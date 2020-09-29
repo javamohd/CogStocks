@@ -66,7 +66,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
     
     public void loadPendingCustomers(){
         try{
-    
+            //System.out.println("Test");
             DefaultTableModel pendModel = new DefaultTableModel();
             pendModel.addColumn("Customer");
             pendModel.addColumn("Balance Amont");
