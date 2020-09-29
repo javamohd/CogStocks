@@ -4,6 +4,8 @@
  */
 package cogentstocks;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,7 +23,8 @@ public class SaleConfiguration extends javax.swing.JFrame {
      */
     public SaleConfiguration() {
         initComponents();
-        ImageIcon icon = new ImageIcon("images/Logo.jpg");
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        ImageIcon icon = new ImageIcon("src/Test/Logo.jpg");
         icon = new ImageIcon(icon.getImage().getScaledInstance(jLabel_Contact.getWidth(), jLabel_Contact.getHeight(), BufferedImage.SCALE_SMOOTH));
         jLabel_Contact.setIcon(icon);
         jTextField2_shopName.disable();
@@ -56,6 +59,7 @@ public class SaleConfiguration extends javax.swing.JFrame {
         jLabel_Contact = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Verdana", 3, 12)); // NOI18N
         jLabel1.setText("Setup Details");
@@ -98,7 +102,7 @@ public class SaleConfiguration extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(0, 51, 153));
         jLabel7.setText("For Help Contact : +91 9655909777");
 
-        jLabel_Contact.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ress/Logo.jpg"))); // NOI18N
+        jLabel_Contact.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Test/Logo.jpg"))); // NOI18N
         jLabel_Contact.setText("jLabel8");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

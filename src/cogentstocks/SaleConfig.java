@@ -60,6 +60,8 @@ public class SaleConfig {
                 
             }else{
                 JOptionPane.showMessageDialog(null, "Please Contact Cogent !!!");
+                setup = false;
+                return;
             }
             prop.load(new FileInputStream("Settings.jxt"));
             shopName = prop.getProperty("shopName");
