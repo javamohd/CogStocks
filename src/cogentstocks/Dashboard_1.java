@@ -144,8 +144,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
     
     public Dashboard_1() {
         try{
-                //UIManager.setLookAndFeel("");
-                UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");  
+                //UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");  
                 }catch(Exception ex){
                     ex.printStackTrace();
                 }

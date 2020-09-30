@@ -442,7 +442,7 @@ public class CustomerBill extends javax.swing.JFrame {
         BillEntry.total = new Double(0.0);    
         Dashboard_1.jLabel1_total = new JLabel("0.0");
         Dashboard_1.jLabel1_total.repaint();
-        //PdfGen.printIt();
+        //PdfGen.saveIt(SaleConst.Curr);
         JOptionPane.showMessageDialog(rootPane, "Transaction Saved Successfully!");
         SaleConfig.printedSales++;
         this.setVisible(false);
