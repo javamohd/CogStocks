@@ -56,8 +56,8 @@ public class ProgressFrame extends javax.swing.JFrame {
         jLabel1.setText("Loading..");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
-        jProgressBar1.setForeground(new java.awt.Color(255, 255, 51));
-        getContentPane().add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 286, 45));
+        jProgressBar1.setForeground(new java.awt.Color(204, 0, 0));
+        getContentPane().add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 286, 30));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("...");

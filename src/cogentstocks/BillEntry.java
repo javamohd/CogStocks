@@ -534,7 +534,7 @@ public class BillEntry extends javax.swing.JDialog {
     }//GEN-LAST:event_jList1_StockKeyReleased
 
     private void jList1_StockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1_StockMouseClicked
-        // TODO add your handling code here:
+         // TODO add your handling code here:
         comboBox.setVisible(false);
         if (evt.getClickCount() == 2) {
             this.jTextField1.setText(jList1_Stock.getModel().getElementAt(jList1_Stock.getSelectedIndex()).toString());

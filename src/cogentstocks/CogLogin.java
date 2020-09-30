@@ -230,7 +230,7 @@ public class CogLogin extends javax.swing.JFrame {
                 if(SaleConfig.setup){
                 new CogLogin().setVisible(true);
             }else{
-                new SaleConfiguration().setVisible(true);
+                new SetupConfiguration().setVisible(true);
             }
                 
             }
