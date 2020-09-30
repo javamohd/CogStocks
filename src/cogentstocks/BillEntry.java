@@ -458,7 +458,7 @@ public class BillEntry extends javax.swing.JDialog {
             return;
         }
         
-        if(SaleConst.CurrentBill.containsKey(jTextField1.getText())){
+        if(SysParam.CurrentBill.containsKey(jTextField1.getText())){
             JOptionPane.showMessageDialog(rootPane, "Duplicate Entry !");
             return;
         }
@@ -469,7 +469,7 @@ public class BillEntry extends javax.swing.JDialog {
         this.setVisible(false);
         Dashboard_1.totalPrice = Dashboard_1.totalPrice+Integer.parseInt(jTextField2.getText());
         
-        SaleConst.CurrentBill.put(jTextField1.getText(), jTextField2.getText()+"~"+jTextField3.getText());
+        SysParam.CurrentBill.put(jTextField1.getText(), jTextField2.getText()+"~"+jTextField3.getText());
         
         
     }//GEN-LAST:event_jButton1ActionPerformed

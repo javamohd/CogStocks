@@ -162,11 +162,11 @@ public class CogLogin extends javax.swing.JFrame {
         SaleConfig.load();
         if(password.equals(SaleConfig.passCode)){
             this.setVisible(false);
-            Dashboard_1 d = new Dashboard_1();
-            //d.dispose();
-            //d.setUndecorated(true);
-            d.setVisible(true);
-            
+            ProgressFrame p = new ProgressFrame();
+            p.setVisible(true);
+            SysParam.pf = p;
+            Thread t = new Thread(new ProgressThread());
+        t.start();
             
         }else{
             status.setText("Incorrect PIN try again !");

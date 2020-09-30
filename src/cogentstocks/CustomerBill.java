@@ -411,10 +411,10 @@ public class CustomerBill extends javax.swing.JFrame {
         String purItems = "";
         //int n = SaleConst.CurrentBill.size();
         
-        List<String> keys = new ArrayList<>(SaleConst.CurrentBill.keySet());
+        List<String> keys = new ArrayList<>(SysParam.CurrentBill.keySet());
         
         for(String eachKey : keys){
-            String qty = SaleConst.CurrentBill.get(eachKey).toString().split("~")[1];
+            String qty = SysParam.CurrentBill.get(eachKey).toString().split("~")[1];
             purItems += eachKey+"("+qty+"),";
         }purItems=purItems.substring(0, purItems.lastIndexOf(","));
         
@@ -437,7 +437,7 @@ public class CustomerBill extends javax.swing.JFrame {
         inputStream.close();
         os.close();
         
-        SaleConst.CurrentBill.clear();
+        SysParam.CurrentBill.clear();
         
         BillEntry.total = new Double(0.0);    
         Dashboard_1.jLabel1_total = new JLabel("0.0");

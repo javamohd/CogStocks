@@ -143,11 +143,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
     }
     
     public Dashboard_1() {
-        try{
-                //UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");  
-                }catch(Exception ex){
-                    ex.printStackTrace();
-                }
+        
         initComponents();
         
         
@@ -701,7 +697,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
         Dashboard_1.jLabel1_total.setText(BillEntry.total+"");
         itemDet.remove(jTable_billList.getValueAt(i, 1).toString());
         priceDet.remove(jTable_billList.getValueAt(i, 1).toString());
-        SaleConst.CurrentBill.remove(jTable_billList.getValueAt(i, 1).toString());
+        SysParam.CurrentBill.remove(jTable_billList.getValueAt(i, 1).toString());
         Dashboard_1.model.removeRow(i);
         sNoOrder();
         jButton3_remove.setEnabled(false);
@@ -727,7 +723,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
         } else {
         }*/
         priceDet.put(itemName, selectedPrice);
-        SaleConst.tmpPrice = selectedPrice;
+        SysParam.tmpPrice = selectedPrice;
         Set s = priceDet.keySet();
         ArrayList<String> l = new ArrayList(s);
         BillEntry.total = 0.0;
@@ -910,7 +906,7 @@ jLabel1_total.setText(totalPrice+"");
 
     private void jButton_resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_resetActionPerformed
         // TODO add your handling code here:
-        SaleConst.CurrentBill.clear();
+        SysParam.CurrentBill.clear();
         if (jTable_billList.getRowCount() <= 0) {
             return;
         }
@@ -983,6 +979,16 @@ jLabel1_total.setText(totalPrice+"");
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
+                
+                ProgressFrame p = new ProgressFrame();
+        p.setVisible(true);
+        Thread t = new Thread(new ProgressThread());
+        t.start();
+        try{        
+        //t.join();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
                 new Dashboard_1().setVisible(true);
             }
         });

@@ -11,10 +11,14 @@ import java.util.Map;
  *
  * @author IS Mohammed
  */
-public class SaleConst {
+public class SysParam {
     
     public static Map CurrentBill = new HashMap();
     
     public static int tmpPrice = 0;
+    
+    public static ProgressFrame pf = null;
+    
+    public static Map barCodeMappings = new HashMap();
     
 }
