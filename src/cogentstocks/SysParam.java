@@ -17,8 +17,10 @@ public class SysParam {
     
     public static int tmpPrice = 0;
     
+    public static int itemCount = 0;
+    
     public static ProgressFrame pf = null;
     
-    public static Map barCodeMappings = new HashMap();
+    public static Map<String, ItemObj> barCodeMappings = new HashMap();
     
 }

@@ -12,8 +12,8 @@ public class ItemObj {
     
 public String itemName;
 public String itemCode;
-public String itemQty;
-public String itemPrice;
+public int itemQty;
+public double itemPrice;
 public String itemBarcode;
 public String itemImgref;
 
@@ -49,19 +49,19 @@ public String itemImgref;
         this.itemName = itemName;
     }
 
-    public String getItemPrice() {
+    public double getItemPrice() {
         return itemPrice;
     }
 
-    public void setItemPrice(String itemPrice) {
+    public void setItemPrice(double itemPrice) {
         this.itemPrice = itemPrice;
     }
 
-    public String getItemQty() {
+    public int getItemQty() {
         return itemQty;
     }
 
-    public void setItemQty(String itemQty) {
+    public void setItemQty(int itemQty) {
         this.itemQty = itemQty;
     }
 
