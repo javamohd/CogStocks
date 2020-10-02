@@ -402,10 +402,14 @@ public class BillEntry extends javax.swing.JDialog {
             while (cellIterator.hasNext()) {
                 Cell cell = cellIterator.next();
                  
+                //System.out.println(cell.getCellType());
+                
                 switch (cell.getCellType()) {
                     case Cell.CELL_TYPE_STRING:
+                        if(cell.getColumnIndex() == 1){
                         String stockName = cell.getStringCellValue();
                         rowString += stockName;
+                        }
                         break;
                     case Cell.CELL_TYPE_BOOLEAN:
                         break;
@@ -463,13 +467,17 @@ public class BillEntry extends javax.swing.JDialog {
             return;
         }
         // TODO add your handling code here:
-        Dashboard_1.addItem(this.jTextField1.getText(), Integer.parseInt(jTextField3.getText()), Integer.parseInt(jTextField2.getText()));
+        ItemObj item = new ItemObj();
+        item.setItemName(jTextField1.getText());
+        item.setItemPrice(Double.parseDouble(jTextField2.getText()));
+        Dashboard_1.addItem(item, Integer.parseInt(jTextField3.getText()));
         total += Integer.parseInt(jTextField2.getText());
         Dashboard_1.jLabel1_total.setText(total+"");
         this.setVisible(false);
         Dashboard_1.totalPrice = Dashboard_1.totalPrice+Integer.parseInt(jTextField2.getText());
         
-        SysParam.CurrentBill.put(jTextField1.getText(), jTextField2.getText()+"~"+jTextField3.getText());
+        SysParam.CurrentBill.put(jTextField1.getText(), item);
+        //System.out.println("While Add --> "+SysParam.CurrentBill);
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -535,6 +543,9 @@ public class BillEntry extends javax.swing.JDialog {
 
     private void jList1_StockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1_StockMouseClicked
          // TODO add your handling code here:
+        
+        //System.out.println(qtyMap);
+        
         comboBox.setVisible(false);
         if (evt.getClickCount() == 2) {
             this.jTextField1.setText(jList1_Stock.getModel().getElementAt(jList1_Stock.getSelectedIndex()).toString());

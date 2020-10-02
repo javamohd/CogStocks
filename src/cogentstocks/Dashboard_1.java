@@ -36,6 +36,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
     public static HashMap itemDet = new HashMap();
     public static HashMap priceDet = new HashMap();
     public static double totalPrice = 0.0;
+    public static double saletotal = 0.0;
     Map priceMap = new HashMap();
 
     public static HashMap getItemDet() {
@@ -53,6 +54,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
            jLabel4_gallaCash.setText(SaleConfig.gallaCash+"");
            jLabel5_lastGalla.setText(SaleConfig.lastGalla+"");
            jLabel4_gallaCash.repaint();
+           
             
             
     }catch(Exception e){
@@ -344,7 +346,8 @@ public class Dashboard_1 extends javax.swing.JFrame {
         });
 
         jLabel1_total.setBackground(java.awt.Color.white);
-        jLabel1_total.setFont(new java.awt.Font("Consolas", 1, 12)); // NOI18N
+        jLabel1_total.setFont(new java.awt.Font("Cinzel Black", 1, 18)); // NOI18N
+        jLabel1_total.setForeground(new java.awt.Color(0, 0, 102));
         jLabel1_total.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1_total.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
@@ -357,8 +360,9 @@ public class Dashboard_1 extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Sitka Small", 3, 12)); // NOI18N
-        jLabel2.setText("Total Price :");
+        jLabel2.setFont(new java.awt.Font("Sitka Small", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(102, 255, 255));
+        jLabel2.setText("Total :");
 
         jButton_reset.setBackground(new java.awt.Color(102, 102, 102));
         jButton_reset.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -520,10 +524,10 @@ public class Dashboard_1 extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel2))
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(105, 105, 105)
-                                .addComponent(jLabel1_total, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(85, 85, 85)
+                                .addComponent(jLabel1_total, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
@@ -584,15 +588,12 @@ public class Dashboard_1 extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
+                        .addComponent(jLabel1_total, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(41, 41, 41)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel1_total, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 84, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(33, 33, 33)
@@ -652,13 +653,39 @@ public class Dashboard_1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
-    public static void addItem(String item, int qty, int price){
+    public static void addItem(ItemObj obj, int qty) {
         
-        //System.out.println("--"+totalPrice+"--");
-        model.addRow(new Object[]{sNoOrder(),item, qty, price});
-        itemDet.put(item, qty);
-        priceDet.put(item, price);
+        int n = model.getRowCount();
+            if (n > 0) {
+                for (int i = 0; i <= n-1; i++) {
+                    model.removeRow(0);
+                }
+            }
         
+        if (itemDet.containsKey(obj.itemName)) {
+            int existingQty = Integer.parseInt(itemDet.get(obj.itemName).toString());
+            itemDet.put(obj.itemName, qty + existingQty);
+            priceDet.put(obj.getItemName(),
+                    (obj.getItemPrice() * Integer.parseInt(itemDet.get(obj.itemName).toString())));
+            Iterator saleItem = itemDet.keySet().iterator();
+            while (saleItem.hasNext()) {
+                ItemObj eachItem = SysParam.CurrentBill.get(saleItem.next().toString());
+                model.addRow(new Object[]{sNoOrder(),
+                    eachItem.itemName, itemDet.get(eachItem.getItemName()), priceDet.get(eachItem.getItemName())});
+            }
+
+        } else {
+            itemDet.put(obj.getItemName(), qty);
+            SysParam.CurrentBill.put(obj.itemName, obj);
+            priceDet.put(obj.getItemName(),
+                    (obj.getItemPrice() * Integer.parseInt(itemDet.get(obj.itemName).toString())));
+            Iterator saleItem = itemDet.keySet().iterator();
+            while (saleItem.hasNext()) {
+                ItemObj eachItem = SysParam.CurrentBill.get(saleItem.next().toString());
+                model.addRow(new Object[]{sNoOrder(), eachItem.itemName, itemDet.get(eachItem.getItemName()), eachItem.getItemPrice()});
+            }
+
+        }
     }
     
     public static int sNoOrder(){
@@ -965,11 +992,19 @@ jLabel1_total.setText(totalPrice+"");
         String purItmStr = jTextField_bar.getText();
         ItemObj item = SysParam.barCodeMappings.get(purItmStr);
         //JOptionPane.showMessageDialog(rootPane, SysParam.barCodeMappings.get(purItmStr).getItemName());
-        Dashboard_1.addItem(item.getItemName(), Integer.parseInt("1"), (int)item.getItemPrice());
-        SysParam.CurrentBill.put(item.getItemName(), item.getItemPrice()+"~"+"1");
+        Dashboard_1.addItem(item, 1);
+        SysParam.CurrentBill.put(item.getItemName(), item);
+        
+        //Qty price validation
+        //Dashboard_1.totalPrice = Dashboard_1.totalPrice+(int)item.getItemPrice();
+        
+        //total settings
+        String rate = priceDet.get(item.getItemName()).toString();
+        saletotal = Double.parseDouble(rate);
+        Dashboard_1.jLabel1_total.setText(saletotal+"");
         
         jTextField_bar.setText("");
-        
+        //System.out.println("While Add --> "+SysParam.CurrentBill);
     }//GEN-LAST:event_jTextField_barActionPerformed
 
     /**

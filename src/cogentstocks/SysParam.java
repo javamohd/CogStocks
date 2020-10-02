@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public class SysParam {
     
-    public static Map CurrentBill = new HashMap();
+    public static Map<String,ItemObj> CurrentBill = new HashMap();
     
     public static int tmpPrice = 0;
     
