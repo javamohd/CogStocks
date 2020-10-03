@@ -218,7 +218,7 @@ public class PdfGen {
      
     }
     
-    public static void saveIt(ArrayList<String> bill){
+    public static void saveIt(ArrayList<String> items){
          
         try {
  
@@ -227,7 +227,7 @@ public class PdfGen {
            PdfWriter.getInstance(document, file);
  
  //Inserting Image in PDF
-      Image image = Image.getInstance ("images/java4s.png");
+      Image image = Image.getInstance ("src/Test/Logo.jpg");
       image.scaleAbsolute(120f, 60f);//image width,height 
  
  //Inserting Table in PDF
@@ -292,8 +292,8 @@ public class PdfGen {
        table.addCell("NC");
        table.addCell("United States");*/
        int sno=1;
-       for(String s: bill){
-           String[] dets = s.split(",");
+       for(String s: items){
+           //String[] dets = s.split(",");
             
            PdfPCell snocell = new PdfPCell();
            Font font = new Font(FontFamily.HELVETICA, 12, Font.NORMAL);
@@ -307,12 +307,12 @@ public class PdfGen {
             table.addCell(snocell);
            //table.addCell(sno+". ");//S.No
            
-            table.addCell(dets[0]);//Item
+            table.addCell(s);//Item
              
            
            //table.addCell(dets[1]);//qty
            PdfPCell qtycell = new PdfPCell();
-           Paragraph qtypara = new Paragraph(dets[1], font);
+           Paragraph qtypara = new Paragraph(Dashboard_1.itemDet.get(s).toString(), font);
            qtypara.setAlignment(Element.ALIGN_CENTER);
            qtycell.addElement(qtypara);
            qtycell.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -321,7 +321,7 @@ public class PdfGen {
            //table.addCell(dets[2]);//Price
            
            PdfPCell pricell = new PdfPCell();
-           Paragraph pripara = new Paragraph(dets[2], font);
+           Paragraph pripara = new Paragraph(Dashboard_1.priceDet.get(s).toString(), font);
            pripara.setAlignment(Element.ALIGN_CENTER);
            pricell.addElement(pripara);
            pricell.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -340,7 +340,7 @@ public class PdfGen {
        table.addCell(totcell);
        
        PdfPCell pricecell = new PdfPCell();
-       Paragraph numberpara = new Paragraph(BillEntry.total+"");
+       Paragraph numberpara = new Paragraph(Dashboard_1.totalPrice+"");
        numberpara.setAlignment(Element.ALIGN_CENTER);
        pricecell.addElement(numberpara);
        pricecell.setHorizontalAlignment(Element.ALIGN_CENTER);

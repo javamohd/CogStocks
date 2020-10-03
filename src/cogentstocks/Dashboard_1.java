@@ -183,7 +183,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
             e.printStackTrace();
         }
         //this.getRootPane().setDefaultButton(jButton2);
-        this.getRootPane().setDefaultButton(jButton2);
+        //this.getRootPane().setDefaultButton(jButton2);
         //this.setUndecorated(true);
         
         ImageIcon icon = new ImageIcon("src/Test/Logo.jpg");
@@ -734,7 +734,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         int i = jTable_billList.getSelectedRow();
-        int removePrice = Integer.parseInt(jTable_billList.getValueAt(i, 3).toString());
+        int removePrice = (int)Double.parseDouble(jTable_billList.getValueAt(i, 3).toString());
         BillEntry.total -= removePrice;
         Dashboard_1.jLabel1_total.setText(BillEntry.total+"");
         itemDet.remove(jTable_billList.getValueAt(i, 1).toString());

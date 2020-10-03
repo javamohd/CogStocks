@@ -414,7 +414,7 @@ public class CustomerBill extends javax.swing.JFrame {
         List<String> keys = new ArrayList<>(SysParam.CurrentBill.keySet());
         
         for(String eachKey : keys){
-            String qty = SysParam.CurrentBill.get(eachKey).toString().split("~")[1];
+            String qty = Dashboard_1.itemDet.get(eachKey).toString();
             purItems += eachKey+"("+qty+"),";
         }purItems=purItems.substring(0, purItems.lastIndexOf(","));
         
@@ -437,13 +437,14 @@ public class CustomerBill extends javax.swing.JFrame {
         inputStream.close();
         os.close();
         
-        SysParam.CurrentBill.clear();
+        
         
         BillEntry.total = new Double(0.0);    
         Dashboard_1.jLabel1_total = new JLabel("0.0");
         Dashboard_1.jLabel1_total.repaint();
-        //PdfGen.saveIt(SaleConst.Curr);
+        PdfGen.saveIt(new ArrayList<>(SysParam.CurrentBill.keySet()));
         JOptionPane.showMessageDialog(rootPane, "Transaction Saved Successfully!");
+        SysParam.CurrentBill.clear();
         SaleConfig.printedSales++;
         this.setVisible(false);
         try{
