@@ -702,7 +702,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
             int existingQty = Integer.parseInt(itemDet.get(obj.itemName).toString());
             itemDet.put(obj.itemName, qty + existingQty);
             priceDet.put(obj.getItemName(),
-                    (obj.getItemPrice() * Integer.parseInt(itemDet.get(obj.itemName).toString())));
+                    (obj.getCustPrice() * Integer.parseInt(itemDet.get(obj.itemName).toString())));
             Iterator saleItem = itemDet.keySet().iterator();
             while (saleItem.hasNext()) {
                 ItemObj eachItem = SysParam.CurrentBill.get(saleItem.next().toString());
@@ -714,11 +714,11 @@ public class Dashboard_1 extends javax.swing.JFrame {
             itemDet.put(obj.getItemName(), qty);
             SysParam.CurrentBill.put(obj.itemName, obj);
             priceDet.put(obj.getItemName(),
-                    (obj.getItemPrice() * Integer.parseInt(itemDet.get(obj.itemName).toString())));
+                    (obj.getCustPrice() * Integer.parseInt(itemDet.get(obj.itemName).toString())));
             Iterator saleItem = itemDet.keySet().iterator();
             while (saleItem.hasNext()) {
                 ItemObj eachItem = SysParam.CurrentBill.get(saleItem.next().toString());
-                model.addRow(new Object[]{sNoOrder(), eachItem.itemName, itemDet.get(eachItem.getItemName()), eachItem.getItemPrice()});
+                model.addRow(new Object[]{sNoOrder(), eachItem.itemName, itemDet.get(eachItem.getItemName()), eachItem.getCustPrice()});
             }
 
         }

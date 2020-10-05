@@ -439,26 +439,14 @@ public class ImportStock extends javax.swing.JDialog {
             return;
         } 
        
-        if(Integer.parseInt(jTextField3.getText())>Integer.parseInt(jLabel5_avail.getText())){
-            JOptionPane.showMessageDialog(rootPane, "Entered Quantity is not available..");
-            return;
-        }
-        
-        if(SysParam.CurrentBill.containsKey(jTextField1.getText())){
-            JOptionPane.showMessageDialog(rootPane, "Duplicate Entry !");
-            return;
-        }
         // TODO add your handling code here:
         ItemObj item = new ItemObj();
         item.setItemName(jTextField1.getText());
-        Dashboard_1.addItem(item, Integer.parseInt(jTextField3.getText()));
-        Dashboard_1.jLabel1_total.setText(total+"");
-        this.setVisible(false);
+        item.setItemQty(Integer.parseInt(jTextField3.getText()) + Integer.parseInt(jLabel5_avail.getText()));
         
-        SysParam.CurrentBill.put(jTextField1.getText(), item);
-        //System.out.println("While Add --> "+SysParam.CurrentBill);
-        
-        
+        DataStore.updateStock(item);
+        JOptionPane.showMessageDialog(rootPane, "Stock Updated Successfully.");
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -529,7 +517,7 @@ public class ImportStock extends javax.swing.JDialog {
             String price = priceMap.get(jList1_Stock.getModel().getElementAt(jList1_Stock.getSelectedIndex())).toString();
             String qty = qtyMap.get(jList1_Stock.getModel().getElementAt(jList1_Stock.getSelectedIndex())).toString();
             this.jLabel5_avail.setText(qty);
-            this.jTextField3.setText("1");
+            //this.jTextField3.setText("1");
             this.comboBox.setVisible(false);
 
             if (Integer.parseInt(qty) <= 0) {

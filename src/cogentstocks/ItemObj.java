@@ -13,7 +13,9 @@ public class ItemObj {
 public String itemName;
 public String itemCode;
 public int itemQty;
-public double itemPrice;
+public double purPrice;
+public double custPrice;
+public int taxIncl;
 public String itemBarcode;
 public String itemImgref;
 
@@ -49,20 +51,36 @@ public String itemImgref;
         this.itemName = itemName;
     }
 
-    public double getItemPrice() {
-        return itemPrice;
-    }
-
-    public void setItemPrice(double itemPrice) {
-        this.itemPrice = itemPrice;
-    }
-
     public int getItemQty() {
         return itemQty;
     }
 
     public void setItemQty(int itemQty) {
         this.itemQty = itemQty;
+    }
+
+    public double getCustPrice() {
+        return custPrice;
+    }
+
+    public void setCustPrice(double custPrice) {
+        this.custPrice = custPrice;
+    }
+
+    public double getPurPrice() {
+        return purPrice;
+    }
+
+    public void setPurPrice(double purPrice) {
+        this.purPrice = purPrice;
+    }
+
+    public int getTaxIncl() {
+        return taxIncl;
+    }
+
+    public void setTaxIncl(int taxIncl) {
+        this.taxIncl = taxIncl;
     }
 
 

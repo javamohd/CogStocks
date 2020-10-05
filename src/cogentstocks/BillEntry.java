@@ -469,7 +469,7 @@ public class BillEntry extends javax.swing.JDialog {
         // TODO add your handling code here:
         ItemObj item = new ItemObj();
         item.setItemName(jTextField1.getText());
-        item.setItemPrice(Double.parseDouble(jTextField2.getText()));
+        item.setCustPrice(Double.parseDouble(jTextField2.getText()));
         Dashboard_1.addItem(item, Integer.parseInt(jTextField3.getText()));
         total += Integer.parseInt(jTextField2.getText());
         Dashboard_1.jLabel1_total.setText(total+"");
