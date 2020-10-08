@@ -4,8 +4,10 @@
  */
 package cogentstocks;
 
+import java.awt.Checkbox;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -165,6 +167,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
         jTable_billList.getColumn("Purchase").setPreferredWidth(350);
         jTable_billList.getColumn("Quantity").setPreferredWidth(50);
         jTable_billList.getColumn("Price").setPreferredWidth(50);
+        jTable_billList.getColumn("Tax Inc").setPreferredWidth(50);
         this.jSpinner1.setValue(10);
         //jTable_billList.getModel()
         
@@ -203,7 +206,9 @@ public class Dashboard_1 extends javax.swing.JFrame {
         }
 //        jLabel1_logo.setIcon(icon);
         loadPendingCustomers();
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
+        this.setSize((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(), (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight());
         this.getContentPane().setBackground(Color.getHSBColor(60, 150, 50));
         //this.dispose();
         
@@ -264,14 +269,14 @@ public class Dashboard_1 extends javax.swing.JFrame {
 
             },
             new String [] {
-                "S.No. ", "Purchase", "Quantity", "Price"
+                "S.No. ", "Purchase", "Quantity", "Price", "Tax Inc"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, true
+                false, false, false, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -294,10 +299,10 @@ public class Dashboard_1 extends javax.swing.JFrame {
             }
         });
         jTable_billList.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jTable_billListInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jTable_billList.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -353,7 +358,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
 
         jLabel1_total.setBackground(java.awt.Color.white);
         jLabel1_total.setFont(new java.awt.Font("Cinzel Black", 1, 18)); // NOI18N
-        jLabel1_total.setForeground(new java.awt.Color(0, 0, 102));
+        jLabel1_total.setForeground(new java.awt.Color(153, 255, 0));
         jLabel1_total.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1_total.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
@@ -551,8 +556,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField_bar, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addComponent(jTextField_bar, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
@@ -711,7 +715,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
             while (saleItem.hasNext()) {
                 ItemObj eachItem = SysParam.CurrentBill.get(saleItem.next().toString());
                 model.addRow(new Object[]{sNoOrder(),
-                            eachItem.itemName, itemDet.get(eachItem.getItemName()), priceDet.get(eachItem.getItemName())});
+                            eachItem.itemName, itemDet.get(eachItem.getItemName()), priceDet.get(eachItem.getItemName()),true});
             }
         } else {
             itemDet.put(obj.getItemName(), qty);
@@ -721,7 +725,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
             Iterator saleItem = itemDet.keySet().iterator();
             while (saleItem.hasNext()) {
                 ItemObj eachItem = SysParam.CurrentBill.get(saleItem.next().toString());
-                model.addRow(new Object[]{sNoOrder(), eachItem.itemName, itemDet.get(eachItem.getItemName()), eachItem.getCustPrice()});
+                model.addRow(new Object[]{sNoOrder(), eachItem.itemName, itemDet.get(eachItem.getItemName()), eachItem.getCustPrice(),true});
             }
         }
     }
@@ -790,7 +794,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
             int selectedRow = jTable_billList.getSelectedRow();
         if (selectedRow == -1) { return; }
         String itemName = jTable_billList.getValueAt(selectedRow, 1).toString();
-        int selectedPrice = Integer.parseInt(jTable_billList.getValueAt(selectedRow, 3).toString());
+        int selectedPrice = (int)Double.parseDouble(jTable_billList.getValueAt(selectedRow, 3).toString());
         int selectedQty = Integer.parseInt(jTable_billList.getValueAt(selectedRow, 2).toString());
         itemDet.put(itemName, selectedQty);
         priceDet.put(itemName, selectedPrice);
