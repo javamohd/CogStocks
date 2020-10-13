@@ -824,6 +824,29 @@ public class Dashboard_1 extends javax.swing.JFrame {
         }else{
             jButton3_remove.setEnabled(true);
         }
+        
+        int selectedRow = jTable_billList.getSelectedRow();
+        String val = jTable_billList.getModel().getValueAt(selectedRow, 4).toString();
+        String itemName = jTable_billList.getModel().getValueAt(selectedRow, 1).toString();
+        
+        ItemObj obj = SysParam.CurrentBill.get(itemName);
+        
+        if(val.equals("true")){
+            jTable_billList.getModel().setValueAt(obj.getCustPrice(), selectedRow, 3);
+            priceDet.put(obj.getItemName(), (int)obj.getCustPrice());
+        }else{
+            jTable_billList.getModel().setValueAt(obj.getPurPrice(), selectedRow, 3);
+            priceDet.put(obj.getItemName(), (int)obj.getPurPrice());
+        }
+        
+        Set s = priceDet.keySet();
+        ArrayList<String> l = new ArrayList(s);
+        BillEntry.total = 0.0;
+        for (String each : l) {
+            BillEntry.total += Integer.parseInt(priceDet.get(each).toString());
+        }
+        Dashboard_1.jLabel1_total.setText(BillEntry.total + "");
+        
     }//GEN-LAST:event_jTable_billListMouseClicked
 
     public void checkDate(){
