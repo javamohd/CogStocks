@@ -251,8 +251,8 @@ public class SetupImg extends javax.swing.JFrame {
             Sheet sheet = wb.getSheet("Stocks");
             int TotalRows  = sheet.getLastRowNum();
             sheet.setColumnWidth(4, 14000);
-            for (int i=1;i<=TotalRows;i++){
-                if(i==1)continue;
+            for (int i=0;i<=TotalRows;i++){
+                if(i==0)continue;
                 Row row = sheet.getRow(i);
                 
                 String itemName = row.getCell(1).getStringCellValue().toString();

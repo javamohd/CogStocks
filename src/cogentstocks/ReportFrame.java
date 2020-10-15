@@ -78,8 +78,10 @@ public class ReportFrame extends javax.swing.JFrame {
              
                 switch (cell.getCellType()) {
                     case Cell.CELL_TYPE_STRING:
+                        if(cell.getColumnIndex() == 1){
                         String stockName = cell.getStringCellValue();
                         rowString += stockName;
+                        }
                         break;
                     case Cell.CELL_TYPE_BOOLEAN:
                         break;
