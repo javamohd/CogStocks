@@ -184,6 +184,9 @@
     <Component class="javax.swing.JTextField" name="jTextField_stockDesc">
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField_purPrice">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextField_purPriceKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField_custPrice">
     </Component>

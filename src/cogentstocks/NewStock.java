@@ -85,6 +85,12 @@ public class NewStock extends JDialog {
 
         jLabel7.setText("BarCode :");
 
+        jTextField_purPrice.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField_purPriceKeyPressed(evt);
+            }
+        });
+
         jLabel8.setFont(new java.awt.Font("Teko SemiBold", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(102, 102, 102));
         jLabel8.setText("Preview Image");
@@ -226,6 +232,65 @@ public class NewStock extends JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         
+        //Validation Starts
+        
+        if(jTextField_stockName.getText().isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Please Enter Stock Name");
+            return;
+        }
+        
+        if(jTextField_stockDesc.getText().isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Please Enter Stock Description");
+            return;
+        }
+        
+        if(jTextField_purPrice.getText().isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Please Enter Stock purchase Price.");
+            return;
+        }
+        try{
+        double i = Double.parseDouble(jTextField_purPrice.getText());
+        if(i<=0)throw new Exception();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(rootPane, "Please Enter valid Purchase Price");
+            return;
+        }
+        if(jTextField_custPrice.getText().isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Please Enter Stock Customer Price.");
+            return;
+        }
+        try{
+        double i = Double.parseDouble(jTextField_custPrice.getText());
+        if(i<=0)throw new Exception();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(rootPane, "Please Enter valid Customer Price");
+            return;
+        }
+        if(jTextField_newQty.getText().isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Please Enter Stock quantity.");
+            return;
+        }
+        try{
+        int i = Integer.parseInt(jTextField_newQty.getText());
+        if(i<=0)throw new Exception();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(rootPane, "Please Enter valid Stock Quantity");
+            return;
+        }
+        if(jTextField_tax.getText().isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Please Enter Stock tax.");
+            return;
+        }
+        try{
+        int i = Integer.parseInt(jTextField_tax.getText());
+        if(i<=0)throw new Exception();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(rootPane, "Please Enter valid Tax to be included.");
+            return;
+        }
+              
+        //Validation Ends 
+        //if(true)return;
         try{
             
             ItemObj obj = new ItemObj();
@@ -270,6 +335,12 @@ public class NewStock extends JDialog {
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField_purPriceKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_purPriceKeyPressed
+        
+        
+        
+    }//GEN-LAST:event_jTextField_purPriceKeyPressed
 
     private Image fitimage(String img , int w , int h)
     {
