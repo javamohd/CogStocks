@@ -33,17 +33,20 @@ public class CartBox {
                 }
             }
             
+        cartTotal = 0;
         
-        for (ItemObj eachObj : items) {
-            model.addRow(new Object[]{
-                        sNoOrder(),//BillBoard Item Serial No
-                        eachObj.itemName,// Bill Board Item Name
-                        SysParam.CurrentBill.get(eachObj.itemName).getCustPrice(),//Bill Board Item Price
-                        qtyMap.get(eachObj.itemName).toString(),//BillBoard Item Quantity
-                        priceMap.get(eachObj.getItemName()).toString(),//BillBoard Item Price
-                        Boolean.parseBoolean(taxInclMap.get(eachObj.getItemName()).toString())// BillBoard Tax Include map
-                    });
-            cartTotal += priceMap.get(eachObj.getItemName());
+        if (!items.isEmpty()) {
+            for (ItemObj eachObj : items) {
+                model.addRow(new Object[]{
+                            sNoOrder(),//BillBoard Item Serial No
+                            eachObj.itemName,// Bill Board Item Name
+                            eachObj.getCustPrice(),//Bill Board Item cust Price
+                            qtyMap.get(eachObj.itemName).toString(),//BillBoard Item Quantity
+                            priceMap.get(eachObj.getItemName()).toString(),//BillBoard Item Price
+                            Boolean.parseBoolean(taxInclMap.get(eachObj.getItemName()).toString())// BillBoard Tax Include map
+                        });
+                cartTotal += priceMap.get(eachObj.getItemName());
+            }
         }
         Dashboard_1.jLabel1_total.setText(cartTotal+"");
     }
@@ -67,10 +70,13 @@ public class CartBox {
     public static boolean addItem_popup(ItemObj obj,int Qty){
         boolean toReturn = true;
         
-        if(items.contains(obj.itemName))return false;
+        for(ItemObj eachObj : items){
+            if(eachObj.getItemName().equalsIgnoreCase(obj.itemName))
+            return false;
+        }
         items.add(obj);
         qtyMap.put(obj.itemName, Qty);
-        int price = Qty * Integer.parseInt(String.valueOf(obj.custPrice));
+        int price = Qty * (int)Double.parseDouble(String.valueOf(obj.custPrice));
         priceMap.put(obj.itemName, price);
         taxInclMap.put(obj.itemName, true);
         
@@ -98,11 +104,9 @@ public class CartBox {
     
     public static void removeItem(String itemName){
         int idx = 0;
-        ItemObj itemtobeRemoved = null;
         for (ItemObj eachObj : items) {
             if (eachObj.getItemName().equalsIgnoreCase(itemName)) {
                 idx = items.indexOf(eachObj);
-                itemtobeRemoved = eachObj;
             }
         }
         items.remove(idx);

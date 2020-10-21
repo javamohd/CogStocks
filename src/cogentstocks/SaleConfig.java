@@ -4,6 +4,7 @@
  */
 package cogentstocks;
 
+import Cart.CartBox;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -103,12 +104,11 @@ try{
     public static void Store(){
         try{
             prop.setProperty("shopName", shopName);
-            //prop.setProperty("initPass", initPass);
             prop.setProperty("passCode", passCode);
             prop.setProperty("printerName", printerName);
             prop.setProperty("printedSales", printedSales+"");
             prop.setProperty("filePrefix", filePrefix);
-            gallaCash += Dashboard_1.totalPrice;
+            //gallaCash += CartBox.cartTotal;
             prop.setProperty("gallaCash", gallaCash+"/"+new SimpleDateFormat("ddMM").format(new Date()));
             prop.setProperty("lastGalla", lastGalla+"");
             prop.store(new FileOutputStream("Settings.jxt"), null);

@@ -8,8 +8,7 @@ package cogentstocks;
 //import com.itextpdf.kernel.pdf.PdfDocument;
 //import java.awt.Desktop;
 //import com.adobe.acrobat.gui.PDFPrint;
-import com.itextpdf.kernel.xmp.options.AliasOptions;
-import com.itextpdf.layout.Canvas;
+import Cart.CartBox;
 import com.itextpdf.text.*;
 import com.itextpdf.text.Font.FontFamily;
 import java.awt.Desktop;
@@ -312,7 +311,7 @@ public class PdfGen {
            
            //table.addCell(dets[1]);//qty
            PdfPCell qtycell = new PdfPCell();
-           Paragraph qtypara = new Paragraph(Dashboard_1.itemDet.get(s).toString(), font);
+           Paragraph qtypara = new Paragraph(CartBox.qtyMap.get(s).toString(), font);
            qtypara.setAlignment(Element.ALIGN_CENTER);
            qtycell.addElement(qtypara);
            qtycell.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -321,7 +320,7 @@ public class PdfGen {
            //table.addCell(dets[2]);//Price
            
            PdfPCell pricell = new PdfPCell();
-           Paragraph pripara = new Paragraph(Dashboard_1.priceDet.get(s).toString(), font);
+           Paragraph pripara = new Paragraph(CartBox.priceMap.get(s).toString(), font);
            pripara.setAlignment(Element.ALIGN_CENTER);
            pricell.addElement(pripara);
            pricell.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -340,7 +339,7 @@ public class PdfGen {
        table.addCell(totcell);
        
        PdfPCell pricecell = new PdfPCell();
-       Paragraph numberpara = new Paragraph(Dashboard_1.totalPrice+"");
+       Paragraph numberpara = new Paragraph(CartBox.cartTotal+"");
        numberpara.setAlignment(Element.ALIGN_CENTER);
        pricecell.addElement(numberpara);
        pricecell.setHorizontalAlignment(Element.ALIGN_CENTER);

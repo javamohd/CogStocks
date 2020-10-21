@@ -4,6 +4,7 @@
  */
 package cogentstocks;
 
+import Cart.CartBox;
 import Sett.SystemParam;
 import java.awt.Checkbox;
 import java.awt.Color;
@@ -37,19 +38,15 @@ public class Dashboard_1 extends javax.swing.JFrame {
 
     
     public static DefaultTableModel model;
-    public static HashMap itemDet = new HashMap();
-    public static HashMap priceDet = new HashMap();
-    public static double totalPrice = 0.0;
-    public static double saletotal = 0.0;
-    Map priceMap = new HashMap();
+    //public static HashMap itemDet = new HashMap();
+    //public static HashMap priceDet = new HashMap();
+    //public static double totalPrice = 0.0;
+    //public static double saletotal = 0.0;
+    //Map priceMap = new HashMap();
 
-    public static HashMap getItemDet() {
-        return itemDet;
-    }
+    
 
-    public static void setItemDet(HashMap itemDet) {
-        Dashboard_1.itemDet = itemDet;
-    }
+    
     
     
     public static void prepareGallaReport(){
@@ -700,7 +697,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
-    public static void addItem(ItemObj obj, int qty) {
+    /*public static void addItem(ItemObj obj, int qty) {
         
         int n = model.getRowCount();
             if (n > 0) {
@@ -738,7 +735,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
             }
         }
         jLabel1_total.setText(Dashboard_1.getCurrentSaleTotal());
-    }
+    }*/
     
     public static int sNoOrder(){
         int returnVal = 0;
@@ -785,7 +782,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
         
         // TODO add your handling code here:
         
-        int i = jTable_billList.getSelectedRow();
+        /*int i = jTable_billList.getSelectedRow();
         int removePrice = (int)Double.parseDouble(jTable_billList.getValueAt(i, 3).toString());
         ItemObj obj = SysParam.CurrentBill.remove(jTable_billList.getValueAt(i, 1).toString());
         itemDet.remove(obj);
@@ -796,14 +793,14 @@ public class Dashboard_1 extends javax.swing.JFrame {
         priceDet.remove(jTable_billList.getValueAt(i, 1).toString());
         Dashboard_1.model.removeRow(i);
         sNoOrder();
-        jButton3_remove.setEnabled(false);
+        jButton3_remove.setEnabled(false);*/
         return;
         
         
     }//GEN-LAST:event_jButton3_removeActionPerformed
 
     private void jTable_billListPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTable_billListPropertyChange
-            int selectedRow = jTable_billList.getSelectedRow();
+           /* int selectedRow = jTable_billList.getSelectedRow();
         if (selectedRow == -1) { return; }
         String itemName = jTable_billList.getValueAt(selectedRow, 1).toString();
         int selectedPrice = (int)Double.parseDouble(jTable_billList.getValueAt(selectedRow, 3).toString());
@@ -817,7 +814,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
             jTable_billList.getModel().setValueAt(newPr * selectedQty, selectedRow, 3);
             SaleConst.CurrentBill.put(itemName, selectedPrice + "~" + selectedQty);
         } else {
-        }*/
+        }
         priceDet.put(itemName, selectedPrice);
         SysParam.tmpPrice = selectedPrice;
         Set s = priceDet.keySet();
@@ -825,19 +822,20 @@ public class Dashboard_1 extends javax.swing.JFrame {
         BillEntry.total = 0.0;
         for (String each : l) {
             BillEntry.total += Integer.parseInt(priceDet.get(each).toString());
-        }
+        }*/
         //Dashboard_1.jLabel1_total.setText(BillEntry.total + "");
     }//GEN-LAST:event_jTable_billListPropertyChange
 
     private void jTable_billListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_billListMouseClicked
-        // TODO add your handling code here:
         if(jTable_billList.getSelectedRowCount() <= 0){
             jButton3_remove.setEnabled(false);
         }else{
             jButton3_remove.setEnabled(true);
         }
         int selectedRow = jTable_billList.getSelectedRow();
-        String ChkVal = jTable_billList.getModel().getValueAt(selectedRow, 5).toString();
+        String itemName = jTable_billList.getModel().getValueAt(selectedRow, 1).toString();
+        CartBox.removeItem(itemName);
+        /*String ChkVal = jTable_billList.getModel().getValueAt(selectedRow, 5).toString();
         String itemName = jTable_billList.getModel().getValueAt(selectedRow, 1).toString();
         ItemObj obj = SysParam.CurrentBill.get(itemName);
         
@@ -849,7 +847,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
             priceDet.put(obj.getItemName(), (int)obj.getPurPrice());
         }
         Dashboard_1.jLabel1_total.setText(Dashboard_1.getCurrentSaleTotal());
-        
+        */
     }//GEN-LAST:event_jTable_billListMouseClicked
 
     public void checkDate(){
@@ -904,26 +902,14 @@ public class Dashboard_1 extends javax.swing.JFrame {
             keys.add(jTable_billList.getValueAt(i, 1).toString());
         }
         
-        for(String key : keys ){
-            try{
-            String val = new String();
-            val += key+","+itemDet.get(key).toString() +","+priceDet.get(key).toString();
-            ll.add(val);
-            }catch(Exception ex){
-                System.out.println(key+ " in Error");
-                System.out.println(keys);
-            }
-        }
         System.out.println("Saving --"+ll);
         //PdfGen.saveIt(ll);
-        SaleConfig.updateQty(itemDet);
+        SaleConfig.updateQty(CartBox.qtyMap);
         }catch(Exception e){
             e.printStackTrace();
         }
         
-        //JOptionPane.showMessageDialog(rootPane, "Saved in Receipts");
-        Dashboard_1.totalPrice = Double.parseDouble(Dashboard_1.jLabel1_total.getText());
-        CustomerBill.pass_amt = Dashboard_1.totalPrice+"";
+        CustomerBill.pass_amt = CartBox.cartTotal+"";
         CustomerBill c = new CustomerBill();
         c.setVisible(true);
         this.setVisible(false);
@@ -1016,21 +1002,20 @@ public class Dashboard_1 extends javax.swing.JFrame {
 
     private void jButton_resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_resetActionPerformed
         // TODO add your handling code here:
-        SysParam.CurrentBill.clear();
+        //SysParam.CurrentBill.clear();
         if (jTable_billList.getRowCount() <= 0) {
             return;
         }
 
-        BillEntry.total = 0.0;
-        Dashboard_1.jLabel1_total.setText(BillEntry.total + "");
-        itemDet.clear();
-        priceDet.clear();
-        int cnt = model.getRowCount();
+        //BillEntry.total = 0.0;
+        //Dashboard_1.jLabel1_total.setText(BillEntry.total + "");
+        CartBox.clearCart();
+        /*int cnt = model.getRowCount();
         for (int i = 0; i < cnt; i++) {
             Dashboard_1.model.removeRow(0);
         }
         sNoOrder();
-        jButton3_remove.setEnabled(false);
+        jButton3_remove.setEnabled(false);*/
     }//GEN-LAST:event_jButton_resetActionPerformed
 
     private void jButton_SettActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SettActionPerformed
@@ -1058,25 +1043,16 @@ public class Dashboard_1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         String purItmStr = jTextField_bar.getText();
-        ItemObj item = SysParam.barCodeMappings.get(purItmStr);
+        Cart.ItemObj item = SysParam.barCodeMappings.get(purItmStr);
         //JOptionPane.showMessageDialog(rootPane, SysParam.barCodeMappings.get(purItmStr).getItemName());
-        Dashboard_1.addItem(item, 1);
-        SysParam.CurrentBill.put(item.getItemName(), item);
+        CartBox.addItem_scan(item);
         
         //Qty price validation
         //Dashboard_1.totalPrice = Dashboard_1.totalPrice+(int)item.getItemPrice();
         
         //total settings
         //String rate = priceDet.get(item.getItemName()).toString();
-        List keys = new ArrayList(priceDet.keySet());
-        double rate = 0.0;
-        for(int i=0;i<priceDet.size();i++){
-            rate += (double)priceDet.get(keys.get(i).toString());
-        }
-        //saletotal = Double.parseDouble(rate);
-        Dashboard_1.jLabel1_total.setText(Dashboard_1.getCurrentSaleTotal());
-        
-        jTextField_bar.setText("");
+                jTextField_bar.setText("");
         //System.out.println("While Add --> "+SysParam.CurrentBill);
     }//GEN-LAST:event_jTextField_barActionPerformed
 
@@ -1208,20 +1184,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
     }
     
     public static String getCurrentSaleTotal() {
-        String toReturtn = "0.0";
-        int total = 0;
-
-        ArrayList<String> itemKeys = new ArrayList<>(SysParam.CurrentBill.keySet());
-        for (int i = 0; i < itemKeys.size(); i++) {
-
-            ItemObj eachItemObj = SysParam.CurrentBill.get(itemKeys.get(i));
-            String eachItemName = eachItemObj.getItemName();
-            //double eachItemMRP = eachItemObj.getCustPrice();
-            int saleQty = Integer.parseInt(itemDet.get(eachItemName).toString());
-            total += (saleQty * Double.parseDouble(priceDet.get(eachItemName).toString()));
-            toReturtn = String.valueOf(total);
-        }
-        return toReturtn;
+        return CartBox.cartTotal+"";
     }
     
 }

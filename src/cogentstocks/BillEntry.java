@@ -6,6 +6,8 @@ package cogentstocks;
 
 //import com.sun.rowset.internal.Row;
 //import com.sun.glass.events.KeyEvent;
+import Cart.CartBox;
+import Cart.ItemObj;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -462,23 +464,11 @@ public class BillEntry extends javax.swing.JDialog {
             return;
         }
         
-        if(SysParam.CurrentBill.containsKey(jTextField1.getText())){
-            JOptionPane.showMessageDialog(rootPane, "Duplicate Entry !");
-            return;
-        }
-        // TODO add your handling code here:
-        //ItemObj item = new ItemObj();
         toAdd.setItemName(jTextField1.getText());
-        Dashboard_1.addItem(toAdd, Integer.parseInt(jTextField3.getText()));
-        total += Integer.parseInt(jTextField2.getText());
-        Dashboard_1.jLabel1_total.setText(total+"");
+        boolean res = true;
+        res = CartBox.addItem_popup(toAdd, Integer.parseInt(jTextField3.getText()));
         this.setVisible(false);
-        Dashboard_1.totalPrice = Dashboard_1.totalPrice+Integer.parseInt(jTextField2.getText());
-        
-        SysParam.CurrentBill.put(jTextField1.getText(), toAdd);
-        //System.out.println("While Add --> "+SysParam.CurrentBill);
-        
-        
+        if(!res)JOptionPane.showMessageDialog(rootPane, "Duplicate Entry!!");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

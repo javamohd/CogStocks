@@ -4,6 +4,7 @@
  */
 package cogentstocks;
 
+import Cart.CartBox;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -65,7 +66,7 @@ public class CustomerBill extends javax.swing.JFrame {
         initComponents();
         loadCustomers();
         //bill_Amt = Integer.parseInt(Dashboard.jLabel1_total.getText().split(".")[0]);
-        Dashboard_1.totalPrice = Double.parseDouble(Dashboard_1.jLabel1_total.getText());
+        //Dashboard_1.totalPrice = Double.parseDouble(Dashboard_1.jLabel1_total.getText());
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         ButtonGroup grp = new ButtonGroup();
         grp.add(jToggleButton_fullPay);
@@ -414,7 +415,7 @@ public class CustomerBill extends javax.swing.JFrame {
         List<String> keys = new ArrayList<>(SysParam.CurrentBill.keySet());
         
         for(String eachKey : keys){
-            String qty = Dashboard_1.itemDet.get(eachKey).toString();
+            String qty = CartBox.qtyMap.get(eachKey).toString();
             purItems += eachKey+"("+qty+"),";
         }purItems=purItems.substring(0, purItems.lastIndexOf(","));
         
@@ -448,17 +449,17 @@ public class CustomerBill extends javax.swing.JFrame {
         SaleConfig.printedSales++;
         this.setVisible(false);
         try{
-        Dashboard_1.totalPrice = Double.parseDouble(billAmt) - Double.parseDouble(balAmt);
+        //Dashboard_1.totalPrice = Double.parseDouble(billAmt) - Double.parseDouble(balAmt);
         }catch(Exception e){
-        Dashboard_1.totalPrice = 0.0;    
+        //Dashboard_1.totalPrice = 0.0;    
         }
         SaleConfig.Store();
         Dashboard_1 d = new Dashboard_1();
         d.setVisible(true);
         BillEntry.total = 0.0;
         Dashboard_1.jLabel1_total.setText("0.0");
-        Dashboard_1.priceDet.clear();
-        Dashboard_1.itemDet.clear();
+        //Dashboard_1.priceDet.clear();
+        //Dashboard_1.itemDet.clear();
         //Resets all Static values
         
         
