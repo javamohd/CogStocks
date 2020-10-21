@@ -660,9 +660,8 @@ public class Dashboard_1 extends javax.swing.JFrame {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel1)
                                         .addComponent(jLabel4_gallaCash, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))
+                                    .addComponent(jButton6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
                                     .addComponent(jButton7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(7, 7, 7))
                             .addGroup(layout.createSequentialGroup()
@@ -731,7 +730,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
             Iterator saleItem = itemDet.keySet().iterator();
             while (saleItem.hasNext()) {
                 ItemObj eachItem = SysParam.CurrentBill.get(saleItem.next().toString());
-                double mrp = SysParam.CurrentBill.get(eachItem.itemName).getCustPrice() / Integer.parseInt(itemDet.get(eachItem.itemName).toString());
+                double mrp = SysParam.CurrentBill.get(eachItem.itemName).getCustPrice();
                 model.addRow(new Object[]{sNoOrder(),
                             eachItem.itemName,mrp, itemDet.get(eachItem.getItemName()),
                             eachItem.getCustPrice()*Integer.parseInt(itemDet.get(eachItem.getItemName()).toString()),
@@ -808,7 +807,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
         if (selectedRow == -1) { return; }
         String itemName = jTable_billList.getValueAt(selectedRow, 1).toString();
         int selectedPrice = (int)Double.parseDouble(jTable_billList.getValueAt(selectedRow, 3).toString());
-        int selectedQty = Integer.parseInt(jTable_billList.getValueAt(selectedRow, 2).toString());
+        int selectedQty = Integer.parseInt(jTable_billList.getValueAt(selectedRow, 3).toString());
         itemDet.put(itemName, selectedQty);
         priceDet.put(itemName, selectedPrice);
         /*System.out.println("Manual Editing... -- " + itemName + "--" + selectedQty + "--" + selectedPrice);
@@ -838,12 +837,11 @@ public class Dashboard_1 extends javax.swing.JFrame {
             jButton3_remove.setEnabled(true);
         }
         int selectedRow = jTable_billList.getSelectedRow();
-        String val = jTable_billList.getModel().getValueAt(selectedRow, 5).toString();
+        String ChkVal = jTable_billList.getModel().getValueAt(selectedRow, 5).toString();
         String itemName = jTable_billList.getModel().getValueAt(selectedRow, 1).toString();
-        
         ItemObj obj = SysParam.CurrentBill.get(itemName);
         
-        if(val.equals("true")){
+        if(ChkVal.equals("true")){
             jTable_billList.getModel().setValueAt(obj.getCustPrice(), selectedRow, 4);
             priceDet.put(obj.getItemName(), (int)obj.getCustPrice());
         }else{
@@ -1170,7 +1168,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTable jTable_billList;
+    public static javax.swing.JTable jTable_billList;
     private javax.swing.JTable jTable_pendings;
     private javax.swing.JTextField jTextField_bar;
     private javax.swing.JToggleButton jToggleButton1;
@@ -1218,9 +1216,9 @@ public class Dashboard_1 extends javax.swing.JFrame {
 
             ItemObj eachItemObj = SysParam.CurrentBill.get(itemKeys.get(i));
             String eachItemName = eachItemObj.getItemName();
-            double eachItemMRP = eachItemObj.getCustPrice();
+            //double eachItemMRP = eachItemObj.getCustPrice();
             int saleQty = Integer.parseInt(itemDet.get(eachItemName).toString());
-            total += (saleQty * (int) eachItemMRP);
+            total += (saleQty * Double.parseDouble(priceDet.get(eachItemName).toString()));
             toReturtn = String.valueOf(total);
         }
         return toReturtn;

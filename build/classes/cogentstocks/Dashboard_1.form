@@ -180,10 +180,8 @@
                                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel4_gallaCash" min="-2" pref="16" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                                      <Component id="jButton6" alignment="0" pref="39" max="32767" attributes="0"/>
-                                      <Component id="jButton5" alignment="0" pref="39" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="jButton6" alignment="0" pref="39" max="32767" attributes="0"/>
+                                  <Component id="jButton5" alignment="0" pref="39" max="32767" attributes="0"/>
                                   <Component id="jButton7" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
@@ -305,6 +303,9 @@
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTable_billListKeyTyped"/>
             <EventHandler event="vetoableChange" listener="java.beans.VetoableChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jTable_billListVetoableChange"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
