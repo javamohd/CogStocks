@@ -21,7 +21,7 @@ public class CartBox {
     public static HashMap<String,Integer> priceMap = new HashMap<String,Integer>();
     public static HashMap<String, Boolean> taxInclMap = new HashMap<String, Boolean>();
     public static DefaultTableModel model = (DefaultTableModel) Dashboard_1.jTable_billList.getModel();
-    //add
+    public static int cartTotal = 0;
     //remove
     //clear
     public static void updateTable(){
@@ -34,6 +34,7 @@ public class CartBox {
                 }
             }
             
+        
         for (ItemObj eachObj : items) {
             model.addRow(new Object[]{
                         sNoOrder(),//BillBoard Item Serial No
@@ -43,7 +44,9 @@ public class CartBox {
                         priceMap.get(eachObj.getItemName()).toString(),//BillBoard Item Price
                         Boolean.parseBoolean(taxInclMap.get(eachObj.getItemName()).toString())// BillBoard Tax Include map
                     });
+            cartTotal += priceMap.get(eachObj.getItemName());
         }
+        Dashboard_1.jLabel1_total.setText(cartTotal+"");
     }
     
     public static int sNoOrder(){
@@ -72,7 +75,7 @@ public class CartBox {
         priceMap.put(obj.itemName, price);
         taxInclMap.put(obj.itemName, true);
         
-        
+        updateTable();
         return toReturn;
     }
     
