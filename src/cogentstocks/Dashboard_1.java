@@ -4,6 +4,7 @@
  */
 package cogentstocks;
 
+import Sett.SystemParam;
 import java.awt.Checkbox;
 import java.awt.Color;
 import java.awt.Font;
@@ -192,9 +193,9 @@ public class Dashboard_1 extends javax.swing.JFrame {
         //this.getRootPane().setDefaultButton(jButton2);
         //this.getRootPane().setDefaultButton(jButton2);
         //this.setUndecorated(true);
-        
+       // jLabel1_logo =new JLabel(icon.jLabel1.CENTER);
         ImageIcon icon = new ImageIcon("src/Test/Logo.jpg");
-        icon = new ImageIcon(icon.getImage().getScaledInstance(jLabel1_logo.getWidth()+70, jLabel1_logo.getHeight(), BufferedImage.SCALE_SMOOTH));
+        icon = new ImageIcon(icon.getImage().getScaledInstance(jLabel1_logo.getWidth(), jLabel1_logo.getHeight(), BufferedImage.SCALE_SMOOTH));
         jLabel1_logo.setIcon(icon);
         jLabel1_logo.repaint();
         prepareGallaReport();
@@ -210,7 +211,6 @@ public class Dashboard_1 extends javax.swing.JFrame {
         //this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
         this.setSize((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(), (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight());
         this.getContentPane().setBackground(Color.getHSBColor(60, 150, 50));
-        //this.dispose();
         
     }
     
@@ -311,11 +311,11 @@ public class Dashboard_1 extends javax.swing.JFrame {
             }
         });
         jTable_billList.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTable_billListKeyTyped(evt);
-            }
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTable_billListKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTable_billListKeyTyped(evt);
             }
         });
         jTable_billList.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
@@ -388,14 +388,18 @@ public class Dashboard_1 extends javax.swing.JFrame {
         jLabel1_logo.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         jLabel1.setFont(new java.awt.Font("Sitka Small", 3, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
         jLabel1.setText("Galla Cash :");
 
         jLabel3.setFont(new java.awt.Font("Sitka Small", 3, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(204, 204, 204));
         jLabel3.setText("Last Galla :");
 
         jLabel4_gallaCash.setFont(new java.awt.Font("Consolas", 1, 12)); // NOI18N
+        jLabel4_gallaCash.setForeground(new java.awt.Color(204, 204, 204));
 
         jLabel5_lastGalla.setFont(new java.awt.Font("Consolas", 1, 12)); // NOI18N
+        jLabel5_lastGalla.setForeground(new java.awt.Color(204, 204, 204));
         jLabel5_lastGalla.setText("  ");
         jLabel5_lastGalla.setToolTipText("  Last working day Collection in Rs.(INR)");
 
@@ -556,12 +560,11 @@ public class Dashboard_1 extends javax.swing.JFrame {
                                 .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextField_bar, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(125, 125, 125)
+                                .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel2))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(85, 85, 85)
                                 .addComponent(jLabel1_total, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(91, 91, 91)
@@ -587,33 +590,33 @@ public class Dashboard_1 extends javax.swing.JFrame {
                                                 .addGap(9, 9, 9)
                                                 .addComponent(jLabel5_lastGalla, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGap(10, 10, 10)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addGap(10, 10, 10)
+                                                .addComponent(jButton8)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jButton9))
+                                            .addGroup(layout.createSequentialGroup()
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                     .addGroup(layout.createSequentialGroup()
                                                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(jButton8)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(jButton9))))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, 0)
-                                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addGap(15, 15, 15))))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(50, 50, 50)
                                         .addComponent(jLabel1)
                                         .addGap(7, 7, 7)
                                         .addComponent(jLabel4_gallaCash, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(jLabel1_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 674, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -623,14 +626,12 @@ public class Dashboard_1 extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(79, 79, 79)
+                                .addGap(90, 90, 90)
                                 .addComponent(jTextField_bar, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(33, 33, 33)
+                                .addGap(63, 63, 63)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jButton3_remove, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                                     .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -639,39 +640,44 @@ public class Dashboard_1 extends javax.swing.JFrame {
                                     .addComponent(jButton3_updS, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButton3_newS, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1_total, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel1_total, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(11, 11, 11)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jButton_reset, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jButton_Sett, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(jLabel_shop_name, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addContainerGap()
+                                .addComponent(jLabel1_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(7, 7, 7)
+                                .addComponent(jLabel_shop_name, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel1)
                                         .addComponent(jLabel4_gallaCash, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))
+                                    .addComponent(jButton7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(7, 7, 7))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(379, 379, 379)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel4)
-                                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(7, 7, 7)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -686,7 +692,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(45, 45, 45)
                                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         bindingGroup.bind();
@@ -712,7 +718,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
             Iterator saleItem = itemDet.keySet().iterator();
             while (saleItem.hasNext()) {
                 ItemObj eachItem = SysParam.CurrentBill.get(saleItem.next().toString());
-                double mrp = SysParam.CurrentBill.get(eachItem.itemName).getCustPrice() / Integer.parseInt(itemDet.get(eachItem.itemName).toString());
+                //double mrp = SysParam.CurrentBill.get(eachItem.itemName).getCustPrice() / Integer.parseInt(itemDet.get(eachItem.itemName).toString());
                 model.addRow(new Object[]{sNoOrder(),
                             eachItem.itemName,SysParam.CurrentBill.get(eachItem.itemName).getCustPrice(), itemDet.get(eachItem.getItemName()),
                             priceDet.get(eachItem.getItemName()),true});
@@ -728,9 +734,11 @@ public class Dashboard_1 extends javax.swing.JFrame {
                 double mrp = SysParam.CurrentBill.get(eachItem.itemName).getCustPrice() / Integer.parseInt(itemDet.get(eachItem.itemName).toString());
                 model.addRow(new Object[]{sNoOrder(),
                             eachItem.itemName,mrp, itemDet.get(eachItem.getItemName()),
-                            eachItem.getCustPrice(),true});
+                            eachItem.getCustPrice()*Integer.parseInt(itemDet.get(eachItem.getItemName()).toString()),
+                            true});
             }
         }
+        jLabel1_total.setText(Dashboard_1.getCurrentSaleTotal());
     }
     
     public static int sNoOrder(){
@@ -780,11 +788,13 @@ public class Dashboard_1 extends javax.swing.JFrame {
         
         int i = jTable_billList.getSelectedRow();
         int removePrice = (int)Double.parseDouble(jTable_billList.getValueAt(i, 3).toString());
+        ItemObj obj = SysParam.CurrentBill.remove(jTable_billList.getValueAt(i, 1).toString());
+        itemDet.remove(obj);
+        priceDet.remove(obj);
         BillEntry.total -= removePrice;
-        Dashboard_1.jLabel1_total.setText(BillEntry.total+"");
+        Dashboard_1.jLabel1_total.setText(Dashboard_1.getCurrentSaleTotal());
         itemDet.remove(jTable_billList.getValueAt(i, 1).toString());
         priceDet.remove(jTable_billList.getValueAt(i, 1).toString());
-        SysParam.CurrentBill.remove(jTable_billList.getValueAt(i, 1).toString());
         Dashboard_1.model.removeRow(i);
         sNoOrder();
         jButton3_remove.setEnabled(false);
@@ -817,38 +827,30 @@ public class Dashboard_1 extends javax.swing.JFrame {
         for (String each : l) {
             BillEntry.total += Integer.parseInt(priceDet.get(each).toString());
         }
-        Dashboard_1.jLabel1_total.setText(BillEntry.total + "");
+        //Dashboard_1.jLabel1_total.setText(BillEntry.total + "");
     }//GEN-LAST:event_jTable_billListPropertyChange
 
     private void jTable_billListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_billListMouseClicked
         // TODO add your handling code here:
-        if(jTable_billList.getSelectedColumnCount() <= 0){
+        if(jTable_billList.getSelectedRowCount() <= 0){
             jButton3_remove.setEnabled(false);
         }else{
             jButton3_remove.setEnabled(true);
         }
-        
         int selectedRow = jTable_billList.getSelectedRow();
-        String val = jTable_billList.getModel().getValueAt(selectedRow, 4).toString();
+        String val = jTable_billList.getModel().getValueAt(selectedRow, 5).toString();
         String itemName = jTable_billList.getModel().getValueAt(selectedRow, 1).toString();
         
         ItemObj obj = SysParam.CurrentBill.get(itemName);
         
         if(val.equals("true")){
-            jTable_billList.getModel().setValueAt(obj.getCustPrice(), selectedRow, 3);
+            jTable_billList.getModel().setValueAt(obj.getCustPrice(), selectedRow, 4);
             priceDet.put(obj.getItemName(), (int)obj.getCustPrice());
         }else{
-            jTable_billList.getModel().setValueAt(obj.getPurPrice(), selectedRow, 3);
+            jTable_billList.getModel().setValueAt(obj.getPurPrice(), selectedRow, 4);
             priceDet.put(obj.getItemName(), (int)obj.getPurPrice());
         }
-        
-        Set s = priceDet.keySet();
-        ArrayList<String> l = new ArrayList(s);
-        BillEntry.total = 0.0;
-        for (String each : l) {
-            BillEntry.total += Integer.parseInt(priceDet.get(each).toString());
-        }
-        Dashboard_1.jLabel1_total.setText(BillEntry.total + "");
+        Dashboard_1.jLabel1_total.setText(Dashboard_1.getCurrentSaleTotal());
         
     }//GEN-LAST:event_jTable_billListMouseClicked
 
@@ -939,13 +941,13 @@ public class Dashboard_1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel1_totalPropertyChange
 
     private void jTable_billListVetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_jTable_billListVetoableChange
-jLabel1_total.setText(totalPrice+"");
+//jLabel1_total.setText(totalPrice+"");
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable_billListVetoableChange
 
     private void jTable_billListHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_jTable_billListHierarchyChanged
         // TODO add your handling code here:
-        jLabel1_total.setText(totalPrice+"");
+        //jLabel1_total.setText(totalPrice+"");
     }//GEN-LAST:event_jTable_billListHierarchyChanged
 
     private void jTable_billListKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable_billListKeyPressed
@@ -1074,7 +1076,7 @@ jLabel1_total.setText(totalPrice+"");
             rate += (double)priceDet.get(keys.get(i).toString());
         }
         //saletotal = Double.parseDouble(rate);
-        Dashboard_1.jLabel1_total.setText(rate+"");
+        Dashboard_1.jLabel1_total.setText(Dashboard_1.getCurrentSaleTotal());
         
         jTextField_bar.setText("");
         //System.out.println("While Add --> "+SysParam.CurrentBill);
@@ -1206,4 +1208,22 @@ jLabel1_total.setText(totalPrice+"");
         } 
         return temp; 
     }
+    
+    public static String getCurrentSaleTotal() {
+        String toReturtn = "0.0";
+        int total = 0;
+
+        ArrayList<String> itemKeys = new ArrayList<>(SysParam.CurrentBill.keySet());
+        for (int i = 0; i < itemKeys.size(); i++) {
+
+            ItemObj eachItemObj = SysParam.CurrentBill.get(itemKeys.get(i));
+            String eachItemName = eachItemObj.getItemName();
+            double eachItemMRP = eachItemObj.getCustPrice();
+            int saleQty = Integer.parseInt(itemDet.get(eachItemName).toString());
+            total += (saleQty * (int) eachItemMRP);
+            toReturtn = String.valueOf(total);
+        }
+        return toReturtn;
+    }
+    
 }

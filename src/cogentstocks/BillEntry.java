@@ -10,7 +10,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -44,6 +43,7 @@ public class BillEntry extends javax.swing.JDialog {
     List<String> sortedstock = new ArrayList<String>();
     Map priceMap = new HashMap();
     Map qtyMap = new HashMap();
+    ItemObj toAdd = new ItemObj();
     private JComboBox<String> comboBox;
     private static String[] arr = { "Afghanistan", "Australia", "America", "Argentina", "United Kingdom",
    "United States", "United Arab Emirates", "Ukraine", "Uganda", "Albania", "Algeria", "Andorra", "Angola",
@@ -467,16 +467,15 @@ public class BillEntry extends javax.swing.JDialog {
             return;
         }
         // TODO add your handling code here:
-        ItemObj item = new ItemObj();
-        item.setItemName(jTextField1.getText());
-        item.setCustPrice(Double.parseDouble(jTextField2.getText()));
-        Dashboard_1.addItem(item, Integer.parseInt(jTextField3.getText()));
+        //ItemObj item = new ItemObj();
+        toAdd.setItemName(jTextField1.getText());
+        Dashboard_1.addItem(toAdd, Integer.parseInt(jTextField3.getText()));
         total += Integer.parseInt(jTextField2.getText());
         Dashboard_1.jLabel1_total.setText(total+"");
         this.setVisible(false);
         Dashboard_1.totalPrice = Dashboard_1.totalPrice+Integer.parseInt(jTextField2.getText());
         
-        SysParam.CurrentBill.put(jTextField1.getText(), item);
+        SysParam.CurrentBill.put(jTextField1.getText(), toAdd);
         //System.out.println("While Add --> "+SysParam.CurrentBill);
         
         
@@ -553,6 +552,7 @@ public class BillEntry extends javax.swing.JDialog {
             String qty = qtyMap.get(jList1_Stock.getModel().getElementAt(jList1_Stock.getSelectedIndex())).toString();
             this.jLabel5_avail.setText(qty);
             this.jTextField2.setText(price);
+            toAdd.setCustPrice(Double.parseDouble(price));
             this.jTextField3.setText("1");
             this.comboBox.setVisible(false);
 
