@@ -22,8 +22,7 @@ public class CartBox {
     public static HashMap<String, Boolean> taxInclMap = new HashMap<String, Boolean>();
     public static DefaultTableModel model = (DefaultTableModel) Dashboard_1.jTable_billList.getModel();
     public static int cartTotal = 0;
-    //remove
-    //clear
+    
     public static void updateTable(){
         
         int n = model.getRowCount();
@@ -95,5 +94,25 @@ public class CartBox {
         }
         updateTable();
         return toReturn;
+    }
+    
+    public static void removeItem(String itemName){
+        int idx = 0;
+        ItemObj itemtobeRemoved = null;
+        for (ItemObj eachObj : items) {
+            if (eachObj.getItemName().equalsIgnoreCase(itemName)) {
+                idx = items.indexOf(eachObj);
+                itemtobeRemoved = eachObj;
+            }
+        }
+        items.remove(idx);
+        //priceMap.remove(itemtobeRemoved);
+        //taxInclMap.remove(itemtobeRemoved);
+        updateTable();
+    }
+    
+    public static void clearCart(){
+        items.clear();
+        updateTable();
     }
 }
