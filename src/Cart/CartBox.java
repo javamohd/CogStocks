@@ -85,17 +85,22 @@ public class CartBox {
     }
     
     public static boolean addItem_scan(ItemObj obj){
-        boolean toReturn = true;
         
-        if(items.contains(obj.itemName)){
+        boolean toReturn = true;
+        boolean exist = false;
+        for(ItemObj eachObj : items){
+            if(eachObj.itemName.equals(obj.itemName))exist = true;
+        }
+        
+        if(exist){
             int existing_qty = Integer.parseInt(qtyMap.get(obj.itemName).toString());
             int newQty = existing_qty+1;
             qtyMap.put(obj.itemName, newQty);
-            priceMap.put(obj.itemName, (newQty)*Integer.parseInt(obj.getCustPrice()+""));
+            priceMap.put(obj.itemName, (newQty)*(int)obj.getCustPrice());
         }else{
             items.add(obj);
             qtyMap.put(obj.itemName, 1);
-            priceMap.put(obj.itemName, Integer.parseInt(String.valueOf(obj.custPrice)));
+            priceMap.put(obj.itemName, (int)obj.custPrice);
             taxInclMap.put(obj.itemName, true);
         }
         updateTable();

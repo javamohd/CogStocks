@@ -780,20 +780,13 @@ public class Dashboard_1 extends javax.swing.JFrame {
 
     private void jButton3_removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3_removeActionPerformed
         
-        // TODO add your handling code here:
+        int selectedRow = jTable_billList.getSelectedRow();
+        String itemName = jTable_billList.getModel().getValueAt(selectedRow, 1).toString();
+        CartBox.removeItem(itemName);
         
-        /*int i = jTable_billList.getSelectedRow();
-        int removePrice = (int)Double.parseDouble(jTable_billList.getValueAt(i, 3).toString());
-        ItemObj obj = SysParam.CurrentBill.remove(jTable_billList.getValueAt(i, 1).toString());
-        itemDet.remove(obj);
-        priceDet.remove(obj);
-        BillEntry.total -= removePrice;
-        Dashboard_1.jLabel1_total.setText(Dashboard_1.getCurrentSaleTotal());
-        itemDet.remove(jTable_billList.getValueAt(i, 1).toString());
-        priceDet.remove(jTable_billList.getValueAt(i, 1).toString());
-        Dashboard_1.model.removeRow(i);
-        sNoOrder();
-        jButton3_remove.setEnabled(false);*/
+        if(jTable_billList.getModel().getRowCount() == 0 || jTable_billList.getSelectedRow() == -1)
+            jButton3_remove.setEnabled(false);
+        
         return;
         
         
@@ -832,9 +825,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
         }else{
             jButton3_remove.setEnabled(true);
         }
-        int selectedRow = jTable_billList.getSelectedRow();
-        String itemName = jTable_billList.getModel().getValueAt(selectedRow, 1).toString();
-        CartBox.removeItem(itemName);
+        
         /*String ChkVal = jTable_billList.getModel().getValueAt(selectedRow, 5).toString();
         String itemName = jTable_billList.getModel().getValueAt(selectedRow, 1).toString();
         ItemObj obj = SysParam.CurrentBill.get(itemName);
@@ -937,17 +928,6 @@ public class Dashboard_1 extends javax.swing.JFrame {
     private void jTable_billListKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable_billListKeyPressed
         // TODO add your handling code here:
         
-        int selectedRow = 0;
-        String selectedItem = "";
-        int selectedqty = 0;
-        int selectedPrice = 0;
-        
-        //if(evt.getClickCount()==2){
-            selectedRow = jTable_billList.getSelectedRow();
-            selectedItem = model.getValueAt(selectedRow, 1).toString();
-            //System.out.println(selectedRow+"--"+selectedItem);
-        //}
-        
     }//GEN-LAST:event_jTable_billListKeyPressed
 
     private void jTable_billListInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTable_billListInputMethodTextChanged
@@ -1044,16 +1024,8 @@ public class Dashboard_1 extends javax.swing.JFrame {
         
         String purItmStr = jTextField_bar.getText();
         Cart.ItemObj item = SysParam.barCodeMappings.get(purItmStr);
-        //JOptionPane.showMessageDialog(rootPane, SysParam.barCodeMappings.get(purItmStr).getItemName());
         CartBox.addItem_scan(item);
-        
-        //Qty price validation
-        //Dashboard_1.totalPrice = Dashboard_1.totalPrice+(int)item.getItemPrice();
-        
-        //total settings
-        //String rate = priceDet.get(item.getItemName()).toString();
-                jTextField_bar.setText("");
-        //System.out.println("While Add --> "+SysParam.CurrentBill);
+        jTextField_bar.setText("");
     }//GEN-LAST:event_jTextField_barActionPerformed
 
     private void jButton3_updSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3_updSActionPerformed
