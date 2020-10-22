@@ -5,8 +5,6 @@
 package cogentstocks;
 
 import Cart.CartBox;
-import Sett.SystemParam;
-import java.awt.Checkbox;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -165,7 +163,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
         jTable_billList.getColumn("Purchase").setPreferredWidth(350);
         jTable_billList.getColumn("Quantity").setPreferredWidth(50);
         jTable_billList.getColumn("Price").setPreferredWidth(50);
-        jTable_billList.removeColumn(jTable_billList.getColumn("Tax Inc"));
+        
         this.jSpinner1.setValue(10);
         
         
@@ -256,14 +254,14 @@ public class Dashboard_1 extends javax.swing.JFrame {
 
             },
             new String [] {
-                "S.No. ", "Purchase", "MRP", "Quantity", "Price", "Tax Inc"
+                "S.No. ", "Purchase", "MRP", "Quantity", "Price"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Boolean.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, true
+                false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -757,14 +755,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
             e.printStackTrace();
         }
         
-        
-        //this.setVisible(false);
         new BillEntry().setVisible(true);
-        /*if(jTable_billList.getRowCount() > 0){
-            jButton3_remove.setEnabled(true);
-        }else{
-            jButton3_remove.setEnabled(false);
-        }*/
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -874,9 +865,8 @@ public class Dashboard_1 extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         //checkDate();
-        try{//java4s not found
+        try{
             File f = new File("src/Test/Logo.jpg");
-            //System.out.println(f.getAbsolutePath());
             if(!f.exists()){
                 JOptionPane.showMessageDialog(rootPane, "[***] Logo not found!!!");
                 return;
@@ -890,16 +880,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Please add Purchased Items!!!");
                 return;
             }
-        ArrayList<String> ll = new ArrayList<String>();
-        //populate list
-        List<String>keys = new ArrayList<>();
-        int tableCount = jTable_billList.getRowCount();
-        for(int i=0;i<tableCount;i++){
-            keys.add(jTable_billList.getValueAt(i, 1).toString());
-        }
-        //System.out.println("Saving --"+ll);
-        //PdfGen.saveIt(ll);
-        SaleConfig.updateQty(CartBox.qtyMap);
+        
         }catch(Exception e){
             e.printStackTrace();
         }

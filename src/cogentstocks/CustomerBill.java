@@ -426,12 +426,7 @@ public class CustomerBill extends javax.swing.JFrame {
         currRow.createCell(2).setCellValue(phone);
         currRow.createCell(3).setCellValue(billAmt);
         currRow.createCell(4).setCellValue(balAmt);
-        //XSSFHyperlink file_link=new XSSFHyperlink(XSSFHyperlink.LINK_FILE);
-        //XSSFHyperlink file_link = new XSSFHyperlink();
-        //file_link.setAddress("Receipts/"+SaleConfig.getBill_No().toUpperCase()+".pdf");
         currRow.createCell(5).setCellValue(SaleConfig.getBill_No().toUpperCase());
-        //currRow.getCell(5).setHyperlink(file_link);
-        //currRow.createCell(5).setCellValue(SaleConfig.getBill_No().toUpperCase());
         currRow.createCell(6).setCellValue(purItems);
         
         OutputStream os = new FileOutputStream(new File("Stocks.xlsx"));
@@ -446,6 +441,7 @@ public class CustomerBill extends javax.swing.JFrame {
         Dashboard_1.jLabel1_total.repaint();
         PdfGen.saveIt(CartBox.items);
         JOptionPane.showMessageDialog(rootPane, "Transaction Saved Successfully!");
+        SaleConfig.updateQty(CartBox.qtyMap);///Excel  Qty Update
         CartBox.clearCart();
         SaleConfig.printedSales++;
         this.setVisible(false);

@@ -8,6 +8,8 @@ import cogentstocks.Dashboard_1;
 import cogentstocks.SysParam;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.JLabel;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -49,7 +51,14 @@ public class CartBox {
             }
         }
         Dashboard_1.jLabel1_total.setText(cartTotal+"");
-        Dashboard_1.jTable_billList.repaint();
+        
+        Dashboard_1.jTable_billList.setModel(model);
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
+        Dashboard_1.jTable_billList.getColumn("MRP").setCellRenderer(centerRenderer);
+        Dashboard_1.jTable_billList.getColumn("S.No. ").setCellRenderer(centerRenderer);
+        Dashboard_1.jTable_billList.getColumn("Quantity").setCellRenderer(centerRenderer);
+        Dashboard_1.jTable_billList.getColumn("Price").setCellRenderer(centerRenderer);
     }
     
     public static int sNoOrder(){
@@ -123,6 +132,9 @@ public class CartBox {
     
     public static void clearCart(){
         items.clear();
+        priceMap.clear();
+        qtyMap.clear();
+        taxInclMap.clear();
         updateTable();
     }
 }
