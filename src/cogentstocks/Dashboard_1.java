@@ -38,6 +38,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
 
     
     public static DefaultTableModel model;
+    public boolean modified = false;
     //public static HashMap itemDet = new HashMap();
     //public static HashMap priceDet = new HashMap();
     //public static double totalPrice = 0.0;
@@ -148,7 +149,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
     public Dashboard_1() {
         
         initComponents();
-        jTable_billList.setRowHeight(40);
+        jTable_billList.setRowHeight(50);
         jTable_billList.setFont(new Font("Serif", Font.BOLD, 16));
         jTable_billList.setBackground(Color.getHSBColor(75, 50, 65));
         this.jTextField_bar.setBackground(Color.getHSBColor(60, 150, 50));
@@ -164,7 +165,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
         jTable_billList.getColumn("Purchase").setPreferredWidth(350);
         jTable_billList.getColumn("Quantity").setPreferredWidth(50);
         jTable_billList.getColumn("Price").setPreferredWidth(50);
-        jTable_billList.getColumn("Tax Inc").setPreferredWidth(50);
+        jTable_billList.removeColumn(jTable_billList.getColumn("Tax Inc"));
         this.jSpinner1.setValue(10);
         
         
@@ -782,7 +783,15 @@ public class Dashboard_1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3_removeActionPerformed
 
     private void jTable_billListPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTable_billListPropertyChange
-           /* int selectedRow = jTable_billList.getSelectedRow();
+
+            if(modified){
+            int selectedRow = jTable_billList.getSelectedRow();
+            String itemN = jTable_billList.getValueAt(selectedRow, 1).toString();
+            String modVal = jTable_billList.getValueAt(selectedRow, 4).toString();
+            CartBox.priceMap.put(itemN, Integer.parseInt(modVal));
+            screenupdate();
+            }
+        /* int selectedRow = jTable_billList.getSelectedRow();
         if (selectedRow == -1) { return; }
         String itemName = jTable_billList.getValueAt(selectedRow, 1).toString();
         int selectedPrice = (int)Double.parseDouble(jTable_billList.getValueAt(selectedRow, 3).toString());
@@ -808,12 +817,28 @@ public class Dashboard_1 extends javax.swing.JFrame {
         //Dashboard_1.jLabel1_total.setText(BillEntry.total + "");
     }//GEN-LAST:event_jTable_billListPropertyChange
 
+    private void screenupdate(){
+        if(modified)CartBox.updateTable();
+        if(jTable_billList.getSelectedRowCount() <= 0){
+            jButton3_remove.setEnabled(false);
+        }else{
+            jButton3_remove.setEnabled(true);
+        }
+    }
+    
     private void jTable_billListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_billListMouseClicked
         if(jTable_billList.getSelectedRowCount() <= 0){
             jButton3_remove.setEnabled(false);
         }else{
             jButton3_remove.setEnabled(true);
         }
+            modified = true;
+            int selectedRow = jTable_billList.getSelectedRow();
+            String itemN = jTable_billList.getValueAt(selectedRow, 1).toString();
+            String modVal = jTable_billList.getValueAt(selectedRow, 4).toString();
+            CartBox.priceMap.put(itemN, Integer.parseInt(modVal));
+        
+        
         
         /*String ChkVal = jTable_billList.getModel().getValueAt(selectedRow, 5).toString();
         String itemName = jTable_billList.getModel().getValueAt(selectedRow, 1).toString();

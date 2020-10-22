@@ -49,6 +49,7 @@ public class CartBox {
             }
         }
         Dashboard_1.jLabel1_total.setText(cartTotal+"");
+        Dashboard_1.jTable_billList.repaint();
     }
     
     public static int sNoOrder(){
