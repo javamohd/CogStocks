@@ -152,11 +152,10 @@ public class Dashboard_1 extends javax.swing.JFrame {
         jTable_billList.setFont(new Font("Serif", Font.BOLD, 16));
         jTable_billList.setBackground(Color.getHSBColor(75, 50, 65));
         this.jTextField_bar.setBackground(Color.getHSBColor(60, 150, 50));
-        //System.out.println(SysParam.barCodeMappings.keySet());
+        jTextField_bar.setCaretColor(Color.getHSBColor(60, 150, 50));
         Border b = new BevelBorder(BevelBorder.LOWERED, Color.getHSBColor(60, 150, 50), Color.getHSBColor(60, 150, 50));
         this.jTextField_bar.setBorder(b);
         
-        //Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2-50);
         SaleConfig.load();
         this.setTitle("Cogent Point of Sale");
         jLabel_shop_name.setText(SaleConfig.shopName);
@@ -167,7 +166,6 @@ public class Dashboard_1 extends javax.swing.JFrame {
         jTable_billList.getColumn("Price").setPreferredWidth(50);
         jTable_billList.getColumn("Tax Inc").setPreferredWidth(50);
         this.jSpinner1.setValue(10);
-        //jTable_billList.getModel()
         
         
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -175,10 +173,9 @@ public class Dashboard_1 extends javax.swing.JFrame {
         jTable_billList.getColumn("S.No. ").setCellRenderer(centerRenderer);
         jTable_billList.getColumn("Quantity").setCellRenderer(centerRenderer);
         jTable_billList.getColumn("Price").setCellRenderer(centerRenderer);
+        jTable_billList.getColumn("MRP").setCellRenderer(centerRenderer);
         jButton3_remove.setEnabled(false);
-        //jLabel1_total.setText(model.getRowCount()+"");
         
-        //Creating Receipt Folder
         try{
             File folder = new File("Receipts");
             if(!folder.exists()){
@@ -187,25 +184,17 @@ public class Dashboard_1 extends javax.swing.JFrame {
         }catch(Exception e){
             e.printStackTrace();
         }
-        //this.getRootPane().setDefaultButton(jButton2);
-        //this.getRootPane().setDefaultButton(jButton2);
-        //this.setUndecorated(true);
-       // jLabel1_logo =new JLabel(icon.jLabel1.CENTER);
-        ImageIcon icon = new ImageIcon("src/Test/Logo.jpg");
+        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("Test/Logo.jpg"));
+        
         icon = new ImageIcon(icon.getImage().getScaledInstance(jLabel1_logo.getWidth(), jLabel1_logo.getHeight(), BufferedImage.SCALE_SMOOTH));
         jLabel1_logo.setIcon(icon);
         jLabel1_logo.repaint();
         prepareGallaReport();
         try{
-        //Thread.sleep(2000);
-        //new BillEntry().setVisible(true);
         }catch(Exception e){
             e.printStackTrace();
         }
-//        jLabel1_logo.setIcon(icon);
         loadPendingCustomers();
-        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        //this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
         this.setSize((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(), (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight());
         this.getContentPane().setBackground(Color.getHSBColor(60, 150, 50));
         
@@ -859,16 +848,10 @@ public class Dashboard_1 extends javax.swing.JFrame {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        // TODO add your handling code here:
         //checkDate();
-        
-        //SaleConst.CurrentBill.clear();
         try{//java4s not found
-            
             File f = new File("src/Test/Logo.jpg");
-            
-            System.out.println(f.getAbsolutePath());
-            
+            //System.out.println(f.getAbsolutePath());
             if(!f.exists()){
                 JOptionPane.showMessageDialog(rootPane, "[***] Logo not found!!!");
                 return;
@@ -876,15 +859,12 @@ public class Dashboard_1 extends javax.swing.JFrame {
         }catch(Exception e){
             e.printStackTrace();
         }
-        
         try{
             
             if(jTable_billList.getRowCount() <= 0){
                 JOptionPane.showMessageDialog(rootPane, "Please add Purchased Items!!!");
                 return;
             }
-            
-            
         ArrayList<String> ll = new ArrayList<String>();
         //populate list
         List<String>keys = new ArrayList<>();
@@ -892,8 +872,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
         for(int i=0;i<tableCount;i++){
             keys.add(jTable_billList.getValueAt(i, 1).toString());
         }
-        
-        System.out.println("Saving --"+ll);
+        //System.out.println("Saving --"+ll);
         //PdfGen.saveIt(ll);
         SaleConfig.updateQty(CartBox.qtyMap);
         }catch(Exception e){

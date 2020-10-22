@@ -9,6 +9,7 @@ package cogentstocks;
 //import java.awt.Desktop;
 //import com.adobe.acrobat.gui.PDFPrint;
 import Cart.CartBox;
+import Cart.ItemObj;
 import com.itextpdf.text.*;
 import com.itextpdf.text.Font.FontFamily;
 import java.awt.Desktop;
@@ -217,7 +218,7 @@ public class PdfGen {
      
     }
     
-    public static void saveIt(ArrayList<String> items){
+    public static void saveIt(ArrayList<ItemObj> items){
          
         try {
  
@@ -291,9 +292,9 @@ public class PdfGen {
        table.addCell("NC");
        table.addCell("United States");*/
        int sno=1;
-       for(String s: items){
+       for(ItemObj e : items){
            //String[] dets = s.split(",");
-            
+           String s =e.itemName;  
            PdfPCell snocell = new PdfPCell();
            Font font = new Font(FontFamily.HELVETICA, 12, Font.NORMAL);
            Paragraph para = new Paragraph(sno+". ", font);

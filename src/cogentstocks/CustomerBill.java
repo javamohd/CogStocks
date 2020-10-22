@@ -5,6 +5,7 @@
 package cogentstocks;
 
 import Cart.CartBox;
+import Cart.ItemObj;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -412,12 +413,12 @@ public class CustomerBill extends javax.swing.JFrame {
         String purItems = "";
         //int n = SaleConst.CurrentBill.size();
         
-        List<String> keys = new ArrayList<>(SysParam.CurrentBill.keySet());
-        
-        for(String eachKey : keys){
+        for(ItemObj eachObj : CartBox.items){
+            String eachKey = eachObj.getItemName();
             String qty = CartBox.qtyMap.get(eachKey).toString();
             purItems += eachKey+"("+qty+"),";
-        }purItems=purItems.substring(0, purItems.lastIndexOf(","));
+        }
+        purItems=purItems.substring(0, purItems.lastIndexOf(","));
         
         Row currRow = BillSheet.createRow(BillSheet.getLastRowNum()+1);
         currRow.createCell(0).setCellValue(dateStr);
@@ -443,27 +444,14 @@ public class CustomerBill extends javax.swing.JFrame {
         BillEntry.total = new Double(0.0);    
         Dashboard_1.jLabel1_total = new JLabel("0.0");
         Dashboard_1.jLabel1_total.repaint();
-        PdfGen.saveIt(new ArrayList<>(SysParam.CurrentBill.keySet()));
+        PdfGen.saveIt(CartBox.items);
         JOptionPane.showMessageDialog(rootPane, "Transaction Saved Successfully!");
-        SysParam.CurrentBill.clear();
+        CartBox.clearCart();
         SaleConfig.printedSales++;
         this.setVisible(false);
-        try{
-        //Dashboard_1.totalPrice = Double.parseDouble(billAmt) - Double.parseDouble(balAmt);
-        }catch(Exception e){
-        //Dashboard_1.totalPrice = 0.0;    
-        }
         SaleConfig.Store();
         Dashboard_1 d = new Dashboard_1();
         d.setVisible(true);
-        BillEntry.total = 0.0;
-        Dashboard_1.jLabel1_total.setText("0.0");
-        //Dashboard_1.priceDet.clear();
-        //Dashboard_1.itemDet.clear();
-        //Resets all Static values
-        
-        
-        
         
         } catch (IOException ex) {
             Logger.getLogger(BillEntry.class.getName()).log(Level.SEVERE, null, ex);

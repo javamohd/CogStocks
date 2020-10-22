@@ -34,7 +34,7 @@ public class DataStore {
             FileInputStream inputStream = new FileInputStream(new File(File_Name));
             Workbook workbook = new XSSFWorkbook(inputStream);
             Sheet firstSheet = workbook.getSheetAt(0);
-            SysParam.itemCount = firstSheet.getLastRowNum()-1;
+            //SysParam.itemCount = firstSheet.getLastRowNum()-1;
             Iterator<Row> iterator = firstSheet.iterator();
             boolean skiprow = true;
             while (iterator.hasNext()) {

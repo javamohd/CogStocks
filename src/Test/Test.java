@@ -6,6 +6,7 @@ package Test;
 
 import cogentstocks.ProgressFrame;
 import cogentstocks.ProgressThread;
+import java.io.File;
 
 /**
  *
@@ -14,10 +15,8 @@ import cogentstocks.ProgressThread;
 public class Test {
     
     public static void main(String a[]){
-        ProgressFrame p = new ProgressFrame();
-        p.setVisible(true);
-        Thread t = new Thread(new ProgressThread());
-        t.start();
+        File f = new File("Test/Logo.jpg");
+        System.out.println(f.getAbsolutePath());
     }
     
 }
