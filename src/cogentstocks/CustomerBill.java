@@ -15,12 +15,9 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
-import org.apache.poi.hssf.usermodel.HSSFHyperlink;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFHyperlink;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
@@ -442,10 +439,11 @@ public class CustomerBill extends javax.swing.JFrame {
         PdfGen.saveIt(CartBox.items);
         JOptionPane.showMessageDialog(rootPane, "Transaction Saved Successfully!");
         SaleConfig.updateQty(CartBox.qtyMap);///Excel  Qty Update
-        CartBox.clearCart();
         SaleConfig.printedSales++;
+        SaleConfig.gallaCash += CartBox.cartTotal;
         this.setVisible(false);
         SaleConfig.Store();
+        CartBox.clearCart();
         Dashboard_1 d = new Dashboard_1();
         d.setVisible(true);
         

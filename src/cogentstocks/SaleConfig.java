@@ -40,8 +40,8 @@ public class SaleConfig {
     public static int printedSales = 0;
     public static boolean setup;
     public static Properties prop = new Properties();
-    public static double gallaCash = 0.0;
-    public static double    lastGalla = 0.0;
+    public static int gallaCash = 0;
+    public static int lastGalla = 0;
     public static String bill_No = "";
 
     public static String getBill_No() {
@@ -73,28 +73,24 @@ public class SaleConfig {
             filePrefix = prop.getProperty("filePrefix");
             printedSales = Integer.parseInt(prop.getProperty("printedSales").toString());
 try{
-            gallaCash = Double.parseDouble(prop.getProperty("gallaCash").toString().split("/")[0]);
-            lastGalla = Double.parseDouble(prop.getProperty("lastGalla").toString());
+            gallaCash = Integer.parseInt(prop.getProperty("gallaCash").toString().split("/")[0]);
+            lastGalla = Integer.parseInt(prop.getProperty("lastGalla").toString());
             
             String dateGalla = prop.getProperty("gallaCash").toString().split("/")[1];
             
             if(new SimpleDateFormat("ddMM").format(new Date()).equalsIgnoreCase(dateGalla)){
                 
             }else{
-                lastGalla = Double.parseDouble(prop.getProperty("gallaCash").toString().split("/")[0]);
-                gallaCash = 0.0;
+                lastGalla = Integer.parseInt(prop.getProperty("gallaCash").toString().split("/")[0]);
+                gallaCash = 0;
             }
             
 }catch(Exception e){
     System.out.println("No galla Cash --");
-    gallaCash = 0.0;
-    lastGalla = 0.0;
+    gallaCash = 0;
+    lastGalla = 0;
     e.printStackTrace();
 }
-            
-            //if(){
-                
-            //}
             
         }catch(Exception e){
             e.printStackTrace();
@@ -108,7 +104,13 @@ try{
             prop.setProperty("printerName", printerName);
             prop.setProperty("printedSales", printedSales+"");
             prop.setProperty("filePrefix", filePrefix);
-            //gallaCash += CartBox.cartTotal;
+            /*int temp = 0;
+            try{
+                temp = CartBox.cartTotal;
+            }catch(Exception e){
+                
+            }
+            gallaCash += temp;*/
             prop.setProperty("gallaCash", gallaCash+"/"+new SimpleDateFormat("ddMM").format(new Date()));
             prop.setProperty("lastGalla", lastGalla+"");
             prop.store(new FileOutputStream("Settings.jxt"), null);
