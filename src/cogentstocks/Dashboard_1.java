@@ -502,6 +502,11 @@ public class Dashboard_1 extends javax.swing.JFrame {
                 jTextField_barActionPerformed(evt);
             }
         });
+        jTextField_bar.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField_barFocusLost(evt);
+            }
+        });
 
         jButton3_updS.setBackground(new java.awt.Color(102, 102, 102));
         jButton3_updS.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -866,7 +871,8 @@ public class Dashboard_1 extends javax.swing.JFrame {
         
         //checkDate();
         try{
-            File f = new File("src/Test/Logo.jpg");
+            //ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("Test/Logo.jpg"));
+            File f = new File(getClass().getClassLoader().getResource("Test/Logo.jpg").toURI());
             if(!f.exists()){
                 JOptionPane.showMessageDialog(rootPane, "[***] Logo not found!!!");
                 return;
@@ -1023,6 +1029,11 @@ public class Dashboard_1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         new NewStock().setVisible(true);
     }//GEN-LAST:event_jButton3_newSActionPerformed
+
+    private void jTextField_barFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_barFocusLost
+        // TODO add your handling code here:
+        jToggleButton1.setSelected(false);
+    }//GEN-LAST:event_jTextField_barFocusLost
 
     /**
      * @param args the command line arguments

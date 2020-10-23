@@ -651,6 +651,7 @@
     <Component class="javax.swing.JTextField" name="jTextField_bar">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField_barActionPerformed"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextField_barFocusLost"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton3_updS">
