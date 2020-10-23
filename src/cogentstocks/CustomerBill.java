@@ -440,7 +440,7 @@ public class CustomerBill extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(rootPane, "Transaction Saved Successfully!");
         SaleConfig.updateQty(CartBox.qtyMap);///Excel  Qty Update
         SaleConfig.printedSales++;
-        SaleConfig.gallaCash += CartBox.cartTotal;
+        SaleConfig.gallaCash += CartBox.cartTotal; 
         this.setVisible(false);
         SaleConfig.Store();
         CartBox.clearCart();
