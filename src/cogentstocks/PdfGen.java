@@ -227,7 +227,7 @@ public class PdfGen {
            PdfWriter.getInstance(document, file);
  
  //Inserting Image in PDF
-      Image image = Image.getInstance ("src/Test/Logo.jpg");
+      Image image = Image.getInstance ("Images/Logo4s.jpg");
       image.scaleAbsolute(120f, 60f);//image width,height 
  
  //Inserting Table in PDF

@@ -7,10 +7,17 @@ package cogentstocks;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.io.File;
+//import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -32,6 +39,8 @@ public class SetupConfiguration extends javax.swing.JFrame {
         jTextField_prefix.disable();
         jTextField_printerName.disable();
         jButton1.setEnabled(false);
+        jButton_Browse.setEnabled(false);
+        jTextField_Logo.disable();
     }
 
     /**
@@ -57,6 +66,9 @@ public class SetupConfiguration extends javax.swing.JFrame {
         jTextField_activation_code = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel_Contact = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jTextField_Logo = new javax.swing.JTextField();
+        jButton_Browse = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -87,11 +99,11 @@ public class SetupConfiguration extends javax.swing.JFrame {
         jLabel6.setText("Activation Code :");
 
         jTextField_activation_code.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextField_activation_codeKeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField_activation_codeKeyReleased(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField_activation_codeKeyPressed(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextField_activation_codeKeyTyped(evt);
@@ -104,6 +116,15 @@ public class SetupConfiguration extends javax.swing.JFrame {
 
         jLabel_Contact.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Test/Logo.jpg"))); // NOI18N
         jLabel_Contact.setText("jLabel8");
+
+        jLabel8.setText("Logo_File :");
+
+        jButton_Browse.setText("Browse");
+        jButton_Browse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BrowseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -135,10 +156,18 @@ public class SetupConfiguration extends javax.swing.JFrame {
                                     .addComponent(jTextField_printerName)
                                     .addComponent(jTextField_activation_code, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel8))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField_prefix, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jTextField_prefix, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jTextField_Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton_Browse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -170,10 +199,16 @@ public class SetupConfiguration extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                        .addComponent(jLabel8)
+                        .addGap(38, 38, 38)
                         .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jTextField_prefix, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField_Logo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton_Browse))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -209,6 +244,31 @@ public class SetupConfiguration extends javax.swing.JFrame {
         SaleConfig.printerName = jTextField_printerName.getText();
         SaleConfig.filePrefix = jTextField_prefix.getText();
         SaleConfig.initPass = eval+"S";
+        
+        
+        try{
+            File dir = new File("Images");
+            dir.mkdir();
+        File to = new File("Images/Logo4s.jpg");
+        to.createNewFile();
+        File from  = new File(jTextField_Logo.getToolTipText());
+        FileInputStream fis = new FileInputStream(from);
+        FileOutputStream fos = new FileOutputStream(to);
+        
+        byte[] buffer = new byte[1024];
+        int lengthRead;
+        while ((lengthRead = fis.read(buffer)) > 0) {
+            fos.write(buffer, 0, lengthRead);
+            fos.flush();
+        }
+        fis.close();
+        fos.close();
+        
+        }catch(Exception e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(rootPane, "Application Setup incompleted!");
+            return;
+        }
         SaleConfig.Store();
         JOptionPane.showMessageDialog(rootPane, "Setup Done!!");
         System.exit(0);
@@ -260,14 +320,35 @@ public class SetupConfiguration extends javax.swing.JFrame {
         jTextField_prefix.setEnabled(true);
         jTextField_printerName.setEnabled(true);
         jButton1.setEnabled(true);
+        jButton_Browse.setEnabled(true);
+        jTextField_Logo.setEnabled(true);
         }else{
         jTextField2_shopName.setEnabled(false);
         jTextField_passCode.setEnabled(false);
         jTextField_prefix.setEnabled(false);
         jTextField_printerName.setEnabled(false);
         jButton1.setEnabled(false);
+        jButton_Browse.setEnabled(false);
+        jTextField_Logo.setEnabled(false);
         }
     }//GEN-LAST:event_jTextField_activation_codeKeyReleased
+
+    private void jButton_BrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BrowseActionPerformed
+        // TODO add your handling code here:
+        
+        JFileChooser fc = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+        "Images", "jpg");
+        fc.setFileFilter(filter);
+        int status = fc.showOpenDialog(this.getContentPane());
+        if(status == JFileChooser.APPROVE_OPTION){
+            jTextField_Logo.setText(fc.getSelectedFile().getName());
+            jTextField_Logo.setToolTipText(fc.getSelectedFile().getAbsolutePath());
+        }
+        
+        
+        
+    }//GEN-LAST:event_jButton_BrowseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -312,6 +393,7 @@ public class SetupConfiguration extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton_Browse;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -319,8 +401,10 @@ public class SetupConfiguration extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel_Contact;
     private javax.swing.JTextField jTextField2_shopName;
+    private javax.swing.JTextField jTextField_Logo;
     private javax.swing.JTextField jTextField_activation_code;
     private javax.swing.JTextField jTextField_passCode;
     private javax.swing.JTextField jTextField_prefix;

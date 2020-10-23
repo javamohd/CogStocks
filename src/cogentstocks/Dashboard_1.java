@@ -183,7 +183,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
         }catch(Exception e){
             e.printStackTrace();
         }
-        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("Test/Logo.jpg"));
+        ImageIcon icon = new ImageIcon("Images/Logo4s.jpg");
         
         icon = new ImageIcon(icon.getImage().getScaledInstance(jLabel1_logo.getWidth(), jLabel1_logo.getHeight(), BufferedImage.SCALE_SMOOTH));
         jLabel1_logo.setIcon(icon);
@@ -872,7 +872,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
         //checkDate();
         try{
             //ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("Test/Logo.jpg"));
-            File f = new File(getClass().getClassLoader().getResource("Test/Logo.jpg").toURI());
+            File f = new File("Images/Logo4s.jpg");
             if(!f.exists()){
                 JOptionPane.showMessageDialog(rootPane, "[***] Logo not found!!!");
                 return;
@@ -1006,6 +1006,8 @@ public class Dashboard_1 extends javax.swing.JFrame {
         
         if(jToggleButton1.isSelected()){
             jTextField_bar.requestFocus();
+        }else{
+            jToggleButton1.setSelected(false);
         }
         
     }//GEN-LAST:event_jToggleButton1ActionPerformed
