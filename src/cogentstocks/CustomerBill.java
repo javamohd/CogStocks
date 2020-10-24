@@ -74,6 +74,7 @@ public class CustomerBill extends javax.swing.JFrame {
         jLabel_BalPreview.setText("0.0");
         jTextField_Paid.setText(pass_amt+"");
         jTextField_Paid.setEnabled(false);
+        this.jButton_cancel.setVisible(false);
         
         this.getContentPane().setBackground(Color.getHSBColor(60, 150, 50));
         this.dispose();
@@ -362,10 +363,10 @@ public class CustomerBill extends javax.swing.JFrame {
     public void Trial_checkDate(){
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");  
         Date toDate = new Date();  
-        toDate.setDate(22);
+        toDate.setDate(30);
         toDate.setHours(8);
-        toDate.setMonth(Calendar.OCTOBER);
-        System.out.println(formatter.format(toDate));
+        toDate.setMonth(Calendar.DECEMBER);
+        //System.out.println(formatter.format(toDate));
         if(new Date().before(toDate)){
         }else{
             if(new File("Settings.jxt").delete()){

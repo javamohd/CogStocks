@@ -149,7 +149,10 @@ public class Dashboard_1 extends javax.swing.JFrame {
         initComponents();
         jTable_billList.setRowHeight(50);
         jTable_billList.setFont(new Font("Serif", Font.BOLD, 16));
-        jTable_billList.setBackground(Color.getHSBColor(75, 50, 65));
+        
+        jTable_billList.setBackground(Color.getColor("#696969"));
+        jTable_billList.setForeground(Color.BLACK);
+        
         this.jTextField_bar.setBackground(Color.getHSBColor(60, 150, 50));
         jTextField_bar.setCaretColor(Color.getHSBColor(60, 150, 50));
         Border b = new BevelBorder(BevelBorder.LOWERED, Color.getHSBColor(60, 150, 50), Color.getHSBColor(60, 150, 50));
