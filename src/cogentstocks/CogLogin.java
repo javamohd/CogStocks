@@ -221,7 +221,7 @@ public class CogLogin extends javax.swing.JFrame {
                 
                 try{
                 //UIManager.setLookAndFeel("");
-                //UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");  
+                UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");  
                 }catch(Exception ex){
                     ex.printStackTrace();
                 }
