@@ -18,7 +18,6 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
-import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -786,7 +785,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
     private void jTable_billListPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTable_billListPropertyChange
 
             if(modified){
-            int selectedRow = jTable_billList.getSelectedRow();
+            int selectedRow = jTable_billList.getSelectedRow();if(selectedRow == -1)return;
             String itemN = jTable_billList.getValueAt(selectedRow, 1).toString();
             String modVal = jTable_billList.getValueAt(selectedRow, 4).toString();
             CartBox.priceMap.put(itemN, Integer.parseInt(modVal));
@@ -838,6 +837,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
             String itemN = jTable_billList.getValueAt(selectedRow, 1).toString();
             String modVal = jTable_billList.getValueAt(selectedRow, 4).toString();
             CartBox.priceMap.put(itemN, Integer.parseInt(modVal));
+            //CartBox.updateTable();
         
         
         

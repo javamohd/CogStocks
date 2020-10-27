@@ -305,6 +305,7 @@ public class NewStock extends JDialog {
             obj.setTaxIncl(Integer.parseInt(jTextField_tax.getText()));
             
             DataStore.createNewStock(obj);
+            SysParam.barCodeMappings.put(obj.getItemBarcode(), obj);
             
             JOptionPane.showMessageDialog(rootPane, "Stock updated Successfully.");
             this.dispose();
