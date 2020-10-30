@@ -23,5 +23,6 @@ public class SysParam {
     public static ProgressFrame pf = null;
     
     public static Map<String, ItemObj> barCodeMappings = new HashMap();
+    public static Map<String, Integer> quantityMappings = new HashMap();
     
 }

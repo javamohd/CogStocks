@@ -37,29 +37,46 @@ public class DataStore {
             //SysParam.itemCount = firstSheet.getLastRowNum()-1;
             Iterator<Row> iterator = firstSheet.iterator();
             boolean skiprow = true;
+            int max = firstSheet.getLastRowNum();
+            int jobstatus = 1;
             while (iterator.hasNext()) {
                 Row currRow = iterator.next();
                 if(skiprow){
                  skiprow = false;
                  continue;
              }
+                float progVal = jobstatus/max;
+                //ProgressFrame.jProgressBar1.setValue(progVal);
+            //ProgressFrame.jLabel2.setText(progVal + "%");
+            //Thread.sleep(1000);
+            jobstatus++;
+            //Thread.sleep(500);
+            
+            //System.out.println(progVal +" --");
+            
+                ProgressThread.setProgStatus((int)progVal);
+                
                 ItemObj obj = new ItemObj();
                 
                 String barCodeStr = "";
                 String itemName = "";
                 double itemPrice = 0.0;
+                int itemQty = 0;
                 
                 if(currRow.getCell(5) != null)
                 barCodeStr = currRow.getCell(5).getStringCellValue();
                 
                 itemName = currRow.getCell(1).getStringCellValue();
                 itemPrice = currRow.getCell(2).getNumericCellValue();
+                itemQty = (int)currRow.getCell(3).getNumericCellValue();
                 
                 obj.setItemBarcode(barCodeStr);
                 obj.setItemName(itemName);
                 obj.setCustPrice(itemPrice);
+                obj.setItemQty(itemQty);
                 
                 SysParam.barCodeMappings.put(barCodeStr, obj);
+                SysParam.quantityMappings.put(obj.itemName, obj.itemQty);
             }
             //System.out.println(SysParam.barCodeMappings.size()+" --");
             

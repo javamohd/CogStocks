@@ -46,6 +46,14 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jTextField_bar" min="-2" pref="6" max="-2" attributes="0"/>
                           </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                              <Component id="jButton_minus" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jButton_changeQty" min="-2" pref="37" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jButton_Plus" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
@@ -143,7 +151,13 @@
                               <Component id="jTextField_bar" min="-2" pref="11" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jButton_minus" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="jButton_changeQty" alignment="1" pref="33" max="32767" attributes="0"/>
+                                  <Component id="jButton_Plus" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jButton3_remove" pref="50" max="32767" attributes="0"/>
                                   <Component id="jToggleButton1" max="32767" attributes="0"/>
@@ -687,6 +701,24 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3_newSActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton_minus">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="-1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton_Plus">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="+1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton_changeQty">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Change Quantity."/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_changeQtyActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

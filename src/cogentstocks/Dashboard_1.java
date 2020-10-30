@@ -20,6 +20,8 @@ import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.ss.usermodel.Row;
@@ -147,6 +149,21 @@ public class Dashboard_1 extends javax.swing.JFrame {
     public Dashboard_1() {
         
         initComponents();
+        
+        jTable_billList.getModel().addTableModelListener(new TableModelListener() {
+
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                validateQtyButtons();
+            }
+        });
+        
+        //System.out.println(SysParam.quantityMappings);
+        
+        jButton_Plus.setEnabled(false);
+        jButton_minus.setEnabled(false);
+        jButton_changeQty.setEnabled(false);
+        
         jTable_billList.setRowHeight(50);
         jTable_billList.setFont(new Font("Serif", Font.BOLD, 16));
         
@@ -177,6 +194,8 @@ public class Dashboard_1 extends javax.swing.JFrame {
         jTable_billList.getColumn("Price").setCellRenderer(centerRenderer);
         jTable_billList.getColumn("MRP").setCellRenderer(centerRenderer);
         jButton3_remove.setEnabled(false);
+
+        //jTable_billList.getCellEditor(0, 1).addCellEditorListener(jTable_billList);
         
         try{
             File folder = new File("Receipts");
@@ -199,7 +218,6 @@ public class Dashboard_1 extends javax.swing.JFrame {
         loadPendingCustomers();
         this.setSize((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(), (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight());
         this.getContentPane().setBackground(Color.getHSBColor(60, 150, 50));
-        
     }
     
     /**
@@ -241,6 +259,9 @@ public class Dashboard_1 extends javax.swing.JFrame {
         jTextField_bar = new javax.swing.JTextField();
         jButton3_updS = new javax.swing.JButton();
         jButton3_newS = new javax.swing.JButton();
+        jButton_minus = new javax.swing.JButton();
+        jButton_Plus = new javax.swing.JButton();
+        jButton_changeQty = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -299,11 +320,11 @@ public class Dashboard_1 extends javax.swing.JFrame {
             }
         });
         jTable_billList.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTable_billListKeyPressed(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTable_billListKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable_billListKeyPressed(evt);
             }
         });
         jTable_billList.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
@@ -531,6 +552,17 @@ public class Dashboard_1 extends javax.swing.JFrame {
             }
         });
 
+        jButton_minus.setText("-1");
+
+        jButton_Plus.setText("+1");
+
+        jButton_changeQty.setToolTipText("Change Quantity.");
+        jButton_changeQty.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_changeQtyActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -552,7 +584,14 @@ public class Dashboard_1 extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField_bar, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jTextField_bar, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(77, 77, 77)
+                                .addComponent(jButton_minus)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton_changeQty, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton_Plus)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(125, 125, 125)
@@ -625,7 +664,12 @@ public class Dashboard_1 extends javax.swing.JFrame {
                                 .addGap(90, 90, 90)
                                 .addComponent(jTextField_bar, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(63, 63, 63)
+                                .addGap(24, 24, 24)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButton_minus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton_changeQty, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                                    .addComponent(jButton_Plus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jButton3_remove, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                                     .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -784,6 +828,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
 
     private void jTable_billListPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTable_billListPropertyChange
 
+        validateQtyButtons();
             if(modified){
             int selectedRow = jTable_billList.getSelectedRow();if(selectedRow == -1)return;
             String itemN = jTable_billList.getValueAt(selectedRow, 1).toString();
@@ -824,9 +869,11 @@ public class Dashboard_1 extends javax.swing.JFrame {
         }else{
             jButton3_remove.setEnabled(true);
         }
+        validateQtyButtons();
     }
     
     private void jTable_billListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_billListMouseClicked
+        validateQtyButtons();
         if(jTable_billList.getSelectedRowCount() <= 0){
             jButton3_remove.setEnabled(false);
         }else{
@@ -834,9 +881,12 @@ public class Dashboard_1 extends javax.swing.JFrame {
         }
             modified = true;
             int selectedRow = jTable_billList.getSelectedRow();
+            if (selectedRow != -1) {
             String itemN = jTable_billList.getValueAt(selectedRow, 1).toString();
             String modVal = jTable_billList.getValueAt(selectedRow, 4).toString();
             CartBox.priceMap.put(itemN, Integer.parseInt(modVal));
+            
+        }
             //CartBox.updateTable();
         
         
@@ -1039,6 +1089,52 @@ public class Dashboard_1 extends javax.swing.JFrame {
         jToggleButton1.setSelected(false);
     }//GEN-LAST:event_jTextField_barFocusLost
 
+    private void jButton_changeQtyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_changeQtyActionPerformed
+        ///JOptionPane.showInputDialog(rootPane, "Enter the Item Quantity.");
+        Icon errorIcon = UIManager.getIcon("OptionPane.errorIcon");
+        Object[] possibilities = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+        Integer i = (Integer) JOptionPane.showInputDialog(null,
+                "Select number:\n\from JComboBox", "ShowInputDialog",
+                JOptionPane.PLAIN_MESSAGE, errorIcon, possibilities, "Numbers");
+        
+    }//GEN-LAST:event_jButton_changeQtyActionPerformed
+
+    public void validateQtyButtons(){
+        try{
+            
+            jButton_changeQty.setEnabled(false);
+            jButton_Plus.setEnabled(false);
+            jButton_minus.setEnabled(false);
+            
+            //Remove Button
+            //+1 button
+            //-1 button
+            //Chang Qty button
+            
+            int selectedRow = jTable_billList.getSelectedRow();
+            if(selectedRow == -1) return;
+            if(selectedRow >= jTable_billList.getRowCount())return;
+            String selectedItemName = jTable_billList.getValueAt(selectedRow, 1).toString();
+            int selectedItemQty = Integer.parseInt(jTable_billList.getValueAt(selectedRow, 3).toString());
+            int selectedItemAvailableQty = SysParam.quantityMappings.get(selectedItemName);
+            
+            
+            if(selectedItemQty < selectedItemAvailableQty){
+                jButton_Plus.setEnabled(true);
+                jButton_changeQty.setEnabled(true);
+                jButton_changeQty.setText(selectedItemQty+"");
+            }else{
+                jButton_Plus.setEnabled(false);
+                jButton_changeQty.setEnabled(false);
+            }
+            
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -1101,7 +1197,10 @@ public class Dashboard_1 extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JButton jButton_Plus;
     private javax.swing.JButton jButton_Sett;
+    private javax.swing.JButton jButton_changeQty;
+    private javax.swing.JButton jButton_minus;
     private javax.swing.JButton jButton_reset;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel1_logo;
