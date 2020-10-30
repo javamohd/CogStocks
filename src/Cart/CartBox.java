@@ -137,4 +137,14 @@ public class CartBox {
         taxInclMap.clear();
         updateTable();
     }
+    
+    public static ItemObj getItemByName(String itemName){
+        ItemObj toreturn = new ItemObj();
+        
+        for(ItemObj eachObj : CartBox.items){
+            if(eachObj.getItemName().equalsIgnoreCase(itemName))toreturn = eachObj;
+        }
+        
+        return toreturn;
+    }
 }

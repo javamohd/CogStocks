@@ -555,6 +555,11 @@ public class Dashboard_1 extends javax.swing.JFrame {
         jButton_minus.setText("-1");
 
         jButton_Plus.setText("+1");
+        jButton_Plus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_PlusActionPerformed(evt);
+            }
+        });
 
         jButton_changeQty.setToolTipText("Change Quantity.");
         jButton_changeQty.addActionListener(new java.awt.event.ActionListener() {
@@ -1099,12 +1104,28 @@ public class Dashboard_1 extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton_changeQtyActionPerformed
 
+    private void jButton_PlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_PlusActionPerformed
+        // TODO add your handling code here:
+        
+        int selectedqty = Integer.parseInt(jTable_billList.getValueAt
+                (jTable_billList.getSelectedRow(), 3).toString());
+        String selectedItemName = jTable_billList.getValueAt
+                (jTable_billList.getSelectedRow(), 1).toString();
+        int newQty = selectedqty+1;
+        CartBox.qtyMap.put(selectedItemName, newQty);
+        int newPrice = newQty * (int)CartBox.getItemByName(selectedItemName).getCustPrice();
+        CartBox.priceMap.put(selectedItemName, newPrice);
+        CartBox.updateTable();
+        
+    }//GEN-LAST:event_jButton_PlusActionPerformed
+
     public void validateQtyButtons(){
         try{
             
             jButton_changeQty.setEnabled(false);
             jButton_Plus.setEnabled(false);
             jButton_minus.setEnabled(false);
+            jButton_changeQty.setText("");
             
             //Remove Button
             //+1 button
