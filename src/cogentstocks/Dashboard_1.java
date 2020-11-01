@@ -553,6 +553,11 @@ public class Dashboard_1 extends javax.swing.JFrame {
         });
 
         jButton_minus.setText("-1");
+        jButton_minus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_minusActionPerformed(evt);
+            }
+        });
 
         jButton_Plus.setText("+1");
         jButton_Plus.addActionListener(new java.awt.event.ActionListener() {
@@ -1096,11 +1101,30 @@ public class Dashboard_1 extends javax.swing.JFrame {
 
     private void jButton_changeQtyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_changeQtyActionPerformed
         ///JOptionPane.showInputDialog(rootPane, "Enter the Item Quantity.");
-        Icon errorIcon = UIManager.getIcon("OptionPane.errorIcon");
-        Object[] possibilities = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
-        Integer i = (Integer) JOptionPane.showInputDialog(null,
-                "Select number:\n\from JComboBox", "ShowInputDialog",
-                JOptionPane.PLAIN_MESSAGE, errorIcon, possibilities, "Numbers");
+        
+        int selectedqty = Integer.parseInt(jTable_billList.getValueAt
+                (jTable_billList.getSelectedRow(), 3).toString());
+        String selectedItemName = jTable_billList.getValueAt
+                (jTable_billList.getSelectedRow(), 1).toString();
+        int availableQty = SysParam.quantityMappings.get(selectedItemName);
+        
+        Icon errorIcon = UIManager.getIcon("OptionPane.informationIcon");
+        //Object[] possibilities = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+        
+        ArrayList qty = new ArrayList();
+        for(int i=selectedqty+1;i<=availableQty;i++){
+            qty.add(i);
+        }
+        
+        Integer newQty = (Integer) JOptionPane.showInputDialog(null,
+                "Select puchase quantity:\n\r From below", "Available Quantity",
+                JOptionPane.PLAIN_MESSAGE, errorIcon, qty.toArray(), "Quantity");
+        
+        
+        CartBox.qtyMap.put(selectedItemName, newQty);
+        int newPrice = newQty * (int)CartBox.getItemByName(selectedItemName).getCustPrice();
+        CartBox.priceMap.put(selectedItemName, newPrice);
+        CartBox.updateTable();
         
     }//GEN-LAST:event_jButton_changeQtyActionPerformed
 
@@ -1112,12 +1136,40 @@ public class Dashboard_1 extends javax.swing.JFrame {
         String selectedItemName = jTable_billList.getValueAt
                 (jTable_billList.getSelectedRow(), 1).toString();
         int newQty = selectedqty+1;
+        
+        int availableQty = SysParam.quantityMappings.get(selectedItemName);
+        
+        if(newQty > availableQty){
+            JOptionPane.showMessageDialog(rootPane, "Quantity Not Applicable");
+            return;
+        }
+        
         CartBox.qtyMap.put(selectedItemName, newQty);
         int newPrice = newQty * (int)CartBox.getItemByName(selectedItemName).getCustPrice();
         CartBox.priceMap.put(selectedItemName, newPrice);
         CartBox.updateTable();
         
     }//GEN-LAST:event_jButton_PlusActionPerformed
+
+    private void jButton_minusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_minusActionPerformed
+        // TODO add your handling code here:
+        
+        int selectedqty = Integer.parseInt(jTable_billList.getValueAt
+                (jTable_billList.getSelectedRow(), 3).toString());
+        
+        if (selectedqty <= 1) {
+            JOptionPane.showConfirmDialog(rootPane, "Quantity Not Applicable");
+        return;
+        }
+        
+        String selectedItemName = jTable_billList.getValueAt
+                (jTable_billList.getSelectedRow(), 1).toString();
+        int newQty = selectedqty-1;
+        CartBox.qtyMap.put(selectedItemName, newQty);
+        int newPrice = newQty * (int)CartBox.getItemByName(selectedItemName).getCustPrice();
+        CartBox.priceMap.put(selectedItemName, newPrice);
+        CartBox.updateTable();
+    }//GEN-LAST:event_jButton_minusActionPerformed
 
     public void validateQtyButtons(){
         try{
@@ -1144,6 +1196,11 @@ public class Dashboard_1 extends javax.swing.JFrame {
                 jButton_Plus.setEnabled(true);
                 jButton_changeQty.setEnabled(true);
                 jButton_changeQty.setText(selectedItemQty+"");
+                
+                if(selectedItemQty > 1 && selectedItemAvailableQty > 2){
+                    jButton_minus.setEnabled(true);
+                }
+                
             }else{
                 jButton_Plus.setEnabled(false);
                 jButton_changeQty.setEnabled(false);
