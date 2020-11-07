@@ -268,7 +268,7 @@
                 <Column editable="false" title="S.No. " type="java.lang.Integer"/>
                 <Column editable="false" title="Purchase" type="java.lang.String"/>
                 <Column editable="false" title="MRP" type="java.lang.String"/>
-                <Column editable="false" title="Quantity" type="java.lang.Integer"/>
+                <Column editable="true" title="Quantity" type="java.lang.Integer"/>
                 <Column editable="true" title="Price" type="java.lang.Integer"/>
               </Table>
             </Property>
@@ -310,12 +310,7 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable_billListMouseClicked"/>
-            <EventHandler event="hierarchyChanged" listener="java.awt.event.HierarchyListener" parameters="java.awt.event.HierarchyEvent" handler="jTable_billListHierarchyChanged"/>
-            <EventHandler event="inputMethodTextChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="jTable_billListInputMethodTextChanged"/>
             <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jTable_billListPropertyChange"/>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTable_billListKeyTyped"/>
-            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTable_billListKeyPressed"/>
-            <EventHandler event="vetoableChange" listener="java.beans.VetoableChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jTable_billListVetoableChange"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
