@@ -191,7 +191,12 @@ public class Dashboard_1 extends javax.swing.JFrame {
                 if (e.getColumn() == 4 && selectedRow != -1) {//For Price Changes
                         String itemN = jTable_billList.getValueAt(selectedRow, 1).toString();
                         String modVal = jTable_billList.getValueAt(selectedRow, 4).toString();
+                        try{
                         CartBox.priceMap.put(itemN, Integer.parseInt(modVal));
+                        }catch(Exception gg){
+                            JOptionPane.showMessageDialog(rootPane, "Invalid Values Entered.");
+                            screenupdate();
+                        }
 
                 }
                 modified = true;
@@ -871,11 +876,6 @@ public class Dashboard_1 extends javax.swing.JFrame {
     
     private void jTable_billListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_billListMouseClicked
         validateQtyButtons();
-        if(jTable_billList.getSelectedRowCount() <= 0){
-            jButton3_remove.setEnabled(false);
-        }else{
-            jButton3_remove.setEnabled(true);
-        }
             modified = true;
     }//GEN-LAST:event_jTable_billListMouseClicked
 
@@ -1063,6 +1063,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
         int newPrice = newQty * (int)CartBox.getItemByName(selectedItemName).getCustPrice();
         CartBox.priceMap.put(selectedItemName, newPrice);
         CartBox.updateTable();
+        validateQtyButtons();
         
     }//GEN-LAST:event_jButton_changeQtyActionPerformed
 
@@ -1086,6 +1087,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
         int newPrice = newQty * (int)CartBox.getItemByName(selectedItemName).getCustPrice();
         CartBox.priceMap.put(selectedItemName, newPrice);
         CartBox.updateTable();
+        validateQtyButtons();
         //jTable_billList.setRowSelectionInterval(selectedR, selectedR);
         
     }//GEN-LAST:event_jButton_PlusActionPerformed
@@ -1108,6 +1110,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
         int newPrice = newQty * (int)CartBox.getItemByName(selectedItemName).getCustPrice();
         CartBox.priceMap.put(selectedItemName, newPrice);
         CartBox.updateTable();
+        validateQtyButtons();
     }//GEN-LAST:event_jButton_minusActionPerformed
 
     public void validateQtyButtons(){
@@ -1130,7 +1133,12 @@ public class Dashboard_1 extends javax.swing.JFrame {
             }
             if(selectedRow >= jTable_billList.getRowCount())return;
             String selectedItemName = jTable_billList.getValueAt(selectedRow, 1).toString();
-            int selectedItemQty = Integer.parseInt(jTable_billList.getValueAt(selectedRow, 3).toString());
+            int selectedItemQty = 1;
+            try{
+            selectedItemQty = Integer.parseInt(jTable_billList.getValueAt(selectedRow, 3).toString());
+            }catch(Exception w){
+                throw new NumberFormatException();
+            }
             int selectedItemAvailableQty = SysParam.quantityMappings.get(selectedItemName);
             
             
@@ -1144,12 +1152,24 @@ public class Dashboard_1 extends javax.swing.JFrame {
                 }
                 
             }else{
+                jButton_minus.setEnabled(true);
                 jButton_Plus.setEnabled(false);
-                jButton_changeQty.setEnabled(false);
+                jButton_changeQty.setText(selectedItemQty+"");
+                jButton_changeQty.setEnabled(true);
             }
             
+            //Remove Button Validation
+            if (jTable_billList.getSelectedRowCount() <= 0) {
+                jButton3_remove.setEnabled(false);
+            } else {
+                jButton3_remove.setEnabled(true);
+            }
             
         }catch(Exception e){
+            
+                JOptionPane.showMessageDialog(rootPane, "Invalid Values Entered.");
+                screenupdate();
+            
             e.printStackTrace();
         }
     }
