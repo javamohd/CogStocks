@@ -8,6 +8,8 @@ import Cart.CartBox;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -139,6 +141,20 @@ public class Dashboard_1 extends javax.swing.JFrame {
     public Dashboard_1() {
         
         initComponents();
+        
+        //Single Click Editor
+        final JTextField tt = new JTextField();
+        tt.addFocusListener( new FocusAdapter()
+        {
+            public void focusGained( final FocusEvent e )
+            {
+                tt.selectAll();
+            }
+        } );
+        DefaultCellEditor singleclick = new DefaultCellEditor(tt);
+    singleclick.setClickCountToStart(1);
+    jTable_billList.setDefaultEditor(jTable_billList.getColumnClass(3), singleclick);
+        
         modified = false;
         jTable_billList.getModel().addTableModelListener(new TableModelListener() {
 
@@ -178,6 +194,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
                         CartBox.priceMap.put(itemN, Integer.parseInt(modVal));
 
                 }
+                modified = true;
             }
         });
         
