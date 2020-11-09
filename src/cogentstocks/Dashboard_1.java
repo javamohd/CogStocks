@@ -39,16 +39,6 @@ public class Dashboard_1 extends javax.swing.JFrame {
     
     public static DefaultTableModel model;
     public boolean modified = false;
-    //public static HashMap itemDet = new HashMap();
-    //public static HashMap priceDet = new HashMap();
-    //public static double totalPrice = 0.0;
-    //public static double saletotal = 0.0;
-    //Map priceMap = new HashMap();
-
-    
-
-    
-    
     
     public static void prepareGallaReport(){
         try{
@@ -149,7 +139,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
     public Dashboard_1() {
         
         initComponents();
-        
+        modified = false;
         jTable_billList.getModel().addTableModelListener(new TableModelListener() {
 
             @Override
@@ -161,10 +151,25 @@ public class Dashboard_1 extends javax.swing.JFrame {
                 if(e.getColumn() == 3 && selectedRow != -1){// For Quantity Change
                         String itemN = jTable_billList.getValueAt(selectedRow, 1).toString();
                         String modVal = jTable_billList.getValueAt(selectedRow, 3).toString();
+                        //Validate Qty here 
+                        
+                        int Stockavailable = SysParam.quantityMappings.get(itemN);
+                        int reqVal = Integer.parseInt(modVal);
+                        if(Stockavailable<reqVal){
+                            JOptionPane.showMessageDialog(rootPane, "Invalid Qty!");
+                            return;
+                        }
+                        
+                        try{
+                        int reqQty = Integer.parseInt(modVal);
+                        }catch(Exception ee){
+                            JOptionPane.showMessageDialog(rootPane, "Invalid Qty!");
+                            return;
+                        }
+                        
                         CartBox.qtyMap.put(itemN, Integer.parseInt(modVal));
                         int newP = (int)CartBox.getItemByName(itemN).getCustPrice() * Integer.parseInt(modVal);
                         CartBox.priceMap.put(itemN, newP);
-                        //CartBox.updateTable();
                 }
 
                 if (e.getColumn() == 4 && selectedRow != -1) {//For Price Changes
@@ -173,35 +178,8 @@ public class Dashboard_1 extends javax.swing.JFrame {
                         CartBox.priceMap.put(itemN, Integer.parseInt(modVal));
 
                 }
-                
-                /*if (e.getColumn() == 3) {
-                    String selectedItemName = jTable_billList.getModel().getValueAt(jTable_billList.getSelectedRow(), 1).toString();
-                    String newq = JOptionPane.showInputDialog(rootPane, "Quantity for "
-                            + selectedItemName);
-                    int newQty = 1;
-                    try {
-                        newQty = Integer.parseInt(newq);
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(rootPane, "Quantity not valid!");
-                        CartBox.updateTable();
-                        return;
-                    }
-
-                    CartBox.qtyMap.put(selectedItemName, newQty);
-                    int newPrice = newQty * (int) CartBox.getItemByName(selectedItemName).getCustPrice();
-                    CartBox.priceMap.put(selectedItemName, newPrice);
-                    CartBox.updateTable();
-                }*/
-                
-                //JOptionPane.showMessageDialog(rootPane, e.getColumn());
-                
-                
-                //Updating Backing Beans when table changes
-                
             }
         });
-        
-        //System.out.println(SysParam.quantityMappings);
         
         jButton_Plus.setEnabled(false);
         jButton_minus.setEnabled(false);
@@ -859,35 +837,9 @@ public class Dashboard_1 extends javax.swing.JFrame {
         validateQtyButtons();
             if(modified){
             int selectedRow = jTable_billList.getSelectedRow();if(selectedRow == -1)return;
-            //String itemN = jTable_billList.getValueAt(selectedRow, 1).toString();
-            //String modVal = jTable_billList.getValueAt(selectedRow, 4).toString();
-            //CartBox.priceMap.put(itemN, Integer.parseInt(modVal));
             screenupdate();
             }
-        /* int selectedRow = jTable_billList.getSelectedRow();
-        if (selectedRow == -1) { return; }
-        String itemName = jTable_billList.getValueAt(selectedRow, 1).toString();
-        int selectedPrice = (int)Double.parseDouble(jTable_billList.getValueAt(selectedRow, 3).toString());
-        int selectedQty = Integer.parseInt(jTable_billList.getValueAt(selectedRow, 3).toString());
-        itemDet.put(itemName, selectedQty);
-        priceDet.put(itemName, selectedPrice);
-        /*System.out.println("Manual Editing... -- " + itemName + "--" + selectedQty + "--" + selectedPrice);
-        int newPr = Integer.parseInt(SaleConst.CurrentBill.get(itemName).toString().split("~")[0])
-                / Integer.parseInt(SaleConst.CurrentBill.get(itemName).toString().split("~")[1]);
-        if (selectedQty != Integer.parseInt(SaleConst.CurrentBill.get(itemName).toString().split("~")[1])) {
-            jTable_billList.getModel().setValueAt(newPr * selectedQty, selectedRow, 3);
-            SaleConst.CurrentBill.put(itemName, selectedPrice + "~" + selectedQty);
-        } else {
-        }
-        priceDet.put(itemName, selectedPrice);
-        SysParam.tmpPrice = selectedPrice;
-        Set s = priceDet.keySet();
-        ArrayList<String> l = new ArrayList(s);
-        BillEntry.total = 0.0;
-        for (String each : l) {
-            BillEntry.total += Integer.parseInt(priceDet.get(each).toString());
-        }*/
-        //Dashboard_1.jLabel1_total.setText(BillEntry.total + "");
+        
     }//GEN-LAST:event_jTable_billListPropertyChange
 
     private void screenupdate(){
@@ -908,30 +860,6 @@ public class Dashboard_1 extends javax.swing.JFrame {
             jButton3_remove.setEnabled(true);
         }
             modified = true;
-            int selectedRow = jTable_billList.getSelectedRow();
-            if (selectedRow != -1 && evt.getClickCount() == 2) {
-            //String itemN = jTable_billList.getValueAt(selectedRow, 1).toString();
-            //String modVal = jTable_billList.getValueAt(selectedRow, 4).toString();
-            //CartBox.priceMap.put(itemN, Integer.parseInt(modVal));
-            
-        }
-            //CartBox.updateTable();
-        
-        
-        
-        /*String ChkVal = jTable_billList.getModel().getValueAt(selectedRow, 5).toString();
-        String itemName = jTable_billList.getModel().getValueAt(selectedRow, 1).toString();
-        ItemObj obj = SysParam.CurrentBill.get(itemName);
-        
-        if(ChkVal.equals("true")){
-            jTable_billList.getModel().setValueAt(obj.getCustPrice(), selectedRow, 4);
-            priceDet.put(obj.getItemName(), (int)obj.getCustPrice());
-        }else{
-            jTable_billList.getModel().setValueAt(obj.getPurPrice(), selectedRow, 4);
-            priceDet.put(obj.getItemName(), (int)obj.getPurPrice());
-        }
-        Dashboard_1.jLabel1_total.setText(Dashboard_1.getCurrentSaleTotal());
-        */
     }//GEN-LAST:event_jTable_billListMouseClicked
 
     public void checkDate(){

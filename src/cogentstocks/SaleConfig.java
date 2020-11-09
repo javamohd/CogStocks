@@ -4,7 +4,6 @@
  */
 package cogentstocks;
 
-import Cart.CartBox;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -20,7 +19,6 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -43,6 +41,7 @@ public class SaleConfig {
     public static int gallaCash = 0;
     public static int lastGalla = 0;
     public static String bill_No = "";
+    public static String expire = "";
 
     public static String getBill_No() {
         String billno = shopName.substring(0, 2) +new SimpleDateFormat("ddMM").format(new Date())+printedSales;
@@ -66,6 +65,7 @@ public class SaleConfig {
             }
             prop.load(new FileInputStream("Settings.jxt"));
             shopName = prop.getProperty("shopName");
+            expire = prop.getProperty("expire");
             //if(setup == null)setup = "false";
             setup = ( prop.getProperty("setup").equals("true") ) ? true : false;
             printerName = prop.getProperty("printerName");

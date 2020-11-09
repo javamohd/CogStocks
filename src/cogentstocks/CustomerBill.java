@@ -361,11 +361,21 @@ public class CustomerBill extends javax.swing.JFrame {
 
     
     public void Trial_checkDate(){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");  
-        Date toDate = new Date();  
-        toDate.setDate(30);
+        //SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");  
+        SimpleDateFormat sdf = new SimpleDateFormat("ddMMMyyyy");
+        Date toDate = new Date();
+        try{
+            toDate = sdf.parse(SaleConfig.expire);  
+        }catch(Exception g){
+            toDate.setDate(30);
+            toDate.setHours(8);
+            toDate.setYear(2020);
+            toDate.setMonth(Calendar.DECEMBER);    
+        }
+        /*toDate.setDate(30);
         toDate.setHours(8);
-        toDate.setMonth(Calendar.DECEMBER);
+        toDate.setYear(2020);
+        toDate.setMonth(Calendar.DECEMBER);*/
         //System.out.println(formatter.format(toDate));
         if(new Date().before(toDate)){
         }else{
@@ -379,7 +389,7 @@ public class CustomerBill extends javax.swing.JFrame {
     
     private void jButton_doneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_doneActionPerformed
         // TODO add your handling code here:
-        //Trial_checkDate();
+        Trial_checkDate();
         
         if(jText_csname.getText().isEmpty() && jText_csmobile.getText().isEmpty()){
             JOptionPane.showMessageDialog(rootPane, "Please Enter Customer Details!");
