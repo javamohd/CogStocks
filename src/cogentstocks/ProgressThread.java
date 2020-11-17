@@ -30,7 +30,9 @@ public class ProgressThread implements Runnable{
             }*/
             
             SysParam.pf.setVisible(false);
-            new Dashboard_1().setVisible(true);
+            //new Dashboard_1().setVisible(true);
+            SysParam.dashb = new Dashboard_1();
+            SysParam.dashb.setVisible(true);
         }catch(Exception e){
             e.printStackTrace();
         }
