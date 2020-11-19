@@ -240,7 +240,7 @@ public class CustomerBill extends javax.swing.JFrame {
         jTextField_FilterCust.setBackground(new java.awt.Color(204, 255, 255));
         jTextField_FilterCust.setFont(new java.awt.Font("Marcellus SC", 1, 18)); // NOI18N
         jTextField_FilterCust.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField_FilterCust.setCaretColor(new java.awt.Color(255, 255, 255));
+        jTextField_FilterCust.setCaretColor(new java.awt.Color(51, 51, 51));
         jTextField_FilterCust.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField_FilterCustKeyReleased(evt);
@@ -278,7 +278,6 @@ public class CustomerBill extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel_Balance1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGap(176, 176, 176))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel_BalPreview, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -534,11 +533,17 @@ public class CustomerBill extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         if(existingList == null)existingList = (DefaultListModel)jList1.getModel();
-        if(!jTextField_FilterCust.getText().isEmpty()){
+        if(!jTextField_FilterCust.getText().isEmpty() && jTextField_FilterCust.getText().length() >= 2){
             DefaultListModel newM = new DefaultListModel();
-            newM.addElement("one ");
-            newM.addElement("two ");
-            newM.addElement("th3 ");
+            
+            String key = jTextField_FilterCust.getText();
+                for (int i = 0; i < existingList.getSize(); i++) {
+                    String eachVal = existingList.get(i).toString();
+                    if (eachVal.toLowerCase().contains(key.toLowerCase())) {
+                        newM.addElement(eachVal);
+                    }
+                }
+            
             jList1.setModel(newM);
         }else{
             jList1.setModel(existingList);
