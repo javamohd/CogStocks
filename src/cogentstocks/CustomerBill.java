@@ -50,21 +50,22 @@ public class CustomerBill extends javax.swing.JFrame {
             for (int i = 0; i <= n; i++) {
                 if(i==0)continue;
                 String nam = sheet.getRow(i).getCell(0).getStringCellValue();
-                demoList.addElement(nam);
+                String ph = sheet.getRow(i).getCell(1).getStringCellValue();
+                String val = nam+ "_"+ph;
+                demoList.addElement(val);
                 index.put(nam, i+1);
-                phoneMap.put(nam, sheet.getRow(i).getCell(1).getStringCellValue());
+                phoneMap.put(nam, ph);
             }
             jList1.setModel(demoList);
+            workbook.close();
+            inputStream.close();
         } catch (Exception ex) {
-
         }
     }
     
     public CustomerBill() {
         initComponents();
         loadCustomers();
-        //bill_Amt = Integer.parseInt(Dashboard.jLabel1_total.getText().split(".")[0]);
-        //Dashboard_1.totalPrice = Double.parseDouble(Dashboard_1.jLabel1_total.getText());
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         ButtonGroup grp = new ButtonGroup();
         grp.add(jToggleButton_fullPay);
@@ -76,12 +77,8 @@ public class CustomerBill extends javax.swing.JFrame {
         jTextField_Paid.setEnabled(false);
         this.jButton_cancel.setVisible(false);
         
-        this.getContentPane().setBackground(Color.getHSBColor(60, 150, 50));
-        //this.dispose();
-        //this.setUndecorated(true);
+        this.getContentPane().setBackground(Color.darkGray);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        //this.setSize((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(),
-          //      (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight());
         
         
     }
@@ -113,6 +110,7 @@ public class CustomerBill extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel_Balance1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jTextField_FilterCust = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -235,6 +233,16 @@ public class CustomerBill extends javax.swing.JFrame {
             }
         });
 
+        jTextField_FilterCust.setBackground(new java.awt.Color(204, 255, 255));
+        jTextField_FilterCust.setFont(new java.awt.Font("Marcellus SC", 1, 18)); // NOI18N
+        jTextField_FilterCust.setForeground(new java.awt.Color(102, 102, 102));
+        jTextField_FilterCust.setCaretColor(new java.awt.Color(255, 255, 255));
+        jTextField_FilterCust.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField_FilterCustKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -242,14 +250,17 @@ public class CustomerBill extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jToggleButton_fullPay, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jToggleButton_HalfPay, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel_Balance1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel_Balance, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -260,27 +271,33 @@ public class CustomerBill extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton_done, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jToggleButton_fullPay, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton_HalfPay, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 186, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel_BalPreview, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel_AmtPaid, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel_Balance1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel_BillAmt, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField_Paid))))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(176, 176, 176))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel_BalPreview, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel_AmtPaid, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel_BillAmt, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextField_Paid, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton_cancel)))))
+                                .addGap(54, 54, 54)
+                                .addComponent(jButton_cancel))
+                            .addComponent(jScrollPane1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jTextField_FilterCust, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 30, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -315,7 +332,9 @@ public class CustomerBill extends javax.swing.JFrame {
                                     .addComponent(jLabel_BalPreview, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel_Balance1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField_FilterCust, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton_done, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -492,8 +511,9 @@ public class CustomerBill extends javax.swing.JFrame {
         
         if(evt.getClickCount() == 2){
             String key = jList1.getSelectedValue().toString();
-            jText_csname.setText(key);
-            jText_csmobile.setText(phoneMap.get(key).toString());
+            String nam = key.split("_")[0];
+            jText_csname.setText(nam);
+            jText_csmobile.setText(phoneMap.get(nam).toString());
         }
         
     }//GEN-LAST:event_jList1MouseClicked
@@ -505,6 +525,22 @@ public class CustomerBill extends javax.swing.JFrame {
         this.setVisible(false);
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField_FilterCustKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_FilterCustKeyReleased
+        // TODO add your handling code here:
+        
+        DefaultListModel existed = (DefaultListModel)jList1.getModel();
+        if(!jTextField_FilterCust.getText().isEmpty()){
+            DefaultListModel newM = new DefaultListModel();
+            newM.addElement("one ");
+            newM.addElement("two ");
+            newM.addElement("th3 ");
+            jList1.setModel(newM);
+        }else{
+            jList1.setModel(existed);
+        }
+        
+    }//GEN-LAST:event_jTextField_FilterCustKeyReleased
 
     /**
      * @param args the command line arguments
@@ -561,6 +597,7 @@ public class CustomerBill extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_BillAmt;
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField_FilterCust;
     private javax.swing.JTextField jTextField_Paid;
     private javax.swing.JTextField jText_csmobile;
     private javax.swing.JTextField jText_csname;
