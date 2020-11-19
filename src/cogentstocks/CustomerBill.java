@@ -34,6 +34,7 @@ public class CustomerBill extends javax.swing.JFrame {
     public static String pass_amt = "";
     public HashMap index = new HashMap();
     public HashMap phoneMap = new HashMap();
+    DefaultListModel existingList = null;
     
     public void loadCustomers() {
         try {
@@ -59,6 +60,9 @@ public class CustomerBill extends javax.swing.JFrame {
             jList1.setModel(demoList);
             workbook.close();
             inputStream.close();
+            
+            existingList = (DefaultListModel)jList1.getModel();
+            
         } catch (Exception ex) {
         }
     }
@@ -529,7 +533,7 @@ public class CustomerBill extends javax.swing.JFrame {
     private void jTextField_FilterCustKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_FilterCustKeyReleased
         // TODO add your handling code here:
         
-        DefaultListModel existed = (DefaultListModel)jList1.getModel();
+        if(existingList == null)existingList = (DefaultListModel)jList1.getModel();
         if(!jTextField_FilterCust.getText().isEmpty()){
             DefaultListModel newM = new DefaultListModel();
             newM.addElement("one ");
@@ -537,7 +541,7 @@ public class CustomerBill extends javax.swing.JFrame {
             newM.addElement("th3 ");
             jList1.setModel(newM);
         }else{
-            jList1.setModel(existed);
+            jList1.setModel(existingList);
         }
         
     }//GEN-LAST:event_jTextField_FilterCustKeyReleased
