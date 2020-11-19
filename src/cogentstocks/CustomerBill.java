@@ -53,6 +53,7 @@ public class CustomerBill extends javax.swing.JFrame {
                 String nam = sheet.getRow(i).getCell(0).getStringCellValue();
                 String ph = sheet.getRow(i).getCell(1).getStringCellValue();
                 String val = nam+ "_"+ph;
+                SysParam.customers.add(val);
                 demoList.addElement(val);
                 index.put(nam, i+1);
                 phoneMap.put(nam, ph);
@@ -445,6 +446,10 @@ public class CustomerBill extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Please Enter Paid Amount");
             return;
         }
+        boolean addCust = false;
+        if(!SysParam.customers.contains(jText_csname.getText()+"_"+jText_csmobile.getText())){
+            addCust = true;
+        }
         
         String excelFilePath = "Stocks.xlsx";
         FileInputStream inputStream = null;
@@ -482,6 +487,16 @@ public class CustomerBill extends javax.swing.JFrame {
         currRow.createCell(4).setCellValue(balAmt);
         currRow.createCell(5).setCellValue(SaleConfig.getBill_No().toUpperCase());
         currRow.createCell(6).setCellValue(purItems);
+        
+        if(addCust){
+            Sheet sheet = workbook.getSheetAt(2);
+        int currRowNum = sheet.getLastRowNum()+1;
+        Row curRow = sheet.createRow(currRowNum);
+        curRow.createCell(0).setCellValue(jText_csname.getText());
+        curRow.createCell(1).setCellValue(jText_csmobile.getText());
+        curRow.createCell(2).setCellValue("NA");
+        curRow.createCell(3).setCellValue("NA");
+        }
         
         OutputStream os = new FileOutputStream(new File("Stocks.xlsx"));
         workbook.write(os);

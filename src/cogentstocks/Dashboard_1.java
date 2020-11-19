@@ -133,6 +133,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
             }
             
             jTable_pendings.setModel(pendModel);
+            
     }catch(Exception gg){
         gg.printStackTrace();
     }
