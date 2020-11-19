@@ -449,7 +449,7 @@ public class BillEntry extends javax.swing.JDialog {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        if(jTextField1.getText().isEmpty()){
+        if(jTextField1.getText().isEmpty()){//Stock Name Validation
             JOptionPane.showMessageDialog(rootPane, "Stock Name Please");
             return;
         }
