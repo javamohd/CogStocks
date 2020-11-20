@@ -6,7 +6,11 @@ package cogentstocks;
 
 import Cart.ItemObj;
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -169,5 +173,41 @@ public class DataStore {
             JOptionPane.showMessageDialog(null, "New Stock Error !!");
         }
     }
-    
+    public static CustomerObj getCustDetsByName(String custName){
+        CustomerObj toReturn = new CustomerObj();
+        
+        String excelFilePath = "Stocks.xlsx";
+        FileInputStream inputStream = null;
+        Workbook workbook = null;
+        try {
+            inputStream = new FileInputStream(new File(excelFilePath));
+            workbook = new XSSFWorkbook(inputStream);
+        } catch (IOException ex) {
+            Logger.getLogger(BillEntry.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Sheet billSheet = workbook.getSheetAt(1);
+        Iterator<Row> iterator = billSheet.iterator();
+        toReturn.setCustomerName(custName);
+        while (iterator.hasNext()) {
+            Row currRow = iterator.next();
+            String billName = currRow.getCell(1).getStringCellValue();
+            if (billName.toLowerCase().equals(custName.toLowerCase())) {
+                BillObj obj = new BillObj();
+                obj.CustName = billName;
+                obj.billAmount = Double.parseDouble(currRow.getCell(3).getStringCellValue());
+                obj.billBalance = Double.parseDouble(currRow.getCell(4).getStringCellValue());
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
+                try{
+                obj.billDateTime = sdf.parse(currRow.getCell(0).getStringCellValue().split(" ")[0]);
+                }catch(Exception e){
+                    obj.billDateTime = new Date();
+                }
+                toReturn.CustBillHistory.add(obj);
+            } else {
+                continue;
+            }
+        }
+        
+        return toReturn;
+    }
 }

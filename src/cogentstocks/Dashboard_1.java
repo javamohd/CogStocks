@@ -129,7 +129,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
                 Vector tmp = new Vector();
                 tmp.add(each);
                 tmp.add(pendMap.get(each));
-                pendModel.addRow(tmp);    
+                pendModel.addRow(tmp);
             }
             
             jTable_pendings.setModel(pendModel);
