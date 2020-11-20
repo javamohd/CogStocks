@@ -543,14 +543,15 @@ public class CustomerBill extends javax.swing.JFrame {
             
             int tableSize = jTable_custHist.getModel().getRowCount();
             DefaultTableModel modd = (DefaultTableModel)CustomerBill.jTable_custHist.getModel();
-            for(int i=0;i<tableSize;i++){
+            modd.getDataVector().removeAllElements();
+            /*for(int i=0;i<tableSize;i++){
                 modd.removeRow(i);
-            }
+            }*/
             
             new PopulateHistory().start();
         }catch(Exception e){
             e.printStackTrace();
-            //JOptionPane.showMessageDialog(rootPane, "Customer Records Not Availbale ! ");
+            JOptionPane.showMessageDialog(rootPane, "Customer Records Not Availbale ! ");
         }
     }
     
