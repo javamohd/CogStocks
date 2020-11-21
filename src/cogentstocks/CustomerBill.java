@@ -82,7 +82,8 @@ public class CustomerBill extends javax.swing.JFrame {
         jTextField_Paid.setText(pass_amt+"");
         jTextField_Paid.setEnabled(false);
         
-        this.getContentPane().setBackground(Color.darkGray);
+        float[] s = Color.RGBtoHSB(90, 110, 190, null);
+        this.getContentPane().setBackground(Color.getHSBColor(s[0], s[1], s[2]));
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
         
@@ -117,13 +118,14 @@ public class CustomerBill extends javax.swing.JFrame {
         jTextField_FilterCust = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable_custHist = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         jList1.setBackground(new java.awt.Color(102, 102, 102));
-        jList1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jList1.setForeground(new java.awt.Color(204, 204, 204));
+        jList1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jList1.setForeground(new java.awt.Color(0, 255, 0));
         jList1.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -138,8 +140,8 @@ public class CustomerBill extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jList1);
 
         jToggleButton_fullPay.setBackground(new java.awt.Color(102, 102, 102));
-        jToggleButton_fullPay.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jToggleButton_fullPay.setForeground(new java.awt.Color(204, 204, 204));
+        jToggleButton_fullPay.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jToggleButton_fullPay.setForeground(new java.awt.Color(255, 255, 255));
         jToggleButton_fullPay.setText("Full Pay");
         jToggleButton_fullPay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,8 +150,8 @@ public class CustomerBill extends javax.swing.JFrame {
         });
 
         jToggleButton_HalfPay.setBackground(new java.awt.Color(102, 102, 102));
-        jToggleButton_HalfPay.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jToggleButton_HalfPay.setForeground(new java.awt.Color(204, 204, 204));
+        jToggleButton_HalfPay.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jToggleButton_HalfPay.setForeground(new java.awt.Color(255, 255, 255));
         jToggleButton_HalfPay.setText("Half Pay");
         jToggleButton_HalfPay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,51 +161,54 @@ public class CustomerBill extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(102, 102, 102));
         jLabel1.setFont(new java.awt.Font("Sitka Subheading", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel1.setText("Customers");
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel1.setText("Customers Details");
 
-        jLabel_BillAmt.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel_BillAmt.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel_BillAmt.setFont(new java.awt.Font("hooge 05_55", 1, 14)); // NOI18N
+        jLabel_BillAmt.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_BillAmt.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-        jLabel2.setFont(new java.awt.Font("Showcard Gothic", 0, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel2.setFont(new java.awt.Font("hooge 05_53", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 51));
         jLabel2.setText("Bill Amount :");
 
-        jLabel_AmtPaid.setFont(new java.awt.Font("Showcard Gothic", 0, 12)); // NOI18N
-        jLabel_AmtPaid.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel_AmtPaid.setFont(new java.awt.Font("hooge 05_53", 1, 14)); // NOI18N
+        jLabel_AmtPaid.setForeground(new java.awt.Color(255, 255, 51));
         jLabel_AmtPaid.setText("Amount PAID:");
 
-        jTextField_Paid.setBackground(new java.awt.Color(204, 255, 255));
+        jTextField_Paid.setBackground(new java.awt.Color(204, 204, 204));
         jTextField_Paid.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jTextField_Paid.setForeground(new java.awt.Color(102, 102, 102));
+        jTextField_Paid.setForeground(new java.awt.Color(255, 0, 0));
         jTextField_Paid.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField_PaidKeyReleased(evt);
             }
         });
 
-        jLabel_Balance.setFont(new java.awt.Font("Showcard Gothic", 0, 12)); // NOI18N
-        jLabel_Balance.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel_Balance.setFont(new java.awt.Font("Showcard Gothic", 0, 14)); // NOI18N
+        jLabel_Balance.setForeground(new java.awt.Color(0, 204, 0));
         jLabel_Balance.setText("Mobile :");
 
-        jLabel_BalPreview.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel_BalPreview.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel_BalPreview.setFont(new java.awt.Font("hooge 05_55", 1, 14)); // NOI18N
+        jLabel_BalPreview.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_BalPreview.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
-        jText_csname.setBackground(new java.awt.Color(204, 255, 255));
+        jText_csname.setBackground(new java.awt.Color(0, 204, 153));
         jText_csname.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
-        jText_csname.setForeground(new java.awt.Color(51, 51, 51));
+        jText_csname.setForeground(java.awt.Color.white);
 
-        jText_csmobile.setBackground(new java.awt.Color(204, 255, 255));
+        jText_csmobile.setBackground(new java.awt.Color(0, 204, 153));
         jText_csmobile.setFont(new java.awt.Font("Segoe UI Semilight", 1, 12)); // NOI18N
+        jText_csmobile.setForeground(java.awt.Color.white);
         jText_csmobile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jText_csmobileActionPerformed(evt);
             }
         });
 
-        jButton_done.setBackground(new java.awt.Color(102, 102, 102));
+        jButton_done.setBackground(new java.awt.Color(0, 0, 204));
         jButton_done.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton_done.setForeground(new java.awt.Color(204, 204, 204));
+        jButton_done.setForeground(new java.awt.Color(255, 255, 255));
         jButton_done.setText("Save Purchase");
         jButton_done.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,17 +216,17 @@ public class CustomerBill extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Showcard Gothic", 0, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel3.setFont(new java.awt.Font("Showcard Gothic", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 204, 0));
         jLabel3.setText("Customer Name :");
 
-        jLabel_Balance1.setFont(new java.awt.Font("Showcard Gothic", 0, 12)); // NOI18N
-        jLabel_Balance1.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel_Balance1.setFont(new java.awt.Font("hooge 05_53", 1, 12)); // NOI18N
+        jLabel_Balance1.setForeground(new java.awt.Color(255, 255, 51));
         jLabel_Balance1.setText("Balance :");
 
-        jButton1.setBackground(new java.awt.Color(102, 102, 102));
+        jButton1.setBackground(new java.awt.Color(51, 204, 0));
         jButton1.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(204, 204, 204));
+        jButton1.setForeground(new java.awt.Color(0, 0, 102));
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -229,10 +234,11 @@ public class CustomerBill extends javax.swing.JFrame {
             }
         });
 
-        jTextField_FilterCust.setBackground(new java.awt.Color(204, 255, 255));
+        jTextField_FilterCust.setBackground(new java.awt.Color(0, 204, 153));
         jTextField_FilterCust.setFont(new java.awt.Font("Marcellus SC", 1, 18)); // NOI18N
-        jTextField_FilterCust.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField_FilterCust.setCaretColor(new java.awt.Color(0, 204, 0));
+        jTextField_FilterCust.setForeground(new java.awt.Color(255, 255, 255));
+        jTextField_FilterCust.setCaretColor(new java.awt.Color(255, 51, 0));
+        jTextField_FilterCust.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jTextField_FilterCust.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField_FilterCustKeyReleased(evt);
@@ -257,6 +263,13 @@ public class CustomerBill extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable_custHist);
 
+        jButton2.setText("Search");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -265,49 +278,53 @@ public class CustomerBill extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jToggleButton_fullPay, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jToggleButton_fullPay, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
-                        .addComponent(jToggleButton_HalfPay, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jToggleButton_HalfPay, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel_AmtPaid, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(6, 6, 6)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel_BillAmt, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField_Paid, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel_Balance1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(88, 88, 88)
-                                .addComponent(jLabel_BalPreview, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 350, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel_AmtPaid, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(6, 6, 6)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel_BillAmt, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTextField_Paid, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel_Balance1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(88, 88, 88)
+                                        .addComponent(jLabel_BalPreview, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButton2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextField_FilterCust, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane1))
+                                .addGap(13, 13, 13))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel1)
+                                .addGap(79, 79, 79))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addComponent(jTextField_FilterCust, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel1)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(21, 21, 21)
-                                        .addComponent(jLabel_Balance, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(4, 4, 4)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jText_csname, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jText_csmobile, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(6, 6, 6)
-                                .addComponent(jButton_done, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jLabel_Balance, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel3)))
+                        .addGap(4, 4, 4)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jText_csname, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jText_csmobile, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)
+                        .addComponent(jButton_done, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane2)))
@@ -318,16 +335,10 @@ public class CustomerBill extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jToggleButton_fullPay, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jToggleButton_HalfPay, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
+                        .addGap(9, 9, 9)
                         .addComponent(jLabel1)
-                        .addGap(7, 7, 7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -341,23 +352,32 @@ public class CustomerBill extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel_Balance1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel_BalPreview, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_FilterCust, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+                                    .addComponent(jLabel_BalPreview, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextField_FilterCust, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jToggleButton_fullPay, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jToggleButton_HalfPay, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(9, 9, 9)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(5, 5, 5)
-                            .addComponent(jLabel_Balance, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jText_csname, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jText_csname, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(6, 6, 6)
-                            .addComponent(jText_csmobile, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jText_csmobile, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel_Balance, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addComponent(jButton_done, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(23, 23, 23))
         );
@@ -585,6 +605,13 @@ public class CustomerBill extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jTextField_FilterCustKeyReleased
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+        jTextField_FilterCust.requestFocus();
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -628,6 +655,7 @@ public class CustomerBill extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton_done;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
