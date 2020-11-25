@@ -27,6 +27,8 @@ public class SysParam {
     
     public static ArrayList<String> customers = new ArrayList<>();
     
+    public static Map custCredits = new HashMap();
+    
     public static Map<String, ItemObj> barCodeMappings = new HashMap();
     public static Map<String, Integer> quantityMappings = new HashMap();
     

@@ -67,7 +67,7 @@ public class SaleConfig {
             prop.load(new FileInputStream("Settings.jxt"));
             shopName = prop.getProperty("shopName");
             expire = prop.getProperty("expire");
-            guestcust = prop.getProperty("gurstcust");
+            guestcust = prop.getProperty("guestcust");
             //if(setup == null)setup = "false";
             setup = ( prop.getProperty("setup").equals("true") ) ? true : false;
             printerName = prop.getProperty("printerName");
@@ -106,7 +106,7 @@ try{
             prop.setProperty("printerName", printerName);
             prop.setProperty("printedSales", printedSales+"");
             prop.setProperty("filePrefix", filePrefix);
-            prop.setProperty("guestcust", guestcust);
+            prop.setProperty("guestcust", guestcust+"");
             /*int temp = 0;
             try{
                 temp = CartBox.cartTotal;

@@ -339,6 +339,9 @@
           <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jText_csnameMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jText_csmobile">
       <Properties>

@@ -8,6 +8,8 @@ import Cart.CartBox;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.image.BufferedImage;
@@ -111,7 +113,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
                     pendMap.put(name, prevBal+bal);
                 }
             }
-            
+            SysParam.custCredits = pendMap;
             Iterator hmIterator = pendMap.entrySet().iterator(); 
             while (hmIterator.hasNext()) { 
                 Map.Entry mapElement = (Map.Entry)hmIterator.next();
@@ -142,6 +144,40 @@ public class Dashboard_1 extends javax.swing.JFrame {
     public Dashboard_1() {
         
         initComponents();
+        
+        
+        JPopupMenu popupMenu = new JPopupMenu();
+
+JMenuItem menuItemAdd = new JMenuItem("Add");
+JMenuItem menuItemclr = new JMenuItem("Clear");
+//JMenuItem menuItemRemove = new JMenuItem("Remove Current Row");
+//JMenuItem menuItemRemoveAll = new JMenuItem("Remove All Rows");
+menuItemAdd.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                JOptionPane.showInputDialog(rootPane, "Enter amount.");
+                
+            }
+        });
+menuItemclr.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                JOptionPane.showMessageDialog(rootPane, jTable_pendings.getSelectedRow()+" Clear For this");
+                
+            }
+        });
+
+popupMenu.add(menuItemAdd);
+popupMenu.add(menuItemclr);
+//popupMenu.add(menuItemRemove);
+//popupMenu.add(menuItemRemoveAll);
+
+jTable_pendings.setComponentPopupMenu(popupMenu);
+        
         
         //Single Click Editor
         final JTextField tt = new JTextField();

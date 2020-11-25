@@ -72,7 +72,7 @@ public class CustomerBill extends javax.swing.JFrame {
     public CustomerBill() {
         initComponents();
         loadCustomers();
-        
+        SaleConfig.load();
         this.jText_csname.setText("GuestCust "+SaleConfig.guestcust);
         this.jText_csmobile.setText("9655909777");
         
@@ -200,6 +200,11 @@ public class CustomerBill extends javax.swing.JFrame {
         jText_csname.setBackground(new java.awt.Color(0, 204, 153));
         jText_csname.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
         jText_csname.setForeground(java.awt.Color.white);
+        jText_csname.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jText_csnameMouseClicked(evt);
+            }
+        });
 
         jText_csmobile.setBackground(new java.awt.Color(0, 204, 153));
         jText_csmobile.setFont(new java.awt.Font("Segoe UI Semilight", 1, 12)); // NOI18N
@@ -512,7 +517,7 @@ public class CustomerBill extends javax.swing.JFrame {
         currRow.createCell(5).setCellValue(SaleConfig.getBill_No().toUpperCase());
         currRow.createCell(6).setCellValue(purItems);
         
-        if(addCust){
+        if(addCust && !jText_csname.getText().startsWith("Guest")){
             Sheet sheet = workbook.getSheetAt(2);
         int currRowNum = sheet.getLastRowNum()+1;
         Row curRow = sheet.createRow(currRowNum);
@@ -533,14 +538,24 @@ public class CustomerBill extends javax.swing.JFrame {
         Dashboard_1.jLabel1_total = new JLabel("0.0");
         Dashboard_1.jLabel1_total.repaint();
         PdfGen.saveIt(CartBox.items);
+        
+        //Old Balance Billing
+        if(SysParam.custCredits.containsKey(
+            jText_csname.getText())){
+            String custName = jText_csname.getText();
+            String bal = SysParam.custCredits.get(custName).toString();
+            JOptionPane.showConfirmDialog(rootPane, "Pending Balance Available ("+ bal +"). Add to Current Bill ? ");
+        }
+        
         JOptionPane.showMessageDialog(rootPane, "Transaction Saved Successfully!");
         SaleConfig.updateQty(CartBox.qtyMap);///Excel  Qty Update
         SaleConfig.printedSales++;
         SaleConfig.gallaCash += CartBox.cartTotal; 
         this.setVisible(false);
-        if(jText_csname.getText().startsWith("guest")){
+        if(jText_csname.getText().startsWith("Guest")){
             int i = Integer.parseInt(SaleConfig.guestcust);
-            SaleConfig.guestcust = "" + (i++);
+            i++;
+            SaleConfig.guestcust = String.valueOf(i);
         }
         SaleConfig.Store();
         CartBox.clearCart();
@@ -619,6 +634,12 @@ public class CustomerBill extends javax.swing.JFrame {
         jTextField_FilterCust.requestFocus();
         
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jText_csnameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jText_csnameMouseClicked
+        // TODO add your handling code here:
+        jText_csname.setText("");
+        jText_csmobile.setText("");
+    }//GEN-LAST:event_jText_csnameMouseClicked
 
     /**
      * @param args the command line arguments
