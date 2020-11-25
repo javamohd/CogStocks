@@ -31,6 +31,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class SaleConfig {
 
     public static String shopName = new String();;
+    public static String guestcust = new String();
     public static  String printerName = new String();;
     public static String passCode = new String();
     public static String filePrefix = new String();
@@ -66,6 +67,7 @@ public class SaleConfig {
             prop.load(new FileInputStream("Settings.jxt"));
             shopName = prop.getProperty("shopName");
             expire = prop.getProperty("expire");
+            guestcust = prop.getProperty("gurstcust");
             //if(setup == null)setup = "false";
             setup = ( prop.getProperty("setup").equals("true") ) ? true : false;
             printerName = prop.getProperty("printerName");
@@ -104,6 +106,7 @@ try{
             prop.setProperty("printerName", printerName);
             prop.setProperty("printedSales", printedSales+"");
             prop.setProperty("filePrefix", filePrefix);
+            prop.setProperty("guestcust", guestcust);
             /*int temp = 0;
             try{
                 temp = CartBox.cartTotal;

@@ -259,6 +259,7 @@ public class SetupConfiguration extends javax.swing.JFrame {
         SaleConfig.shopName = jTextField2_shopName.getText();
         SaleConfig.printerName = jTextField_printerName.getText();
         SaleConfig.filePrefix = jTextField_prefix.getText();
+        SaleConfig.guestcust = "0";
         SaleConfig.initPass = eval+"S";
         
         

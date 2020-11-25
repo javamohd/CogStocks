@@ -72,6 +72,10 @@ public class CustomerBill extends javax.swing.JFrame {
     public CustomerBill() {
         initComponents();
         loadCustomers();
+        
+        this.jText_csname.setText("GuestCust "+SaleConfig.guestcust);
+        this.jText_csmobile.setText("9655909777");
+        
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         ButtonGroup grp = new ButtonGroup();
         grp.add(jToggleButton_fullPay);
@@ -534,6 +538,10 @@ public class CustomerBill extends javax.swing.JFrame {
         SaleConfig.printedSales++;
         SaleConfig.gallaCash += CartBox.cartTotal; 
         this.setVisible(false);
+        if(jText_csname.getText().startsWith("guest")){
+            int i = Integer.parseInt(SaleConfig.guestcust);
+            SaleConfig.guestcust = "" + (i++);
+        }
         SaleConfig.Store();
         CartBox.clearCart();
         Dashboard_1 d = new Dashboard_1();

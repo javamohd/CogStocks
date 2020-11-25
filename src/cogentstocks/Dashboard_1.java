@@ -1008,6 +1008,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
 
     private void jButton_resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_resetActionPerformed
         // TODO add your handling code here:
+        //validateQtyButtons();
         //SysParam.CurrentBill.clear();
         if (jTable_billList.getRowCount() <= 0) {
             return;
