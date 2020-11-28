@@ -91,6 +91,37 @@ public class DataStore {
         }
     }
     
+    public static void clearPendings(String user){
+        try{
+            
+            FileInputStream inputStream = new FileInputStream(new File(File_Name));
+            Workbook workbook = new XSSFWorkbook(inputStream);
+            Sheet billsSheet = workbook.getSheetAt(1);
+            int lastRow = billsSheet.getLastRowNum();
+            int firstRow = billsSheet.getFirstRowNum();
+            
+            int idx = firstRow;
+            while(idx<=lastRow){
+                Row currRow = billsSheet.getRow(idx);
+                
+                String rowUser = currRow.getCell(1).getStringCellValue();
+                if(rowUser.equalsIgnoreCase(user)){
+                    Double val = new Double(0.0);
+                    currRow.getCell(4).setCellValue(val);
+                }
+                idx++;
+            }
+            
+            OutputStream os = new FileOutputStream(new File(File_Name));
+            workbook.write(os);
+            inputStream.close();
+            os.close();
+            
+        }catch(Exception e){
+        e.printStackTrace();
+    }
+    }
+    
     public static void createNewStock(ItemObj obj){
         try{
             

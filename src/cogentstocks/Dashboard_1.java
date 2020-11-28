@@ -108,8 +108,6 @@ public class Dashboard_1 extends javax.swing.JFrame {
                 }catch(Exception ek){
                    prevBal = 0; 
                 }
-                    //if(!name.isEmpty())
-                        //list.add(name+"~"+bal);
                     pendMap.put(name, prevBal+bal);
                 }
             }
@@ -148,8 +146,8 @@ public class Dashboard_1 extends javax.swing.JFrame {
         
         JPopupMenu popupMenu = new JPopupMenu();
 
-JMenuItem menuItemAdd = new JMenuItem("Add");
-JMenuItem menuItemclr = new JMenuItem("Clear");
+JMenuItem menuItemAdd = new JMenuItem("Add Cash Inflow");
+JMenuItem menuItemclr = new JMenuItem("Clear Credits");
 //JMenuItem menuItemRemove = new JMenuItem("Remove Current Row");
 //JMenuItem menuItemRemoveAll = new JMenuItem("Remove All Rows");
 menuItemAdd.addActionListener(new ActionListener() {
@@ -166,7 +164,10 @@ menuItemclr.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 
-                JOptionPane.showMessageDialog(rootPane, jTable_pendings.getSelectedRow()+" Clear For this");
+                //JOptionPane.showMessageDialog(rootPane, jTable_pendings.getSelectedRow()+" Clear For this");
+                DataStore.clearPendings(jTable_pendings.getValueAt(jTable_pendings.getSelectedRow(), 0).toString());
+                loadPendingCustomers();
+                jTable_pendings.repaint();
                 
             }
         });
@@ -199,7 +200,7 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
             public void tableChanged(TableModelEvent e) {
                 int selectedRow = jTable_billList.getSelectedRow();
                 if(selectedRow == -1)return;
-                validateQtyButtons();
+                //validateQtyButtons();
                 
                 if(e.getColumn() == 3 && selectedRow != -1){// For Quantity Change
                         String itemN = jTable_billList.getValueAt(selectedRow, 1).toString();
@@ -916,6 +917,9 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
         CartBox.removeItem(itemName);
         
         if(jTable_billList.getModel().getRowCount() == 0 || jTable_billList.getSelectedRow() == -1)
+            jButton_minus.setEnabled(false);
+            jButton_Plus.setEnabled(false);
+            jButton_changeQty.setEnabled(false);
             jButton3_remove.setEnabled(false);
         
         return;
@@ -1202,7 +1206,9 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
                 return;
             }
             if(selectedRow >= jTable_billList.getRowCount())return;
+            //System.out.println(" (-) "+jTable_billList.getRowCount());
             String selectedItemName = jTable_billList.getValueAt(selectedRow, 1).toString();
+            //System.out.println(" (-) "+selectedItemName);
             int selectedItemQty = 1;
             try{
             selectedItemQty = Integer.parseInt(jTable_billList.getValueAt(selectedRow, 3).toString());
@@ -1237,7 +1243,8 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
             
         }catch(Exception e){
             
-                JOptionPane.showMessageDialog(rootPane, "Invalid Values Entered.");
+            e.printStackTrace();    
+            JOptionPane.showMessageDialog(rootPane, "Invalid Values Entered.");
                 screenupdate();
             
             e.printStackTrace();
