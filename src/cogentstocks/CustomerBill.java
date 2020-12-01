@@ -584,7 +584,7 @@ public class CustomerBill extends javax.swing.JFrame {
         try{
             PopulateHistory.custName = custName;
             
-            int tableSize = jTable_custHist.getModel().getRowCount();
+            //int tableSize = jTable_custHist.getModel().getRowCount();
             DefaultTableModel modd = (DefaultTableModel)CustomerBill.jTable_custHist.getModel();
             modd.getDataVector().removeAllElements();
             /*for(int i=0;i<tableSize;i++){

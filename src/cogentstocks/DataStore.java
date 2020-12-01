@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -106,8 +107,9 @@ public class DataStore {
                 
                 String rowUser = currRow.getCell(1).getStringCellValue();
                 if(rowUser.equalsIgnoreCase(user)){
-                    Double val = new Double(0.0);
-                    currRow.getCell(4).setCellValue(val);
+                    Cell c = currRow.getCell(4);
+                    c.setCellType(Cell.CELL_TYPE_STRING);
+                    c.setCellValue("0");
                 }
                 idx++;
             }
