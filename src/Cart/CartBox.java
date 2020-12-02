@@ -5,8 +5,11 @@
 package Cart;
 
 import cogentstocks.Dashboard_1;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -113,6 +116,31 @@ public class CartBox {
             taxInclMap.put(obj.itemName, true);
         }
         updateTable();
+        return toReturn;
+    }
+    
+    public static void addOldPendings(double amount){
+        ItemObj obj = new ItemObj();
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("ddMMMyyyy");
+        
+        obj.setItemName("Bill Clearance "+sdf.format(new Date()));
+        obj.setCustPrice(amount);
+        obj.setItemQty(01);
+        
+        qtyMap.put(obj.itemName, 1);
+        priceMap.put(obj.itemName, (int)obj.custPrice);
+        cartTotal = getCartTotal();
+        items.add(obj);
+    }
+    
+    public static int getCartTotal(){
+        int toReturn = 0;
+        
+        for(Map.Entry<String,Integer> each : priceMap.entrySet()){
+            toReturn += each.getValue();
+        }
+        
         return toReturn;
     }
     

@@ -544,7 +544,16 @@ public class CustomerBill extends javax.swing.JFrame {
             jText_csname.getText())){
             String custName = jText_csname.getText();
             String bal = SysParam.custCredits.get(custName).toString();
-            JOptionPane.showConfirmDialog(rootPane, "Pending Balance Available ("+ bal +"). Add to Current Bill ? ");
+            int r = JOptionPane.showConfirmDialog(rootPane, "Pending Balance Available ("+ bal +"). Add to Current Bill ? ");
+            
+            if(r == JOptionPane.OK_OPTION){
+                CartBox.addOldPendings(Double.parseDouble(bal));
+                SysParam.custCredits.remove(custName);
+                DataStore.clearPendings(custName);
+                this.jLabel_BillAmt.setText(CartBox.getCartTotal()+"");
+                return;
+            }
+            
         }
         
         JOptionPane.showMessageDialog(rootPane, "Transaction Saved Successfully!");

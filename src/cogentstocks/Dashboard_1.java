@@ -992,7 +992,7 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
             e.printStackTrace();
         }
         
-        CustomerBill.pass_amt = CartBox.cartTotal+"";
+        CustomerBill.pass_amt = CartBox.getCartTotal()+"";
         CustomerBill c = new CustomerBill();
         c.setVisible(true);
         this.setVisible(false);
