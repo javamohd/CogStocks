@@ -92,6 +92,27 @@ public class DataStore {
         }
     }
     
+    public static void addDeposit(String name, int amount){
+        try{
+            
+            FileInputStream inputStream = new FileInputStream(new File(File_Name));
+            Workbook workbook = new XSSFWorkbook(inputStream);
+            Sheet billsSheet = workbook.getSheetAt(3);
+            int lastRow = billsSheet.getLastRowNum();
+            int firstRow = billsSheet.getFirstRowNum()+1;
+            
+            
+            
+            OutputStream os = new FileOutputStream(new File(File_Name));
+            workbook.write(os);
+            inputStream.close();
+            os.close();
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
     public static void clearPendings(String user){
         try{
             

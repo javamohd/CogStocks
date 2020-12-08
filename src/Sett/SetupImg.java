@@ -254,24 +254,49 @@ public class SetupImg extends javax.swing.JFrame {
             for (int i=0;i<=TotalRows;i++){
                 if(i==0)continue;
                 Row row = sheet.getRow(i);
-                
+                if(row == null ||row.getCell(1) == null)return;
                 String itemName = row.getCell(1).getStringCellValue().toString();
                 if(SystemParam.imags.containsKey(itemName) && row.getCell(1)
                         .getStringCellValue().equalsIgnoreCase(itemName)){
                     row.setHeight((short) 1400);
+                    
+                    
+                    //return;
+                    
+                    /*if(row.getCell(4) != null){
+                        row.removeCell(row.getCell(4));
+                    }*/
                     InputStream my_banner_image = new FileInputStream(SystemParam.imags.get(itemName).toString());
                     byte[] bytes = IOUtils.toByteArray(my_banner_image);
                     int my_picture_id = wb.addPicture(bytes, Workbook.PICTURE_TYPE_PNG);
                     my_banner_image.close();
                     XSSFDrawing drawing = (XSSFDrawing) sheet.createDrawingPatriarch();
-            XSSFClientAnchor my_anchor = new XSSFClientAnchor();
-            my_anchor.setCol1(4); 
-            my_anchor.setRow1((i+1)-1);
-            my_anchor.setCol2(5);
-            my_anchor.setRow2(i+1);
+            
+                    XSSFClientAnchor my_anchor = new XSSFClientAnchor();
+                    my_anchor.setCol1(4);
+                    my_anchor.setRow1(i);
+                    my_anchor.setCol2(4 + 1);
+                    my_anchor.setRow2(i + 1);
+                    
+                    //get Anchor Object
+                    XSSFDrawing dp = wb.getSheetAt(0).createDrawingPatriarch();
+                        List<XSSFShape> picss = dp.getShapes();
+                        for(XSSFShape eachPic : picss){
+                            XSSFPicture pic = (XSSFPicture)eachPic;
+                            XSSFClientAnchor anc = pic.getClientAnchor();
+                            
+                            if (anc.getRow1() == i) {
+                                my_anchor = anc;
+                                my_anchor.setCol1(4);
+                                my_anchor.setRow1(i);
+                                my_anchor.setCol2(4);
+                                my_anchor.setRow2(i);
+                                XSSFPicture my_picture = drawing.createPicture(my_anchor, 1);
+                                my_picture.resize(1, .95);
+                                break;
+                            }
+                        }
             /* Invoke createPicture and pass the anchor point and ID */
-            XSSFPicture my_picture = drawing.createPicture(my_anchor, my_picture_id);
-            my_picture.resize(1, .95);//Picture Size Specification
                 }
             }
             
@@ -283,7 +308,8 @@ public class SetupImg extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(SetupImg.class.getName()).log(Level.SEVERE, null, ex);
         }
-       JOptionPane.showMessageDialog(rootPane, "Excel Update Done !"); 
+       JOptionPane.showMessageDialog(rootPane, "Excel Update Done !");
+       this.dispose();
     }//GEN-LAST:event_jButton_UpdateActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed

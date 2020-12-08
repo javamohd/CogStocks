@@ -162,6 +162,7 @@ public class CartBox {
         priceMap.clear();
         qtyMap.clear();
         taxInclMap.clear();
+        Dashboard_1.jLabel1_total.setText(CartBox.getCartTotal()+"");
         updateTable();
     }
     

@@ -33,6 +33,7 @@ public class CustomerBill extends javax.swing.JFrame {
     
     public static boolean full_pay = true;
     public static String pass_amt = "";
+    public static String new_amt = "";
     public HashMap index = new HashMap();
     public HashMap phoneMap = new HashMap();
     DefaultListModel existingList = null;
@@ -73,6 +74,7 @@ public class CustomerBill extends javax.swing.JFrame {
         initComponents();
         loadCustomers();
         SaleConfig.load();
+        this.new_amt = pass_amt;
         this.jText_csname.setText("GuestCust "+SaleConfig.guestcust);
         this.jText_csmobile.setText("9655909777");
         
@@ -421,7 +423,7 @@ public class CustomerBill extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         jLabel_BalPreview.setText("0.0");
-        jTextField_Paid.setText(pass_amt+"");
+        jTextField_Paid.setText(new_amt+"");
         jTextField_Paid.setEnabled(false);
         
     }//GEN-LAST:event_jToggleButton_fullPayActionPerformed
@@ -550,7 +552,10 @@ public class CustomerBill extends javax.swing.JFrame {
                 CartBox.addOldPendings(Double.parseDouble(bal));
                 SysParam.custCredits.remove(custName);
                 DataStore.clearPendings(custName);
-                this.jLabel_BillAmt.setText(CartBox.getCartTotal()+"");
+                String newb = CartBox.getCartTotal()+"";
+                new_amt = newb;
+                this.jLabel_BillAmt.setText(new_amt);
+                this.jTextField_Paid.setText(new_amt);
                 return;
             }
             

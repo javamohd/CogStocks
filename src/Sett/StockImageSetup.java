@@ -75,7 +75,7 @@ public class StockImageSetup {
             FileInputStream inputStream = new FileInputStream(new File(filePath));
             Workbook workbook = null;
             workbook = new XSSFWorkbook(inputStream);
-            if (workbook.getNumberOfSheets() != 3) {
+            if (workbook.getNumberOfSheets() != 4) {
                 toReturn = false;
             }
 

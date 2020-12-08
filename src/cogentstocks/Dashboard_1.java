@@ -155,7 +155,14 @@ menuItemAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 
-                JOptionPane.showInputDialog(rootPane, "Enter amount.");
+                String rs = JOptionPane.showInputDialog(rootPane, "Enter amount.");
+                int t = 0;
+                try{
+                    t = Integer.parseInt(rs);
+                }catch(Exception ee){
+                    JOptionPane.showMessageDialog(rootPane, "Update Failed, Invalid Values.");
+                    //return;
+                }
                 
             }
         });
@@ -224,6 +231,7 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
                         CartBox.qtyMap.put(itemN, Integer.parseInt(modVal));
                         int newP = (int)CartBox.getItemByName(itemN).getCustPrice() * Integer.parseInt(modVal);
                         CartBox.priceMap.put(itemN, newP);
+                        CartBox.updateTable();
                 }
 
                 if (e.getColumn() == 4 && selectedRow != -1) {//For Price Changes
