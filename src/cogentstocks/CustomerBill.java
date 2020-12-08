@@ -557,6 +557,8 @@ public class CustomerBill extends javax.swing.JFrame {
                 this.jLabel_BillAmt.setText(new_amt);
                 this.jTextField_Paid.setText(new_amt);
                 return;
+            }else if(r == JOptionPane.CANCEL_OPTION){
+                return;
             }
             
         }
