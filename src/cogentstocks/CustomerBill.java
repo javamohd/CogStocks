@@ -400,6 +400,7 @@ public class CustomerBill extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         jTextField_Paid.setEnabled(true);
+        jTextField_Paid.setEditable(true);
         jTextField_Paid.setText("");
         jTextField_Paid.requestFocus();
         
@@ -409,7 +410,7 @@ public class CustomerBill extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         try{
-        double bill_amt = Double.parseDouble(pass_amt);
+        double bill_amt = Double.parseDouble(new_amt);
         int paid = Integer.parseInt(jTextField_Paid.getText());
         jLabel_BalPreview.setText(bill_amt-paid+"");
         }catch(Exception ex){
@@ -556,6 +557,10 @@ public class CustomerBill extends javax.swing.JFrame {
                 new_amt = newb;
                 this.jLabel_BillAmt.setText(new_amt);
                 this.jTextField_Paid.setText(new_amt);
+                this.jToggleButton_fullPay.setSelected(true);
+                this.jToggleButton_HalfPay.setSelected(false);
+                this.jTextField_Paid.setEditable(false);
+                this.jLabel_BalPreview.setText("0.0");
                 return;
             }else if(r == JOptionPane.CANCEL_OPTION){
                 return;
