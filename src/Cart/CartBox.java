@@ -26,6 +26,7 @@ public class CartBox {
     public static HashMap<String, Boolean> taxInclMap = new HashMap<String, Boolean>();
     public static DefaultTableModel model = (DefaultTableModel) Dashboard_1.jTable_billList.getModel();
     public static int cartTotal = 0;
+    public static int cartDiscount = 0;
     
     public static void updateTable(){
         
@@ -163,6 +164,7 @@ public class CartBox {
         qtyMap.clear();
         taxInclMap.clear();
         Dashboard_1.jLabel1_total.setText(CartBox.getCartTotal()+"");
+        CartBox.cartDiscount = 0;
         updateTable();
     }
     
