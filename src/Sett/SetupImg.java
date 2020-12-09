@@ -25,6 +25,7 @@ import org.apache.poi.xssf.usermodel.XSSFClientAnchor;
 import org.apache.poi.xssf.usermodel.XSSFPicture;
 import org.apache.poi.xssf.usermodel.XSSFDrawing;
 import org.apache.poi.xssf.usermodel.*;
+import org.apache.xmlbeans.XmlCursor;
 
 /**
  *
@@ -249,6 +250,7 @@ public class SetupImg extends javax.swing.JFrame {
             File ff = new File(SystemParam.Stocks_file_path);
             XSSFWorkbook wb = new XSSFWorkbook(new FileInputStream(ff));
             Sheet sheet = wb.getSheet("Stocks");
+            
             int TotalRows  = sheet.getLastRowNum();
             sheet.setColumnWidth(4, 14000);
             for (int i=0;i<=TotalRows;i++){
@@ -258,6 +260,8 @@ public class SetupImg extends javax.swing.JFrame {
                 String itemName = row.getCell(1).getStringCellValue().toString();
                 if(SystemParam.imags.containsKey(itemName) && row.getCell(1)
                         .getStringCellValue().equalsIgnoreCase(itemName)){
+                    //Prepare Row for image load
+            this.RemoveExistingImage(itemName, sheet);
                     row.setHeight((short) 1400);
                     InputStream my_banner_image = new FileInputStream(SystemParam.imags.get(itemName).toString());
                     byte[] bytes = IOUtils.toByteArray(my_banner_image);
@@ -307,6 +311,24 @@ private Image fitimage(String img , int w , int h)
     g2.dispose();
     return resizedimage;
 }
+
+private void RemoveExistingImage(String itemName, Sheet sheet){
+    
+                /*XSSFDrawing drawing = xssfPicture.getDrawing();
+            XmlCursor cursor = xssfPicture.getCTPicture().newCursor();
+            cursor.toParent();
+                if (cursor.getObject() instanceof org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTTwoCellAnchor) {
+                    for (int i = 0; i < drawing.getCTDrawing().getTwoCellAnchorList().size(); i++) {
+                        if (cursor.getObject().equals(drawing.getCTDrawing().getTwoCellAnchorArray(i))) {
+                            drawing.getCTDrawing().removeTwoCellAnchor(i);
+                            System.out.println("TwoCellAnchor for picture " + xssfPicture + " was deleted.");
+                        }
+                    }
+                }
+        }*/
+    
+}
+
     /**
      * @param args the command line arguments
      */
