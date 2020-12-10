@@ -241,7 +241,8 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
                         CartBox.priceMap.put(itemN, Integer.parseInt(modVal));
                         }catch(Exception gg){
                             JOptionPane.showMessageDialog(rootPane, "Invalid Values Entered.");
-                            screenupdate();
+                            return;
+                            //screenupdate();
                         }
 
                 }
@@ -1307,9 +1308,9 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
             
             e.printStackTrace();    
             JOptionPane.showMessageDialog(rootPane, "Invalid Values Entered.");
-                screenupdate();
-            
-            e.printStackTrace();
+            return;
+                //screenupdate();
+            //e.printStackTrace();
         }
     }
     
