@@ -1166,6 +1166,9 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
                 "Select puchase quantity:\n\r From below", "Available Quantity",
                 JOptionPane.PLAIN_MESSAGE, errorIcon, qty.toArray(), "Quantity");
         
+        if(newQty == null){
+            return;
+        }
         
         CartBox.qtyMap.put(selectedItemName, newQty);
         int newPrice = newQty * (int)CartBox.getItemByName(selectedItemName).getCustPrice();

@@ -142,7 +142,7 @@ public class CartBox {
             toReturn += each.getValue();
         }
         
-        return toReturn;
+        return toReturn-cartDiscount;
     }
     
     public static void removeItem(String itemName){
