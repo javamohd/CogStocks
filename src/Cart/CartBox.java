@@ -153,7 +153,7 @@ public class CartBox {
             }
         }
         items.remove(idx);
-        //priceMap.remove(itemtobeRemoved);
+        priceMap.remove(itemName);
         //taxInclMap.remove(itemtobeRemoved);
         updateTable();
     }
