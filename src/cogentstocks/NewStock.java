@@ -306,6 +306,7 @@ public class NewStock extends JDialog {
             
             DataStore.createNewStock(obj);
             SysParam.barCodeMappings.put(obj.getItemBarcode(), obj);
+            SysParam.quantityMappings.put(obj.getItemName(), obj.getItemQty());
             
             JOptionPane.showMessageDialog(rootPane, "Stock updated Successfully.");
             this.dispose();
