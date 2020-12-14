@@ -1030,7 +1030,15 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
         c.setVisible(true);
         this.setVisible(false);
      
-        CartBox.cartDiscount = Integer.parseInt(jTextField_discount.getText());
+        int d = 0;
+        
+        try{
+            d = Integer.parseInt(jTextField_discount.getText());
+        }catch(Exception e){
+            d = 0;
+        }
+        
+        CartBox.cartDiscount = d;
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
