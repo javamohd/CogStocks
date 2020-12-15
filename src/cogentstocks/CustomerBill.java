@@ -544,10 +544,7 @@ public class CustomerBill extends javax.swing.JFrame {
         
         
         
-        BillEntry.total = new Double(0.0);    
-        Dashboard_1.jLabel1_total = new JLabel("0.0");
-        Dashboard_1.jLabel1_total.repaint();
-        PdfGen.saveIt(CartBox.items);
+        
         
         //Old Balance Billing
         if(SysParam.custCredits.containsKey(
@@ -574,6 +571,11 @@ public class CustomerBill extends javax.swing.JFrame {
             }
             
         }
+        
+        BillEntry.total = new Double(0.0);    
+        Dashboard_1.jLabel1_total = new JLabel("0.0");
+        Dashboard_1.jLabel1_total.repaint();
+        PdfGen.saveIt(CartBox.items);
         
         JOptionPane.showMessageDialog(rootPane, "Transaction Saved Successfully!");
         SaleConfig.updateQty(CartBox.qtyMap);///Excel  Qty Update
