@@ -490,6 +490,32 @@ public class CustomerBill extends javax.swing.JFrame {
             addCust = true;
         }
         
+        //Old Balance Billing
+        if(SysParam.custCredits.containsKey(
+            jText_csname.getText())){
+            String custName = jText_csname.getText();
+            String bal = SysParam.custCredits.get(custName).toString();
+            int r = JOptionPane.showConfirmDialog(rootPane, "Pending Balance Available ("+ bal +"). Add to Current Bill ? ");
+            
+            if(r == JOptionPane.OK_OPTION){
+                CartBox.addOldPendings(Double.parseDouble(bal));
+                SysParam.custCredits.remove(custName);
+                DataStore.clearPendings(custName);
+                String newb = CartBox.getCartTotal()+"";
+                new_amt = newb;
+                this.jLabel_BillAmt.setText(new_amt);
+                this.jTextField_Paid.setText(new_amt);
+                this.jToggleButton_fullPay.setSelected(true);
+                this.jToggleButton_HalfPay.setSelected(false);
+                this.jTextField_Paid.setEditable(false);
+                this.jLabel_BalPreview.setText("0.0");
+                return;
+            }else if(r == JOptionPane.CANCEL_OPTION){
+                return;
+            }
+            
+        }
+        
         String excelFilePath = "Stocks.xlsx";
         FileInputStream inputStream = null;
         try {
@@ -546,31 +572,7 @@ public class CustomerBill extends javax.swing.JFrame {
         
         
         
-        //Old Balance Billing
-        if(SysParam.custCredits.containsKey(
-            jText_csname.getText())){
-            String custName = jText_csname.getText();
-            String bal = SysParam.custCredits.get(custName).toString();
-            int r = JOptionPane.showConfirmDialog(rootPane, "Pending Balance Available ("+ bal +"). Add to Current Bill ? ");
-            
-            if(r == JOptionPane.OK_OPTION){
-                CartBox.addOldPendings(Double.parseDouble(bal));
-                SysParam.custCredits.remove(custName);
-                DataStore.clearPendings(custName);
-                String newb = CartBox.getCartTotal()+"";
-                new_amt = newb;
-                this.jLabel_BillAmt.setText(new_amt);
-                this.jTextField_Paid.setText(new_amt);
-                this.jToggleButton_fullPay.setSelected(true);
-                this.jToggleButton_HalfPay.setSelected(false);
-                this.jTextField_Paid.setEditable(false);
-                this.jLabel_BalPreview.setText("0.0");
-                return;
-            }else if(r == JOptionPane.CANCEL_OPTION){
-                return;
-            }
-            
-        }
+        
         
         BillEntry.total = new Double(0.0);    
         Dashboard_1.jLabel1_total = new JLabel("0.0");
