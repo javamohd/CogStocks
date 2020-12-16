@@ -330,7 +330,8 @@ public class PdfGen {
            sno++;
        }
            
-       //Total row addition
+       //Discount row addition
+       if(CartBox.cartDiscount > 0){
        PdfPCell discell = new PdfPCell (new Paragraph ("Discount Price."));
  
        discell.setColspan (3);
@@ -339,17 +340,13 @@ public class PdfGen {
        discell.setBackgroundColor (new BaseColor (140, 171, 8));
        table.addCell(discell);
        
-       //PdfPCell pricecell = new PdfPCell();
-       //Paragraph numberpara = new Paragraph(CartBox.cartTotal+"");
-       //numberpara.setAlignment(Element.ALIGN_CENTER);
-       //pricecell.addElement(numberpara);
       PdfPCell disccellval = new PdfPCell();
        disccellval.setHorizontalAlignment(Element.ALIGN_CENTER);
        Paragraph discpara = new Paragraph(CartBox.cartDiscount+"");
        discpara.setAlignment(Element.ALIGN_CENTER);
        disccellval.addElement(discpara);
        table.addCell(disccellval);
-       
+       }
        
        //Total row addition
        PdfPCell totcell = new PdfPCell (new Paragraph ("Total Price"));
