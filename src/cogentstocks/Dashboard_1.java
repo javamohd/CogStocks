@@ -1249,7 +1249,6 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
         if((itemTotal-1)<=disc_amt){
             throw new Exception("Invalid Discount");
         }
-        
         }catch(Exception ex){
             jTextField_discount.setText("");
             jTextField_discount.requestFocus();
