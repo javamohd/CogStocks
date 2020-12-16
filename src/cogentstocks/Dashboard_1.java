@@ -310,6 +310,8 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
                 (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight());
         float[] s = Color.RGBtoHSB(160, 173, 222, null);
         this.getContentPane().setBackground(Color.getHSBColor(s[0], s[1], s[2]));
+        jTextField_bar.setBackground(Color.getHSBColor(s[1], s[1], s[2]));
+        jTextField_bar.setBorder(javax.swing.BorderFactory.createEmptyBorder());
     }
     
     /**
@@ -590,6 +592,8 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
             }
         });
 
+        jTextField_bar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField_bar.setBorder(new javax.swing.border.SoftBevelBorder(0));
         jTextField_bar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField_barActionPerformed(evt);
@@ -682,16 +686,14 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextField_bar, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(180, 180, 180)
                         .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(jTextField_bar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(4, 4, 4)
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(117, 117, 117)
@@ -842,20 +844,23 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
                                 .addGap(10, 10, 10)
                                 .addComponent(jLabel5)
                                 .addGap(6, 6, 6)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(39, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel_discount)
-                                .addComponent(jTextField_discount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(12, 12, 12)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addComponent(jTextField_bar, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel_discount)
+                                    .addComponent(jTextField_discount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jTextField_bar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(5, 5, 5))))
         );
 
         bindingGroup.bind();
@@ -1100,6 +1105,7 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
         //BillEntry.total = 0.0;
         //Dashboard_1.jLabel1_total.setText(BillEntry.total + "");
         CartBox.clearCart();
+        validateQtyButtons();
         /*int cnt = model.getRowCount();
         for (int i = 0; i < cnt; i++) {
             Dashboard_1.model.removeRow(0);
@@ -1131,11 +1137,14 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
 
     private void jTextField_barActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_barActionPerformed
         // TODO add your handling code here:
-        
+        try{
         String purItmStr = jTextField_bar.getText();
         Cart.ItemObj item = SysParam.barCodeMappings.get(purItmStr);
         CartBox.addItem_scan(item);
         jTextField_bar.setText("");
+        }catch(Exception er){
+            jTextField_bar.setText("");
+        }
     }//GEN-LAST:event_jTextField_barActionPerformed
 
     private void jButton3_updSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3_updSActionPerformed

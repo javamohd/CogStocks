@@ -27,19 +27,17 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jTextField_bar" min="-2" pref="186" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="667" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <EmptySpace min="180" pref="180" max="-2" attributes="0"/>
                       <Component id="jToggleButton1" min="-2" pref="95" max="-2" attributes="0"/>
-                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                      <Component id="jTextField_bar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButton1" min="-2" pref="374" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="117" pref="117" max="-2" attributes="0"/>
@@ -233,24 +231,27 @@
                               <Component id="jScrollPane2" min="-2" pref="260" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace pref="39" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel_discount" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextField_discount" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jScrollPane1" min="-2" pref="600" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="jScrollPane1" min="-2" pref="586" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jToggleButton1" min="-2" pref="90" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <EmptySpace min="19" pref="19" max="-2" attributes="0"/>
-                              <Component id="jTextField_bar" min="-2" pref="11" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel_discount" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jTextField_discount" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jButton1" min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="jTextField_bar" max="32767" attributes="0"/>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jButton1" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="jToggleButton1" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -672,6 +673,16 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField_bar">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="14" style="0"/>
+        </Property>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
+            <BevelBorder/>
+          </Border>
+        </Property>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField_barActionPerformed"/>
         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextField_barFocusLost"/>
