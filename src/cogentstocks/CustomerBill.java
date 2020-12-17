@@ -125,7 +125,7 @@ public class CustomerBill extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable_custHist = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        jTextField_given = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -282,7 +282,12 @@ public class CustomerBill extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setBorder(javax.swing.BorderFactory.createTitledBorder("Given Amt"));
+        jTextField_given.setBorder(javax.swing.BorderFactory.createTitledBorder("Given Amt"));
+        jTextField_given.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField_givenKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -312,7 +317,7 @@ public class CustomerBill extends javax.swing.JFrame {
                                         .addGap(88, 88, 88)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jLabel_BalPreview, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
-                                            .addComponent(jTextField1))))
+                                            .addComponent(jTextField_given))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
@@ -376,7 +381,7 @@ public class CustomerBill extends javax.swing.JFrame {
                                     .addComponent(jLabel_Balance1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel_BalPreview, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(20, 20, 20)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jTextField_given, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -673,6 +678,21 @@ public class CustomerBill extends javax.swing.JFrame {
         jText_csmobile.setText("");
     }//GEN-LAST:event_jText_csnameMouseClicked
 
+    private void jTextField_givenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_givenKeyReleased
+        // TODO add your handling code here:
+        
+        try{
+        double bill_amt = Double.parseDouble(new_amt);
+        int given = Integer.parseInt(jTextField_given.getText());
+        if(given > bill_amt)
+        jLabel_BalPreview.setText(bill_amt-given+"");
+        }catch(Exception ex){
+            jTextField_given.setText("");
+            jLabel_BalPreview.setText("0");
+        }
+        
+    }//GEN-LAST:event_jTextField_givenKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -730,9 +750,9 @@ public class CustomerBill extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     public static javax.swing.JTable jTable_custHist;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField_FilterCust;
     private javax.swing.JTextField jTextField_Paid;
+    private javax.swing.JTextField jTextField_given;
     private javax.swing.JTextField jText_csmobile;
     private javax.swing.JTextField jText_csname;
     private javax.swing.JToggleButton jToggleButton_HalfPay;

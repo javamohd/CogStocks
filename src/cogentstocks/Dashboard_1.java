@@ -1140,9 +1140,21 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
         try{
         String purItmStr = jTextField_bar.getText();
         Cart.ItemObj item = SysParam.barCodeMappings.get(purItmStr);
+        int q = SysParam.quantityMappings.get(item.itemName);
+        //System.out.println("Available "+q);
+        if(CartBox.qtyMap.containsKey(item.itemName)){
+        int s = CartBox.qtyMap.get(item.itemName);
+        
+        if(s>=q){
+            JOptionPane.showMessageDialog(rootPane, "Out of Stock !");
+            jTextField_bar.setText("");
+            return;
+        }
+        }
         CartBox.addItem_scan(item);
         jTextField_bar.setText("");
         }catch(Exception er){
+            er.printStackTrace();
             jTextField_bar.setText("");
         }
     }//GEN-LAST:event_jTextField_barActionPerformed
