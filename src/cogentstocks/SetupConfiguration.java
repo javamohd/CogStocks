@@ -83,6 +83,13 @@ public class SetupConfiguration extends javax.swing.JFrame {
 
         jLabel2.setText("PassCode :");
 
+        jTextField_passCode.setToolTipText("4 digits Please");
+        jTextField_passCode.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField_passCodeKeyReleased(evt);
+            }
+        });
+
         jButton1.setText("Save");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -262,6 +269,17 @@ public class SetupConfiguration extends javax.swing.JFrame {
         SaleConfig.guestcust = "0";
         SaleConfig.initPass = eval+"S";
         
+        if(jTextField_passCode.getText().isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Please Enter Valid Passcode.");
+            return;
+        }
+        
+        if(jTextField_passCode.getText().length()<4){
+            JOptionPane.showMessageDialog(rootPane, "Please Enter Valid Passcode.");
+            jTextField_passCode.setText("");
+            return;
+        }
+        
         
         try{
             File dir = new File("Images");
@@ -368,6 +386,21 @@ public class SetupConfiguration extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jButton_BrowseActionPerformed
+
+    private void jTextField_passCodeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_passCodeKeyReleased
+        // TODO add your handling code here:
+        try{
+        if(jTextField_passCode.getText().length() > 4){
+            throw new Exception();
+        }
+        
+        Integer.parseInt(jTextField_passCode.getText());
+        
+        }catch(Exception e){
+            jTextField_passCode.setText("");
+        }
+        
+    }//GEN-LAST:event_jTextField_passCodeKeyReleased
 
     /**
      * @param args the command line arguments
