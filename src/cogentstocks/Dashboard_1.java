@@ -932,6 +932,7 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        jTextField_discount.setText("");
         
         try{//Stocks.xls not found
             
@@ -959,7 +960,7 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
             jButton_Plus.setEnabled(false);
             jButton_changeQty.setEnabled(false);
             jButton3_remove.setEnabled(false);
-        
+        jTextField_discount.setText("");
         return;
         
         
@@ -1111,6 +1112,7 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
         //Dashboard_1.jLabel1_total.setText(BillEntry.total + "");
         CartBox.clearCart();
         validateQtyButtons();
+        jTextField_discount.setText("");
         /*int cnt = model.getRowCount();
         for (int i = 0; i < cnt; i++) {
             Dashboard_1.model.removeRow(0);
@@ -1142,7 +1144,7 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
 
     private void jTextField_barActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_barActionPerformed
         // TODO add your handling code here:
-        
+        jTextField_discount.setText("");
         float[] ss = Color.RGBtoHSB(160, 173, 222, null);
         jTextField_bar.setBackground(Color.getHSBColor(ss[1], ss[1], ss[2]));
         
@@ -1189,7 +1191,7 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
 
     private void jButton_changeQtyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_changeQtyActionPerformed
         ///JOptionPane.showInputDialog(rootPane, "Enter the Item Quantity.");
-        
+        jTextField_discount.setText("");
         int selectedqty = Integer.parseInt(jTable_billList.getValueAt
                 (jTable_billList.getSelectedRow(), 3).toString());
         String selectedItemName = jTable_billList.getValueAt
@@ -1222,6 +1224,8 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
 
     private void jButton_PlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_PlusActionPerformed
         // TODO add your handling code here:
+        jTextField_discount.setText("");
+        
         int selectedR = jTable_billList.getSelectedRow();
         int selectedqty = Integer.parseInt(jTable_billList.getValueAt
                 (jTable_billList.getSelectedRow(), 3).toString());
@@ -1247,6 +1251,7 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
 
     private void jButton_minusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_minusActionPerformed
         // TODO add your handling code here:
+        jTextField_discount.setText("");
         
         int selectedqty = Integer.parseInt(jTable_billList.getValueAt
                 (jTable_billList.getSelectedRow(), 3).toString());
