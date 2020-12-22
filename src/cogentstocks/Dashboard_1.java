@@ -604,6 +604,11 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
                 jTextField_barFocusLost(evt);
             }
         });
+        jTextField_bar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField_barKeyReleased(evt);
+            }
+        });
 
         jButton3_updS.setBackground(new java.awt.Color(102, 102, 102));
         jButton3_updS.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -1137,8 +1142,15 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
 
     private void jTextField_barActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_barActionPerformed
         // TODO add your handling code here:
+        
+        float[] ss = Color.RGBtoHSB(160, 173, 222, null);
+        jTextField_bar.setBackground(Color.getHSBColor(ss[1], ss[1], ss[2]));
+        
         try{
         String purItmStr = jTextField_bar.getText();
+        
+        //if(!SysParam.quantityMappings.containsKey(purItmStr))return;
+        
         Cart.ItemObj item = SysParam.barCodeMappings.get(purItmStr);
         int q = SysParam.quantityMappings.get(item.itemName);
         //System.out.println("Available "+q);
@@ -1277,6 +1289,17 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
         }
         
     }//GEN-LAST:event_jTextField_discountKeyReleased
+
+    private void jTextField_barKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_barKeyReleased
+        // TODO add your handling code here:
+        
+        if(SysParam.barCodeMappings.containsKey(jTextField_bar.getText())){
+            jTextField_bar.setBackground(Color.WHITE);
+        }else{
+            float[] ss = Color.RGBtoHSB(160, 173, 222, null);
+        jTextField_bar.setBackground(Color.getHSBColor(ss[1], ss[1], ss[2]));
+        }
+    }//GEN-LAST:event_jTextField_barKeyReleased
 
     public void validateQtyButtons(){
         try{

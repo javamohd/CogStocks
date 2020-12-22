@@ -358,7 +358,7 @@ public class PdfGen {
        table.addCell(totcell);
        
        PdfPCell pricecell = new PdfPCell();
-       Paragraph numberpara = new Paragraph(CustomerBill.pass_amt+"");
+       Paragraph numberpara = new Paragraph(CartBox.getCartTotal()+"");
        numberpara.setAlignment(Element.ALIGN_CENTER);
        pricecell.addElement(numberpara);
        pricecell.setHorizontalAlignment(Element.ALIGN_CENTER);
