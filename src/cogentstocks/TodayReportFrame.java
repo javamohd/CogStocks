@@ -85,10 +85,8 @@ public class TodayReportFrame extends javax.swing.JDialog implements TableCellRe
             rowDet.add(row.getCell(6).getStringCellValue());
             rowDet.add(row.getCell(3).getStringCellValue());
             rowDet.add(row.getCell(4).getStringCellValue());
-            //rowDet.add(row.getCell(5).getStringCellValue());
             String ReceiptStr = row.getCell(5).getStringCellValue();
             rowDet.add(ReceiptStr);
-            //rowDet.add("<HTML><a href=file://Receipts/"+ReceiptStr+".pdf>"+ReceiptStr+"</a></HTML>");
             model.addRow(rowDet);
             }catch(Exception ex){
                 ex.printStackTrace();

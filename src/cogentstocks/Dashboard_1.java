@@ -361,6 +361,7 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
         jLabel7 = new javax.swing.JLabel();
         jLabel_discount = new javax.swing.JLabel();
         jTextField_discount = new javax.swing.JTextField();
+        jButton_reports = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -685,6 +686,16 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
             }
         });
 
+        jButton_reports.setBackground(new java.awt.Color(255, 255, 51));
+        jButton_reports.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton_reports.setForeground(new java.awt.Color(102, 102, 102));
+        jButton_reports.setText("Reports");
+        jButton_reports.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_reportsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -716,7 +727,9 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
                                     .addComponent(jButton3_remove, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButton_Sett, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
                                 .addGap(10, 10, 10)
-                                .addComponent(jButton_reset, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton_reset, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton_reports, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
@@ -838,7 +851,9 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
                                     .addComponent(jButton3_remove, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButton_reset, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton_Sett, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButton_Sett, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton_reports, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -1306,6 +1321,13 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
         }
     }//GEN-LAST:event_jTextField_barKeyReleased
 
+    private void jButton_reportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_reportsActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new RepoortPane().setVisible(true);
+        
+    }//GEN-LAST:event_jButton_reportsActionPerformed
+
     public void validateQtyButtons(){
         try{
             
@@ -1437,6 +1459,7 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
     private javax.swing.JButton jButton_Sett;
     private javax.swing.JButton jButton_changeQty;
     private javax.swing.JButton jButton_minus;
+    private javax.swing.JButton jButton_reports;
     private javax.swing.JButton jButton_reset;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel1_logo;
