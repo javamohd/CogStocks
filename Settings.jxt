@@ -1,10 +1,11 @@
-#Thu Dec 24 12:48:17 IST 2020
-guestcust=37
-passCode=1234
+#Thu Feb 11 12:04:12 IST 2021
+guestcust=0
+expire=30Apr2021
+passCode=0000
 setup=true
-filePrefix=XX
+filePrefix=Cog
 lastGalla=0
-shopName=XXCog
-printedSales=164
-gallaCash=0/2412
-printerName=XX
+shopName=Cogent XXX
+printedSales=0
+gallaCash=0/1102
+printerName=XXX
