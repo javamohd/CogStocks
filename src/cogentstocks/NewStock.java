@@ -126,7 +126,7 @@ public class NewStock extends JDialog {
             }
         });
 
-        jLabel10.setText("% of Tax :");
+        jLabel10.setText("% of GST :");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

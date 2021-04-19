@@ -260,7 +260,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel10">
       <Properties>
-        <Property name="text" type="java.lang.String" value="% of Tax :"/>
+        <Property name="text" type="java.lang.String" value="% of GST :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField_tax">
