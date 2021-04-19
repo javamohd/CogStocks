@@ -266,7 +266,7 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
         this.jTextField_bar.setBorder(b);
         
         SaleConfig.load();
-        this.setTitle("Cogent Point of Sale");
+        this.setTitle("FSInfoTech Point of Sale");
         jLabel_shop_name.setText(SaleConfig.shopName);
         model = (DefaultTableModel) this.jTable_billList.getModel();
         jTable_billList.getColumn("S.No. ").setPreferredWidth(30);
@@ -1016,9 +1016,9 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
         if(new Date().before(toDate)){
         }else{
             if(new File("Settings.jxt").delete()){
-                JOptionPane.showMessageDialog(rootPane, "Trial version Coompleted, Please Contact Cogent!!!");
+                JOptionPane.showMessageDialog(rootPane, "Trial version Coompleted, Please Contact FSInfoTech!!!");
             }
-            JOptionPane.showMessageDialog(rootPane, "Trial version Coompleted, Please Contact Cogent!!!");
+            JOptionPane.showMessageDialog(rootPane, "Trial version Coompleted, Please Contact FSInfoTech!!!");
             System.exit(0);
         }
     }
