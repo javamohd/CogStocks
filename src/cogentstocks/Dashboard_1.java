@@ -306,6 +306,7 @@ jTable_pendings.setComponentPopupMenu(popupMenu);
             e.printStackTrace();
         }
         loadPendingCustomers();
+        //This two lines for Screen Resolutions
         this.setSize((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(),
                 (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight());
         float[] s = Color.RGBtoHSB(160, 173, 222, null);
