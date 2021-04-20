@@ -419,7 +419,10 @@ public class BillEntry extends javax.swing.JDialog {
                         int stockPrice = 0;
                         if(cell.getColumnIndex() == 2){
                             stockPrice = (int) cell.getNumericCellValue();
-                            rowString += "~"+stockPrice+"";
+                            
+                            int tax = (int)nextRow.getCell(6).getNumericCellValue();
+                            int inclTac = stockPrice+tax;
+                            rowString += "~"+inclTac+"";
                         }
                         int stockQty = 0;
                         if(cell.getColumnIndex() == 3){

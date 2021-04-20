@@ -89,7 +89,7 @@ public class CartBox {
         }
         items.add(obj);
         qtyMap.put(obj.itemName, Qty);
-        int price = Qty * (int)Double.parseDouble(String.valueOf(obj.custPrice));
+        int price = Qty * ((int)Double.parseDouble(String.valueOf(obj.custPrice)));
         priceMap.put(obj.itemName, price);
         taxInclMap.put(obj.itemName, true);
         
